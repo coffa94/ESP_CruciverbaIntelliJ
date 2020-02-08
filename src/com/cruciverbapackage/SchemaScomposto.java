@@ -1,3 +1,7 @@
+package com.cruciverbapackage;
+
+import com.cruciverbapackage.Schema;
+
 public class SchemaScomposto {
 
     //metodo costruttore

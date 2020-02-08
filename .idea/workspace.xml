@@ -1,17 +1,92 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e0588998-fecd-4017-9f91-39bb71eca9f7" name="Default Changelist" comment="" />
+    <list default="true" id="e0588998-fecd-4017-9f91-39bb71eca9f7" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/cruciverbapackage/ImplementazioneCruciverba.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/cruciverbapackage/ImplementazioneCruciverba.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/cruciverbapackage/Interfaccia.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/cruciverbapackage/Interfaccia.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/cruciverbapackage/Interfaccia.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/cruciverbapackage/Interfaccia.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/cruciverbapackage/Schema.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/cruciverbapackage/Schema.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/cruciverbapackage/SchemaScomposto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/cruciverbapackage/SchemaScomposto.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="CoverageViewManager">
+    <option name="myElementSize" value="209" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="ProjectId" id="1XRIc54nXM59EQYMkEXEGhUeu1d" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\coffa\OneDrive\Desktop\Davide\Universita\Esami\3 anno\_ESP Esperienze di programmazione\ESP_ProgettoCruciverba\src\com\cruciverbapackage" />
+    </key>
+  </component>
+  <component name="RunAnythingCache">
+    <option name="myCommands">
+      <command value="//" />
+    </option>
+  </component>
+  <component name="RunManager" selected="Application.Interfaccia (1)">
+    <configuration name="Interfaccia (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.cruciverbapackage.Interfaccia" />
+      <module name="ESP_ProgettoCruciverba" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.cruciverbapackage.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Interfaccia" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Interfaccia" />
+      <module name="ESP_ProgettoCruciverba" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Interfaccia (1)" />
+        <item itemvalue="Application.Interfaccia" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -23,13 +98,109 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1581002556130</updated>
+      <workItem from="1581002564473" duration="3159000" />
+      <workItem from="1581005908870" duration="120000" />
+      <workItem from="1581006044378" duration="208000" />
+      <workItem from="1581006276613" duration="7055000" />
+      <workItem from="1581088858431" duration="95000" />
+      <workItem from="1581088968882" duration="9000" />
+      <workItem from="1581089107792" duration="7774000" />
+      <workItem from="1581156449431" duration="3857000" />
     </task>
     <servers />
   </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
   <component name="WindowStateProjectService">
-    <state x="431" y="145" key="search.everywhere.popup" timestamp="1581002601280">
+    <state x="544" y="223" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1581003755334">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="431" y="145" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1581002601280" />
+    <state x="544" y="223" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1536.824@0.0.1536.824" timestamp="1581003755334" />
+    <state x="574" y="123" key="#com.intellij.ide.util.MemberChooser" timestamp="1581009627014">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="574" y="123" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1581009627014" />
+    <state x="571" y="305" width="393" height="220" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1581006161340">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="571" y="305" width="393" height="220" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1536.824@0.0.1536.824" timestamp="1581006161340" />
+    <state x="553" y="215" key="#com.intellij.uiDesigner.palette.ComponentItemDialog" timestamp="1581095553079">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="553" y="215" key="#com.intellij.uiDesigner.palette.ComponentItemDialog/0.0.1536.824@0.0.1536.824" timestamp="1581095553079" />
+    <state width="428" height="466" key="DebuggerActiveHint" timestamp="1581090039916">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="428" height="466" key="DebuggerActiveHint/0.0.1536.824@0.0.1536.824" timestamp="1581090039916" />
+    <state width="1493" height="178" key="GridCell.Tab.0.bottom" timestamp="1581160352798">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="178" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1581160352798" />
+    <state width="1493" height="178" key="GridCell.Tab.0.center" timestamp="1581160352798">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="178" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1581160352798" />
+    <state width="1493" height="178" key="GridCell.Tab.0.left" timestamp="1581160352798">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="178" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1581160352798" />
+    <state width="1493" height="178" key="GridCell.Tab.0.right" timestamp="1581160352798">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="178" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1581160352798" />
+    <state width="1493" height="178" key="GridCell.Tab.1.bottom" timestamp="1581160352798">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="178" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1581160352798" />
+    <state width="1493" height="178" key="GridCell.Tab.1.center" timestamp="1581160352798">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="178" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1581160352798" />
+    <state width="1493" height="178" key="GridCell.Tab.1.left" timestamp="1581160352798">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="178" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1581160352798" />
+    <state width="1493" height="178" key="GridCell.Tab.1.right" timestamp="1581160352798">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="178" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1581160352798" />
+    <state x="279" y="58" key="SettingsEditor" timestamp="1581006028492">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="279" y="58" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1581006028492" />
+    <state x="444" y="238" key="com.intellij.ide.util.TipDialog" timestamp="1581088972502">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="444" y="238" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1581088972502" />
+    <state x="425" y="187" key="run.anything.popup" timestamp="1581010589862">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="425" y="187" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1581010589862" />
+    <state x="431" y="145" key="search.everywhere.popup" timestamp="1581012750744">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="431" y="145" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1581012750744" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/cruciverbapackage/Interfaccia.java</url>
+          <line>120</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/cruciverbapackage/Interfaccia.java</url>
+          <line>36</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/ESP_ProgettoCruciverba$Interfaccia__1_.ic" NAME="Interfaccia (1) Coverage Results" MODIFIED="1581090926103" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.cruciverbapackage.*</FILTER>
+    </SUITE>
   </component>
 </project>

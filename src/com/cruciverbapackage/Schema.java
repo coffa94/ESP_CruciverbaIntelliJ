@@ -1,3 +1,5 @@
+package com.cruciverbapackage;
+
 import java.util.ArrayList;
 
 public class Schema {
@@ -14,7 +16,7 @@ public class Schema {
     //Metodo costruttore
     //@modifies: this
     //@effects: prende la matrice in ingresso e crea lo schema originale
-    public Schema(char matrice[][],String parolaIniziale, Posizione posizioneParolaIniziale, char orientamentoInput) {
+    public Schema(char matrice[][], String parolaIniziale, Posizione posizioneParolaIniziale, char orientamentoInput) {
         //inizializzazione variabili classe
         paroleSchema=new ArrayList<Parola>();
         caselleNere = new ArrayList<Posizione>();
@@ -129,8 +131,9 @@ public class Schema {
         }
     }
 
-    public char[][] SchemaToMatrice(){
-
+    public char[][] SchemaToMatrice() {
+        char[][] matrice={{1,2},{3,4}};
+        return matrice;
     }
 
 
