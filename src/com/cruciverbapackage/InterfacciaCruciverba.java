@@ -8,20 +8,19 @@ import java.awt.image.ImageObserver;
 import java.text.AttributedCharacterIterator;
 import java.util.ArrayList;
 
-public class Interfaccia {
-    //private JButton buttonRisolviCruciverba;
-    //private JButton buttonCercaParola;
+public class InterfacciaCruciverba {
     private JPanel panelMain;
+    private JLabel labelCruciverba;
     private JButton buttonRisolviCruciverba;
     private JButton buttonCercaParola;
-    private JPanel panelCruciverba;
     private static ImplementazioneCruciverba cruciverba1;
     private static char[][] matrice= {{'.','.','.','.','*','.','.','.'}, {'*','.','.','.','.','*','.','.'},{'.','.','.','.','.','.','*','.'},{'.','.','*','.','.','.','.','.',}};
     private ArrayList<JTextField> text;
     private static ArrayList<String> dizionarioInput;
 
-    public Interfaccia() {
-        /*buttonRisolviCruciverba.addActionListener(new ActionListener() {
+    public InterfacciaCruciverba() {
+        createUIComponents();
+        buttonRisolviCruciverba.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
@@ -32,17 +31,17 @@ public class Interfaccia {
             public void actionPerformed(ActionEvent e) {
 
             }
-        });*/
+        });
     }
 
-    /*public static void main(String[] args) {
+    public static void main(String[] args) {
         JFrame frame = new JFrame("Cruciverba");
-        Interfaccia window = new Interfaccia();
+        InterfacciaCruciverba window = new InterfacciaCruciverba();
 
         frame.setContentPane(window.panelMain);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
-        frame.setSize(500, 400);
+        frame.setSize(480, 200);
         frame.setVisible(true);
 
 
@@ -67,13 +66,12 @@ public class Interfaccia {
         //window.createUIComponents();
         window.open();
         frame.setContentPane(window.panelMain);
-        System.out.print(window.panelMain.getLayout().toString());
 
-    }*/
+    }
 
     public void open() {
-        //creaCruciverba(matrice);
-        //cruciverba1=new ImplementazioneCruciverba(matrice, "CANE",0,0,dizionarioInput);
+        creaCruciverba(matrice);
+        cruciverba1=new ImplementazioneCruciverba(matrice, "CANE",0,0,dizionarioInput);
 
 
         //aggiornaCruciverba(cruciverba1.VisualizzaSchema());
@@ -120,16 +118,21 @@ public class Interfaccia {
 
     private void createUIComponents() {
         // TODO: place custom component creation code here
-panelMain = new JPanel();
+        panelMain = new JPanel();
         GroupLayout layoutGUI = new GroupLayout(panelMain);
         panelMain.setLayout(layoutGUI);
         layoutGUI.setAutoCreateGaps(true);
         layoutGUI.setAutoCreateContainerGaps(true);
 
-        buttonRisolviCruciverba = new JButton();
+        labelCruciverba = new JLabel("Cruciverba 4X8");
+        labelCruciverba.setBounds(20,20,400,20);
 
-        buttonCercaParola = new JButton();
+        buttonRisolviCruciverba = new JButton("RisolviCruciverba");
+        buttonRisolviCruciverba.setBounds(20, 140, 200, 20);
+        buttonCercaParola = new JButton("CercaParola");
+        buttonCercaParola.setBounds(240, 140, 200, 20);
 
+        panelMain.add(labelCruciverba);
         panelMain.add(buttonRisolviCruciverba);
         panelMain.add(buttonCercaParola);
         panelMain.revalidate();
@@ -148,7 +151,7 @@ panelMain = new JPanel();
         System.out.print(panelMain.getLayout().toString());
         panelMain.add(comp);
         panelMain.revalidate();*/
-        System.out.print(panelMain.getLayout().toString());
+        //System.out.print(panelMain.getLayout().toString());
 
     }
 }

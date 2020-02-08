@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="com.cruciverbapackage.Interfaccia">
-  <grid id="27dc6" binding="panelMain" custom-create="true" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+  <grid id="27dc6" binding="panelMain" custom-create="true" layout-manager="GridLayoutManager" row-count="1" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="0" left="0" bottom="0" right="0"/>
     <constraints>
       <xy x="53" y="18" width="442" height="297"/>
@@ -11,6 +11,23 @@
       <toolTipText value="Cruciverba"/>
     </properties>
     <border type="none" title="Cruciverba 4X8"/>
-    <children/>
+    <children>
+      <component id="8b090" class="javax.swing.JButton" binding="buttonRisolviCruciverba" custom-create="true">
+        <constraints>
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="RisolviCruciverba"/>
+        </properties>
+      </component>
+      <component id="b4ec" class="javax.swing.JButton" binding="buttonCercaParola" custom-create="true">
+        <constraints>
+          <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="CercaParola"/>
+        </properties>
+      </component>
+    </children>
   </grid>
 </form>
