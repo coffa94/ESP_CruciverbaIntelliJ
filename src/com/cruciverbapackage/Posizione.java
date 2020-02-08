@@ -5,13 +5,18 @@ public class Posizione {
     int colonna;
 
     public Posizione() {
-        this.riga=-1;
-        this.colonna=-1;
+        this.riga = -1;
+        this.colonna = -1;
     }
 
     public Posizione(int rigaInput, int colonnaInput) {
-        this.riga=rigaInput;
-        this.colonna=colonnaInput;
+        this.riga = rigaInput;
+        this.colonna = colonnaInput;
+    }
+
+    public Posizione(Posizione posizioneInput) {
+        this.riga = posizioneInput.getRiga();
+        this.colonna = posizioneInput.getColonna();
     }
 
     public int getRiga() {
@@ -31,13 +36,14 @@ public class Posizione {
     }
 
     public void ripristinaPosizione() {
-        this.riga=-1;
-        this.colonna=-1;
+        this.riga = -1;
+        this.colonna = -1;
     }
+
     public boolean equals(Posizione posizioneDaConfrontare) {
-        if (this.riga==posizioneDaConfrontare.getRiga() && this.colonna==posizioneDaConfrontare.getColonna()){
+        if (this.riga == posizioneDaConfrontare.getRiga() && this.colonna == posizioneDaConfrontare.getColonna()) {
             return true;
-        }else {
+        } else {
             return false;
         }
     }

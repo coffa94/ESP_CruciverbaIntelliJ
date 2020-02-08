@@ -14,7 +14,7 @@ public class InterfacciaCruciverba {
     private JButton buttonRisolviCruciverba;
     private JButton buttonCercaParola;
     private static ImplementazioneCruciverba cruciverba1;
-    private static char[][] matrice= {{'.','.','.','.','*','.','.','.'}, {'*','.','.','.','.','*','.','.'},{'.','.','.','.','.','.','*','.'},{'.','.','*','.','.','.','.','.',}};
+    private static char[][] matrice = {{'.', '.', '.', '.', '*', '.', '.', '.'}, {'*', '.', '.', '.', '.', '*', '.', '.'}, {'.', '.', '.', '.', '.', '.', '*', '.'}, {'.', '.', '*', '.', '.', '.', '.', '.',}};
     private ArrayList<JTextField> text;
     private static ArrayList<String> dizionarioInput;
 
@@ -44,7 +44,6 @@ public class InterfacciaCruciverba {
         frame.setSize(480, 200);
         frame.setVisible(true);
 
-
         dizionarioInput = new ArrayList<String>();
         dizionarioInput.add("CAT");
         dizionarioInput.add("NOIA");
@@ -71,7 +70,7 @@ public class InterfacciaCruciverba {
 
     public void open() {
         creaCruciverba(matrice);
-        cruciverba1=new ImplementazioneCruciverba(matrice, "CANE",0,0,dizionarioInput);
+        cruciverba1 = new ImplementazioneCruciverba(panelMain, matrice, "CANE", 0, 0, dizionarioInput);
 
 
         //aggiornaCruciverba(cruciverba1.VisualizzaSchema());
@@ -79,12 +78,12 @@ public class InterfacciaCruciverba {
     }
 
     protected void creaCruciverba(char[][] matrice) {
-        int xIniziale=20;
-        int yIniziale=50;
-        int index=0;
-        text=new ArrayList<JTextField>();
+        int xIniziale = 20;
+        int yIniziale = 50;
+        int index = 0;
+        text = new ArrayList<JTextField>();
 
-        for (int i=0; i<matrice.length; i++) {
+        /*for (int i=0; i<matrice.length; i++) {
             for (int j=0; j<matrice[0].length; j++) {
                 if (matrice[i][j]=='.'){
                     text.add( new JTextField());
@@ -105,7 +104,7 @@ public class InterfacciaCruciverba {
                     panelMain.revalidate();
                 }
             }
-        }
+        }*/
 
         //text = new Text(composite, SWT.BORDER);
         //text.setBounds(125, 66, 21, 21);
@@ -125,7 +124,7 @@ public class InterfacciaCruciverba {
         layoutGUI.setAutoCreateContainerGaps(true);
 
         labelCruciverba = new JLabel("Cruciverba 4X8");
-        labelCruciverba.setBounds(20,20,400,20);
+        labelCruciverba.setBounds(20, 20, 400, 20);
 
         buttonRisolviCruciverba = new JButton("RisolviCruciverba");
         buttonRisolviCruciverba.setBounds(20, 140, 200, 20);

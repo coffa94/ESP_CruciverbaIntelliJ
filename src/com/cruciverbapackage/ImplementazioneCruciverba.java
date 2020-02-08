@@ -1,5 +1,6 @@
 package com.cruciverbapackage;
 
+import javax.swing.*;
 import java.util.ArrayList;
 
 public class ImplementazioneCruciverba implements Cruciverba {
@@ -8,8 +9,8 @@ public class ImplementazioneCruciverba implements Cruciverba {
     private ArrayList<String> dizionario;
 
     //costruttore cruciverba con una struttura passata in input
-    public ImplementazioneCruciverba(char matrice[][], String parolaIniziale, int posizioneRigaIniziale, int posizioneColonnaIniziale, ArrayList<String> dizionarioInput) {
-        schema_originale = new Schema(matrice, parolaIniziale, new Posizione(posizioneRigaIniziale, posizioneColonnaIniziale), 'O');
+    public ImplementazioneCruciverba(JPanel panel, char matrice[][], String parolaIniziale, int posizioneRigaIniziale, int posizioneColonnaIniziale, ArrayList<String> dizionarioInput) {
+        schema_originale = new Schema(panel, matrice, parolaIniziale, new Posizione(posizioneRigaIniziale, posizioneColonnaIniziale), 'O');
         if (dizionarioInput != null && dizionarioInput.size() != 0) {
             dizionario = dizionarioInput;
         }
