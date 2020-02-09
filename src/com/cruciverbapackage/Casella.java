@@ -28,13 +28,15 @@ public class Casella {
             textFieldCasella.setSize(20, 20);
             textFieldCasella.setLocation(xIniziale + j * 20, yIniziale + i * 20);
             textFieldCasella.setText(String.valueOf(carattereCasella));
-            panel.add(textFieldCasella);
+
 
             //imposto sfondo casella nera e la disabilito
             if (casellaNera) {
                 textFieldCasella.setBackground(new Color(0, 0, 0));
-                textFieldCasella.setEnabled(false);
+                textFieldCasella.setEditable(false);
             }
+
+            panel.add(textFieldCasella);
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex.toString(), "Errore", JOptionPane.ERROR_MESSAGE);
         }
@@ -43,5 +45,10 @@ public class Casella {
     public boolean confrontaPosizione(int riga, int colonna) {
         Posizione posizioneDaConfrontare = new Posizione(riga, colonna);
         return posizioneCasella.equals(posizioneDaConfrontare);
+    }
+
+    public void aggiornaCarattere(char carattereInput){
+        carattereCasella=carattereInput;
+        textFieldCasella.setText(String.valueOf(carattereInput));
     }
 }

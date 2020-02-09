@@ -141,4 +141,20 @@ public class Parola {
         }
 
     }
+
+    //aggiorna il testo delle caselle con la stringa dentro parola
+    public void aggiornaCaselleParola(){
+        try{
+            if (lunghezza==caselleParola.size()){
+                for (int i=0; i<lunghezza; i++){
+                    caselleParola.get(i).aggiornaCarattere(parola.charAt(i));
+                }
+            }else{
+                throw new Exception ("Lunghezza parola diversa dalla lunghezza della parola nel cruciverba");
+            }
+        }
+        catch (Exception ex){
+            JOptionPane.showMessageDialog(null, ex.toString(), "Errore", JOptionPane.ERROR_MESSAGE);
+        }
+    }
 }

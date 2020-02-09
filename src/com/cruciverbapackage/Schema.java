@@ -33,10 +33,6 @@ public class Schema {
                 posizioneAttuale.setRiga(i);
                 posizioneAttuale.setColonna(j);
 
-                //inizializzazione casella
-                casellaAttuale = new Casella(panel, posizioneAttuale, matrice[i][j], false);
-
-
                 //ricerca della prima lettera della parola che verrà inserita nello schema
                 if (matrice[i][j] == carattere && primaLettera) {
                     creazioneParola.append(' ');
@@ -44,11 +40,19 @@ public class Schema {
                     posizioneIniziale.setRiga(i);
                     posizioneIniziale.setColonna(j);
                     lunghezzaParola++;
+
+                    //inizializzazione casella
+                    casellaAttuale = new Casella(panel, posizioneAttuale, matrice[i][j], false);
+
                     caselleSchema.add(casellaAttuale);
                     caselleParola.add(casellaAttuale);
                 } else if (matrice[i][j] == carattere && (!primaLettera)) {
                     creazioneParola.append(' ');
                     lunghezzaParola++;
+
+                    //inizializzazione casella
+                    casellaAttuale = new Casella(panel, posizioneAttuale, matrice[i][j], false);
+
                     caselleSchema.add(casellaAttuale);
                     caselleParola.add(casellaAttuale);
                 } else if (matrice[i][j] == casellaNera) {
@@ -155,7 +159,10 @@ public class Schema {
         Parola p = new Parola(parola, posizioneParola, orientamentoInput, parola.length());
         for (Parola parolaSchema : paroleSchema) {
             if (parolaSchema.ConfrontaCaselle(p)) {
-                paroleSchema.set(paroleSchema.indexOf(parolaSchema), p);
+                parolaSchema.setParola(parola);
+                parolaSchema.setLunghezza(parola.length());
+                parolaSchema.aggiornaCaselleParola();
+                //paroleSchema.set(paroleSchema.indexOf(parolaSchema), p);
                 break;
             }
         }
