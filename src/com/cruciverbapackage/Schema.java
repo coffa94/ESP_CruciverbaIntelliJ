@@ -146,7 +146,7 @@ public class Schema {
             }
         }
         //aggiorna schema con la prima parola iniziale data in input
-        AggiornaSchema(parolaIniziale, posizioneParolaIniziale, orientamentoInput);
+        aggiornaSchema(parolaIniziale, posizioneParolaIniziale, orientamentoInput);
     }
 
     //@requires: this!=null, parola entra nello schema (lunghezza corretta), posizione esistente
@@ -155,10 +155,10 @@ public class Schema {
     //deve essere richiamato anche aggiornaSchemaScomposto
     //@throws: nullPointerException, wordException se la parola da inserire è troppo lunga,
     //positionException se la posizione non entra nello schema
-    public void AggiornaSchema(String parola, Posizione posizioneParola, char orientamentoInput) {
+    public void aggiornaSchema(String parola, Posizione posizioneParola, char orientamentoInput) {
         Parola p = new Parola(parola, posizioneParola, orientamentoInput, parola.length());
         for (Parola parolaSchema : paroleSchema) {
-            if (parolaSchema.ConfrontaCaselle(p)) {
+            if (parolaSchema.confrontaCaselle(p)) {
                 parolaSchema.setParola(parola);
                 parolaSchema.setLunghezza(parola.length());
                 parolaSchema.aggiornaCaselleParola();
@@ -174,7 +174,7 @@ public class Schema {
 
     }
 
-    public char[][] SchemaToMatrice() {
+    public char[][] schemaToMatrice() {
         char[][] matrice = {{1, 2}, {3, 4}};
         return matrice;
     }

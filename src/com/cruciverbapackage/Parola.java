@@ -132,7 +132,7 @@ public class Parola {
     }
 
 
-    public boolean ConfrontaCaselle(Parola p) {
+    public boolean confrontaCaselle(Parola p) {
         //controlla se le due parole corrispondono alla stessa casella nello schema, sia come orientamento che come inizio e lunghezza parola
         if (this.orientamento == p.orientamento && posizioneParola.equals(p.getPosizioneParola()) && this.lunghezza == p.lunghezza) {
             return true;

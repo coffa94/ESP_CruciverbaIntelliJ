@@ -71,7 +71,7 @@ public class InterfacciaCruciverba {
     public void open() {
         creaCruciverba(matrice);
         cruciverba1 = new ImplementazioneCruciverba(panelMain, matrice, "CANE", 0, 0, dizionarioInput);
-
+        cruciverba1.aggiornaParola("NOE",0,2,'V');
 
         //aggiornaCruciverba(cruciverba1.VisualizzaSchema());
 

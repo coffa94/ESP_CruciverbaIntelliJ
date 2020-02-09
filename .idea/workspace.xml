@@ -3,14 +3,13 @@
   <component name="ChangeListManager">
     <list default="true" id="e0588998-fecd-4017-9f91-39bb71eca9f7" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ESP_ProgettoCruciverba/com/cruciverbapackage/Casella.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ESP_ProgettoCruciverba/com/cruciverbapackage/Casella.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/ESP_ProgettoCruciverba/com/cruciverbapackage/Cruciverba.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ESP_ProgettoCruciverba/com/cruciverbapackage/Cruciverba.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/ESP_ProgettoCruciverba/com/cruciverbapackage/ImplementazioneCruciverba.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ESP_ProgettoCruciverba/com/cruciverbapackage/ImplementazioneCruciverba.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/ESP_ProgettoCruciverba/com/cruciverbapackage/Parola.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ESP_ProgettoCruciverba/com/cruciverbapackage/Parola.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/ESP_ProgettoCruciverba/com/cruciverbapackage/Schema.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ESP_ProgettoCruciverba/com/cruciverbapackage/Schema.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/cruciverbapackage/Casella.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/cruciverbapackage/Casella.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/cruciverbapackage/Cruciverba.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/cruciverbapackage/Cruciverba.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/cruciverbapackage/ImplementazioneCruciverba.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/cruciverbapackage/ImplementazioneCruciverba.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/cruciverbapackage/InterfacciaCruciverba.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/cruciverbapackage/InterfacciaCruciverba.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/cruciverbapackage/Parola.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/cruciverbapackage/Parola.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/cruciverbapackage/Schema.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/cruciverbapackage/Schema.java" afterDir="false" />
     </list>
@@ -132,6 +131,7 @@
       <workItem from="1581255679472" duration="3797000" />
       <workItem from="1581259844554" duration="2281000" />
       <workItem from="1581262403336" duration="33000" />
+      <workItem from="1581263040429" duration="3387000" />
     </task>
     <servers />
   </component>
@@ -143,10 +143,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="544" y="223" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1536.824@0.0.1536.824" timestamp="1581003755334" />
-    <state x="574" y="123" key="#com.intellij.ide.util.MemberChooser" timestamp="1581262101000">
+    <state x="574" y="123" key="#com.intellij.ide.util.MemberChooser" timestamp="1581268186222">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="574" y="123" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1581262101000" />
+    <state x="574" y="123" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1581268186222" />
     <state x="571" y="305" width="393" height="220" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1581177373351">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -163,38 +163,38 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="496" height="466" key="DebuggerActiveHint/0.0.1536.824@0.0.1536.824" timestamp="1581258480123" />
-    <state width="1493" height="210" key="GridCell.Tab.0.bottom" timestamp="1581262362865">
+    <state width="1493" height="178" key="GridCell.Tab.0.bottom" timestamp="1581268944220">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1581262362865" />
-    <state width="1493" height="210" key="GridCell.Tab.0.center" timestamp="1581262362864">
+    <state width="1493" height="178" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1581268944220" />
+    <state width="1493" height="178" key="GridCell.Tab.0.center" timestamp="1581268944219">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1581262362864" />
-    <state width="1493" height="210" key="GridCell.Tab.0.left" timestamp="1581262362864">
+    <state width="1493" height="178" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1581268944219" />
+    <state width="1493" height="178" key="GridCell.Tab.0.left" timestamp="1581268944219">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1581262362864" />
-    <state width="1493" height="210" key="GridCell.Tab.0.right" timestamp="1581262362864">
+    <state width="1493" height="178" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1581268944219" />
+    <state width="1493" height="178" key="GridCell.Tab.0.right" timestamp="1581268944219">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1581262362864" />
-    <state width="1493" height="178" key="GridCell.Tab.1.bottom" timestamp="1581262362853">
+    <state width="1493" height="178" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1581268944219" />
+    <state width="1493" height="178" key="GridCell.Tab.1.bottom" timestamp="1581268944834">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="178" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1581262362853" />
-    <state width="1493" height="178" key="GridCell.Tab.1.center" timestamp="1581262362853">
+    <state width="1493" height="178" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1581268944834" />
+    <state width="1493" height="178" key="GridCell.Tab.1.center" timestamp="1581268944834">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="178" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1581262362853" />
-    <state width="1493" height="178" key="GridCell.Tab.1.left" timestamp="1581262362853">
+    <state width="1493" height="178" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1581268944834" />
+    <state width="1493" height="178" key="GridCell.Tab.1.left" timestamp="1581268944834">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="178" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1581262362853" />
-    <state width="1493" height="178" key="GridCell.Tab.1.right" timestamp="1581262362853">
+    <state width="1493" height="178" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1581268944834" />
+    <state width="1493" height="178" key="GridCell.Tab.1.right" timestamp="1581268944834">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="178" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1581262362853" />
+    <state width="1493" height="178" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1581268944834" />
     <state x="279" y="58" key="SettingsEditor" timestamp="1581006028492">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
