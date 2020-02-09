@@ -157,4 +157,21 @@ public class Parola {
             JOptionPane.showMessageDialog(null, ex.toString(), "Errore", JOptionPane.ERROR_MESSAGE);
         }
     }
+
+    public void aggiornaParola(){
+        StringBuilder strParolaNuova=new StringBuilder();
+        try{
+            if (lunghezza==caselleParola.size()){
+                for (int i=0; i<lunghezza; i++){
+                    strParolaNuova.append(caselleParola.get(i).getCarattereCasella());
+                }
+                parola=strParolaNuova.toString();
+            }else{
+                throw new Exception ("Lunghezza parola diversa dalla lunghezza della parola nel cruciverba");
+            }
+        }
+        catch (Exception ex){
+            JOptionPane.showMessageDialog(null, ex.toString(), "Errore", JOptionPane.ERROR_MESSAGE);
+        }
+    }
 }

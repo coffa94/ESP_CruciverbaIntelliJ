@@ -34,12 +34,21 @@ public class Casella {
             if (casellaNera) {
                 textFieldCasella.setBackground(new Color(0, 0, 0));
                 textFieldCasella.setEditable(false);
+                textFieldCasella.setFocusable(false);
             }
 
             panel.add(textFieldCasella);
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex.toString(), "Errore", JOptionPane.ERROR_MESSAGE);
         }
+    }
+
+    public char getCarattereCasella() {
+        return carattereCasella;
+    }
+
+    public void setCarattereCasella(char carattereCasella) {
+        this.carattereCasella = carattereCasella;
     }
 
     public boolean confrontaPosizione(int riga, int colonna) {

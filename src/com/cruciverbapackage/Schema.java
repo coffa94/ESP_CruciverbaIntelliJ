@@ -166,6 +166,12 @@ public class Schema {
                 break;
             }
         }
+        
+        //dopo aver aggiornato una parola dello schema devo fare in modo di aggiornare le parole dello schema che hanno lettere collegate alla parola appena aggiornata
+        for(Parola parolaSchema : paroleSchema){
+            parolaSchema.aggiornaParola();
+        }
+
     }
 
     public char[][] SchemaToMatrice() {

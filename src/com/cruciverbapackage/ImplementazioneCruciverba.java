@@ -38,9 +38,9 @@ public class ImplementazioneCruciverba implements Cruciverba {
     //@effects: visualizza lo schema del cruciverba a video
     //@throws: nullPointerException
     //@return: componenteDaVisualizzare T (di tipo grafico??)
-    public char[][] VisualizzaSchema() {
+   /* public char[][] VisualizzaSchema() {
         return schema_originale.SchemaToMatrice();
-    }
+    }*/
 
     //@requires: this!=null
     //@effects: ricerca la prossima parola da inserire nel cruciverba

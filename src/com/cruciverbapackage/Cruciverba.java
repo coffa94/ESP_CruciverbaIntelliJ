@@ -22,7 +22,7 @@ public interface Cruciverba {
     //@effects: visualizza lo schema del cruciverba a video
     //@throws: nullPointerException
     //@return: componenteDaVisualizzare T (di tipo grafico??)
-    public <T> T VisualizzaSchema();
+    //public <T> T VisualizzaSchema();
 
     //@requires: this!=null
     //@effects: ricerca la prossima parola da inserire nel cruciverba
