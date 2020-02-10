@@ -47,7 +47,13 @@ public class ImplementazioneCruciverba implements Cruciverba {
     //@throws: nullPointerException
     //@return: parola trovata E oppure null (in questo caso va gestito)
     public String cercaParolaDaInserire_alg1() {
-        
+        ArrayList<Parola> ricercaParole;
+        int lunghezzaMax = 10;
+        int i=1;
+        boolean trovato=false;
+        while (i<lunghezzaMax && !(trovato)){
+            
+        }
     }
 
     //@requires: this!=null

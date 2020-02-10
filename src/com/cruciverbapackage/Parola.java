@@ -8,6 +8,7 @@ public class Parola {
     private ArrayList<Casella> caselleParola;
     private Posizione posizioneParola;
     private int lunghezza;
+    private int lettereInserite;
     private char orientamento;
 
     //metodo costruttore
@@ -131,6 +132,13 @@ public class Parola {
         this.orientamento = orientamento;
     }
 
+    public int getLettereInserite() {
+        return lettereInserite;
+    }
+
+    public void setLettereInserite(int lettereInserite) {
+        this.lettereInserite = lettereInserite;
+    }
 
     public boolean confrontaCaselle(Parola p) {
         //controlla se le due parole corrispondono alla stessa casella nello schema, sia come orientamento che come inizio e lunghezza parola
@@ -160,9 +168,14 @@ public class Parola {
 
     public void aggiornaParola(){
         StringBuilder strParolaNuova=new StringBuilder();
+        lettereInserite=0;
         try{
             if (lunghezza==caselleParola.size()){
                 for (int i=0; i<lunghezza; i++){
+                    char carattereCasella=caselleParola.get(i).getCarattereCasella();
+                    if (carattereCasella!='.'){
+                        lettereInserite++;
+                    }
                     strParolaNuova.append(caselleParola.get(i).getCarattereCasella());
                 }
                 parola=strParolaNuova.toString();

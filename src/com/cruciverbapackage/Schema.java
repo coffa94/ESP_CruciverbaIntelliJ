@@ -4,8 +4,8 @@ import javax.swing.*;
 import java.util.ArrayList;
 
 public class Schema {
-    ArrayList<Parola> paroleSchema;
-    ArrayList<Casella> caselleSchema;
+    private ArrayList<Parola> paroleSchema;
+    private ArrayList<Casella> caselleSchema;
 
 
     //Metodo costruttore
@@ -185,6 +185,18 @@ public class Schema {
                 caselleParola.add(c);
             }
         }
+    }
+
+    public ArrayList<Parola> ricercaLunghezzaParole(int n){
+        ArrayList<Parola> paroleLunghezzaN = new ArrayList<Parola>();
+        for (Parola p : paroleSchema){
+            int lunghezzaParola=p.getLunghezza();
+            int lettereInserite=p.getLettereInserite();
+            if (lunghezzaParola==n && lettereInserite<lunghezzaParola){
+                paroleLunghezzaN.add(p);
+            }
+        }
+        return paroleLunghezzaN;
     }
 
 
