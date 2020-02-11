@@ -166,6 +166,7 @@ public class Parola {
         }
     }
 
+    //aggiorna la stringa dentro parola con il testo delle caselle
     public void aggiornaParola(){
         StringBuilder strParolaNuova=new StringBuilder();
         lettereInserite=0;
@@ -176,7 +177,7 @@ public class Parola {
                     if (carattereCasella!='.'){
                         lettereInserite++;
                     }
-                    strParolaNuova.append(caselleParola.get(i).getCarattereCasella());
+                    strParolaNuova.append(carattereCasella);
                 }
                 parola=strParolaNuova.toString();
             }else{

@@ -29,7 +29,7 @@ public interface Cruciverba {
     //@effects: ricerca la prossima parola da inserire nel cruciverba
     //@throws: nullPointerException
     //@return: parola trovata E oppure null (in questo caso va gestito)
-    public String cercaParolaDaInserire_alg1();
+    public String cercaParolaDaInserire();
 
     //@requires: this!=null
     //@effects: chiama n volte cercaParolaDaInserire finche lo schema non è completato, cioè isComplete=true

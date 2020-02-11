@@ -23,7 +23,7 @@ public class InterfacciaCruciverba {
         buttonRisolviCruciverba.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                cruciverba1.risolviCruciverba_alg1();
             }
         });
         buttonCercaParola.addActionListener(new ActionListener() {
@@ -52,7 +52,6 @@ public class InterfacciaCruciverba {
         dizionarioInput.add("EIRE");
         dizionarioInput.add("AR");
         dizionarioInput.add("TOPO");
-        dizionarioInput.add("NOIA");
         dizionarioInput.add("RO");
         dizionarioInput.add("ABS");
         dizionarioInput.add("ACERBO");
@@ -71,7 +70,7 @@ public class InterfacciaCruciverba {
     public void open() {
         creaCruciverba(matrice);
         cruciverba1 = new ImplementazioneCruciverba(panelMain, matrice, "CANE", 0, 0, dizionarioInput);
-        cruciverba1.aggiornaParola("NOE",0,2,'V');
+
 
         //aggiornaCruciverba(cruciverba1.VisualizzaSchema());
 
