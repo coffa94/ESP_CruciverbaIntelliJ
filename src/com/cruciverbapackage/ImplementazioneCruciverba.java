@@ -54,6 +54,16 @@ public class ImplementazioneCruciverba implements Cruciverba {
         return "";
     }
 
+    //@requires: this!=null
+    //@effects: chiama n volte cercaParolaDaInserire finche lo schema non è completato, cioè isComplete=true
+    //@throws: nullPointerException
+    //@return: true se completato, false se non è possibile completarlo
+    public boolean risolviCruciverba(){
+        return true;
+    }
+
+    //<editor-fold desc="Funzioni algoritmo1">
+    //risoluzione cruciverba attraverso l'utilizzo dell'algoritmo 1
     //non so se viene utilizzato
     public String cercaParola_alg1() {
         ArrayList<Parola> ricercaParole;
@@ -84,15 +94,6 @@ public class ImplementazioneCruciverba implements Cruciverba {
 
     }
 
-    //@requires: this!=null
-    //@effects: chiama n volte cercaParolaDaInserire finche lo schema non è completato, cioè isComplete=true
-    //@throws: nullPointerException
-    //@return: true se completato, false se non è possibile completarlo
-    public boolean risolviCruciverba(){
-        return true;
-    }
-
-    //risoluzione cruciverba attraverso l'utilizzo dell'algoritmo 1
     public boolean risolviCruciverba_alg1() {
 
         if (isComplete()){
@@ -194,20 +195,6 @@ public class ImplementazioneCruciverba implements Cruciverba {
 
     }
 
-    //cerco la parola all'interno della lista che ha più lettere già inserite, a parità di lettere già inserite prendo la prima che ho trovato
-    public Parola cercaParolaConPiuLettere(ArrayList<Parola> listaParole){
-        int maxLettereInserite=-1, contatoreLettereInserite=0;
-        Parola maxParolaLettereInserite=null;
-        for (Parola p : listaParole){
-            contatoreLettereInserite=p.getLettereInserite();
-            if (contatoreLettereInserite>maxLettereInserite){
-                maxLettereInserite=contatoreLettereInserite;
-                maxParolaLettereInserite=p;
-            }
-        }
-        return maxParolaLettereInserite;
-    }
-
     public String cercaParolaDaInserire_alg1(Parola casellaDaCompletare, ArrayList<String> dizionario){
         ArrayList<String> paroleDizionarioTrovate=new ArrayList<String>();
         int i=0;
@@ -215,11 +202,11 @@ public class ImplementazioneCruciverba implements Cruciverba {
         String parolaDaCompletare=casellaDaCompletare.getParola();
         int lunghezzaParolaDaCompletare = casellaDaCompletare.getLunghezza();
         /*ciclo tutte le parole del dizionario in ricerca di una o più parole che possono entrare nelle caselle a disposizione,
-        * a seconda dei caratteri già inseriti,
-        * se nessuna parola viene trovata si ritorna una stringa vuota
-        * se ci sono più parole da poter inserire si ritorna anche qui una stringa vuota
-        * se ce n'è solo una invece ritorno la stringa da inserire all'interno di queste caselle
-        */
+         * a seconda dei caratteri già inseriti,
+         * se nessuna parola viene trovata si ritorna una stringa vuota
+         * se ci sono più parole da poter inserire si ritorna anche qui una stringa vuota
+         * se ce n'è solo una invece ritorno la stringa da inserire all'interno di queste caselle
+         */
 
         for (String s : dizionario){
             parolaUguale=true;
@@ -249,6 +236,21 @@ public class ImplementazioneCruciverba implements Cruciverba {
             return "";
         }
     }
+    //</editor-fold>
+
+    //cerco la parola all'interno della lista che ha più lettere già inserite, a parità di lettere già inserite prendo la prima che ho trovato
+    public Parola cercaParolaConPiuLettere(ArrayList<Parola> listaParole){
+        int maxLettereInserite=-1, contatoreLettereInserite=0;
+        Parola maxParolaLettereInserite=null;
+        for (Parola p : listaParole){
+            contatoreLettereInserite=p.getLettereInserite();
+            if (contatoreLettereInserite>maxLettereInserite){
+                maxLettereInserite=contatoreLettereInserite;
+                maxParolaLettereInserite=p;
+            }
+        }
+        return maxParolaLettereInserite;
+    }
 
     //@requires: this!=null
     //@effects: controllo se cruciverba è finito o no
@@ -261,8 +263,7 @@ public class ImplementazioneCruciverba implements Cruciverba {
             return false;
         }
     }
-
-
+    
     //aggiornamento dizionario con le parole dello schema COMPLETATE, in questo modo quelle che parole che si sono completate automaticamente inserendo
     //altre parole nello schema vengono eliminate dal dizionario
     public void aggiornaDizionario(){
