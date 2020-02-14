@@ -149,6 +149,10 @@ public class Schema {
         aggiornaSchema(parolaIniziale, posizioneParolaIniziale, orientamentoInput);
     }
 
+    public ArrayList<Parola> getParoleSchema() {
+        return paroleSchema;
+    }
+
     //@requires: this!=null, parola entra nello schema (lunghezza corretta), posizione esistente
     //@modifies: this
     //@effects: inserisce la parola nella posizione iniziale indicata e poi dopo questa funzione

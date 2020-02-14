@@ -95,6 +95,11 @@ public class ImplementazioneCruciverba implements Cruciverba {
     //risoluzione cruciverba attraverso l'utilizzo dell'algoritmo 1
     public boolean risolviCruciverba_alg1() {
 
+        if (isComplete()){
+            JOptionPane.showMessageDialog(null, "Cruciverba completato", "Risultato cruciverba", JOptionPane.INFORMATION_MESSAGE);
+            return true;
+        }
+
         //TODO questa lunghezza=10 potrebbe essere sostituiti analizzando la dimensione dell'insieme trovato cercando il numero di parole
         // suddiviso per lunghezza all'interno dello schema
         int cicliEseguiti=0,cicliMax=100,c,lunghezzaMax=10;
@@ -134,13 +139,14 @@ public class ImplementazioneCruciverba implements Cruciverba {
                         if (!( parolaDaInserire.equals(""))){
                             casellaDaCompletare.setParola(parolaDaInserire);
 
-                            //rimuovo dal dizionario la parola trovata che inserisco nello schema
-                            dizionario.remove(parolaDaInserire);
-
                             //TODO non si può fare in modo di passare la parola di tipo Parola invece che le singole informazioni?
                             aggiornaParola(casellaDaCompletare.getParola(),casellaDaCompletare.getPosizioneParola().getRiga()
                                     , casellaDaCompletare.getPosizioneParola().getColonna(),casellaDaCompletare.getOrientamento());
                             numeroParoleLunghezzaCInserite++;
+
+                            //aggiorno il dizionario togliendo la parola che è stata inserita nello schema
+                            // + eventuali parole che si sono autocompletate inserendo una parola nello schema
+                            aggiornaDizionario();
                         }
 
                     }
@@ -156,8 +162,10 @@ public class ImplementazioneCruciverba implements Cruciverba {
         }
 
         if (!(daTrovare_alg1(trovato))){
+            JOptionPane.showMessageDialog(null, "Cruciverba completato", "Risultato cruciverba", JOptionPane.INFORMATION_MESSAGE);
             return true;
         }else{
+            JOptionPane.showMessageDialog(null, "Cruciverba non completato", "Risultato cruciverba", JOptionPane.ERROR_MESSAGE);
             return false;
         }
 
@@ -247,7 +255,25 @@ public class ImplementazioneCruciverba implements Cruciverba {
     //@throws: nullPointerException
     //@return: true se completo, false altrimenti
     public boolean isComplete() {
-        return true;
+        if (dizionario.size()==0){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+
+    //aggiornamento dizionario con le parole dello schema COMPLETATE, in questo modo quelle che parole che si sono completate automaticamente inserendo
+    //altre parole nello schema vengono eliminate dal dizionario
+    public void aggiornaDizionario(){
+        ArrayList<Parola> paroleSchema = schema_originale.getParoleSchema();
+        String parolaCorrente;
+        for (Parola p : paroleSchema){
+            parolaCorrente=p.getParola();
+            if (p.getLunghezza()==p.getLettereInserite() && dizionario.contains(parolaCorrente)){
+                dizionario.remove(parolaCorrente);
+            }
+        }
     }
 
 
