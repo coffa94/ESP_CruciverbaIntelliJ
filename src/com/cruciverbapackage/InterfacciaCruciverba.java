@@ -23,7 +23,20 @@ public class InterfacciaCruciverba {
         buttonRisolviCruciverba.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                cruciverba1.risolviCruciverba_alg1();
+                //risoluzione tramite algoritmo1
+                // if(cruciverba1.risolviCruciverba_alg1()){
+                //  JOptionPane.showMessageDialog(null, "Cruciverba completato", "Risultato cruciverba", JOptionPane.INFORMATION_MESSAGE);
+                // }else{
+                //  JOptionPane.showMessageDialog(null, "Cruciverba non completato", "Risultato cruciverba", JOptionPane.ERROR_MESSAGE);
+                // }
+
+                //risoluzione tramite algoritmo2
+                if (cruciverba1.risolviCruciverba_alg2()) {
+                    JOptionPane.showMessageDialog(null, "Cruciverba completato", "Risultato cruciverba", JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Cruciverba non completato", "Risultato cruciverba", JOptionPane.ERROR_MESSAGE);
+
+                }
             }
         });
         buttonCercaParola.addActionListener(new ActionListener() {
@@ -68,7 +81,7 @@ public class InterfacciaCruciverba {
     }
 
     public void open() {
-        creaCruciverba(matrice);
+        //creaCruciverba(matrice);
         cruciverba1 = new ImplementazioneCruciverba(panelMain, matrice, "CANE", 0, 0, dizionarioInput);
 
 
