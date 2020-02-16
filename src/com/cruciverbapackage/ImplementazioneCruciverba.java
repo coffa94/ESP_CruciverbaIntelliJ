@@ -98,7 +98,6 @@ public class ImplementazioneCruciverba implements Cruciverba {
     public boolean risolviCruciverba_alg1() {
 
         if (isComplete()){
-            JOptionPane.showMessageDialog(null, "Cruciverba completato", "Risultato cruciverba", JOptionPane.INFORMATION_MESSAGE);
             return true;
         }
 
@@ -158,7 +157,7 @@ public class ImplementazioneCruciverba implements Cruciverba {
                 }
 
                 //incremento il numero di caselle di cui voglio cercare le parole da inserire
-                c++;
+                    c++;
             }
 
         }

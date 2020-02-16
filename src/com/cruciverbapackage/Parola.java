@@ -168,7 +168,7 @@ public class Parola {
 
     //aggiorna la stringa dentro parola con il testo delle caselle
     public void aggiornaParola(){
-        StringBuilder strParolaNuova=new StringBuilder();
+            StringBuilder strParolaNuova=new StringBuilder();
         lettereInserite=0;
         try{
             if (lunghezza==caselleParola.size()){

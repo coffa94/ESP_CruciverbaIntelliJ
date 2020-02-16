@@ -14,7 +14,9 @@ public class InterfacciaCruciverba {
     private JButton buttonRisolviCruciverba;
     private JButton buttonCercaParola;
     private static ImplementazioneCruciverba cruciverba1;
+    //private static char[][] matrice = {{'.', '.', '.', '.', '*', '.', '.', '.'}, {'*', '.', '.', '.', '.', '*', '.', '.'}, {'.', '.', '.', '.', '.', '.', '*', '.'}, {'.', '.', '*', '.', '.', '.', '.', '.',}};
     private static char[][] matrice = {{'.', '.', '.', '.', '*', '.', '.', '.'}, {'*', '.', '.', '.', '.', '*', '.', '.'}, {'.', '.', '.', '.', '.', '.', '*', '.'}, {'.', '.', '*', '.', '.', '.', '.', '.',}};
+
     private ArrayList<JTextField> text;
     private static ArrayList<String> dizionarioInput;
 
@@ -24,18 +26,17 @@ public class InterfacciaCruciverba {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //risoluzione tramite algoritmo1
-                // if(cruciverba1.risolviCruciverba_alg1()){
-                //  JOptionPane.showMessageDialog(null, "Cruciverba completato", "Risultato cruciverba", JOptionPane.INFORMATION_MESSAGE);
-                // }else{
-                //  JOptionPane.showMessageDialog(null, "Cruciverba non completato", "Risultato cruciverba", JOptionPane.ERROR_MESSAGE);
-                // }
+                 /*if(cruciverba1.risolviCruciverba_alg1()){
+                  JOptionPane.showMessageDialog(null, "Cruciverba completato", "Risultato cruciverba", JOptionPane.INFORMATION_MESSAGE);
+                 }else{
+                  JOptionPane.showMessageDialog(null, "Cruciverba non completato", "Risultato cruciverba", JOptionPane.ERROR_MESSAGE);
+                 }*/
 
                 //risoluzione tramite algoritmo2
                 if (cruciverba1.risolviCruciverba_alg2()) {
                     JOptionPane.showMessageDialog(null, "Cruciverba completato", "Risultato cruciverba", JOptionPane.INFORMATION_MESSAGE);
                 } else {
                     JOptionPane.showMessageDialog(null, "Cruciverba non completato", "Risultato cruciverba", JOptionPane.ERROR_MESSAGE);
-
                 }
             }
         });
@@ -139,9 +140,9 @@ public class InterfacciaCruciverba {
         labelCruciverba.setBounds(20, 20, 400, 20);
 
         buttonRisolviCruciverba = new JButton("RisolviCruciverba");
-        buttonRisolviCruciverba.setBounds(20, 140, 200, 20);
+        buttonRisolviCruciverba.setBounds(20, 40, 200, 20);
         buttonCercaParola = new JButton("CercaParola");
-        buttonCercaParola.setBounds(240, 140, 200, 20);
+        buttonCercaParola.setBounds(240, 40, 200, 20);
 
         panelMain.add(labelCruciverba);
         panelMain.add(buttonRisolviCruciverba);
