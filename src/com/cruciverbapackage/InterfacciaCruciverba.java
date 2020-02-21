@@ -32,8 +32,15 @@ public class InterfacciaCruciverba {
                   JOptionPane.showMessageDialog(null, "Cruciverba non completato", "Risultato cruciverba", JOptionPane.ERROR_MESSAGE);
                  }*/
 
-                //risoluzione tramite algoritmo2
+                /*//risoluzione tramite algoritmo2
                 if (cruciverba1.risolviCruciverba_alg2()) {
+                    JOptionPane.showMessageDialog(null, "Cruciverba completato", "Risultato cruciverba", JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Cruciverba non completato", "Risultato cruciverba", JOptionPane.ERROR_MESSAGE);
+                }*/
+
+                //risoluzione tramite algoritmo3
+                if (cruciverba1.risolviCruciverba_alg3()) {
                     JOptionPane.showMessageDialog(null, "Cruciverba completato", "Risultato cruciverba", JOptionPane.INFORMATION_MESSAGE);
                 } else {
                     JOptionPane.showMessageDialog(null, "Cruciverba non completato", "Risultato cruciverba", JOptionPane.ERROR_MESSAGE);

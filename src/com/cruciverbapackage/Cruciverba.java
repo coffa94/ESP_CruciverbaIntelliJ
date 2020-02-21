@@ -2,6 +2,8 @@ package com.cruciverbapackage;
 
 //Coffaro_Davide_mat556603_Progetto ESP cruciverba
 
+import java.util.ArrayList;
+
 public interface Cruciverba {
     //costruttore cruciverba con una struttura passata in input
 
@@ -29,7 +31,7 @@ public interface Cruciverba {
     //@effects: ricerca la prossima parola da inserire nel cruciverba
     //@throws: nullPointerException
     //@return: parola trovata E oppure null (in questo caso va gestito)
-    public String cercaParolaDaInserire();
+    public String cercaParolaDaInserire(Parola casellaDaCompletare, ArrayList<String> dizionario);
 
     //@requires: this!=null
     //@effects: chiama n volte cercaParolaDaInserire finche lo schema non è completato, cioè isComplete=true
