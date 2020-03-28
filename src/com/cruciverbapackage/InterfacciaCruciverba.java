@@ -1,5 +1,7 @@
 package com.cruciverbapackage;
 
+import org.junit.rules.Stopwatch;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -7,6 +9,7 @@ import java.awt.event.ActionListener;
 import java.awt.image.ImageObserver;
 import java.text.AttributedCharacterIterator;
 import java.util.ArrayList;
+import java.lang.Object;
 
 public class InterfacciaCruciverba {
     private JPanel panelMain;
@@ -14,8 +17,27 @@ public class InterfacciaCruciverba {
     private JButton buttonRisolviCruciverba;
     private JButton buttonCercaParola;
     private static ImplementazioneCruciverba cruciverba1;
+    private long startTime=0;
+    private long stopTime=0;
+    private long totalTime=0;
     //private static char[][] matrice = {{'.', '.', '.', '.', '*', '.', '.', '.'}, {'*', '.', '.', '.', '.', '*', '.', '.'}, {'.', '.', '.', '.', '.', '.', '*', '.'}, {'.', '.', '*', '.', '.', '.', '.', '.',}};
-    private static char[][] matrice = {{'.', '.', '.', '.', '*', '.', '.', '.'}, {'*', '.', '.', '.', '.', '*', '.', '.'}, {'.', '.', '.', '.', '.', '.', '*', '.'}, {'.', '.', '*', '.', '.', '.', '.', '.',}};
+    //private static char[][] matrice = {{'.', '.', '.', '.', '*', '.', '.', '.'}, {'*', '.', '.', '.', '.', '*', '.', '.'}, {'.', '.', '.', '.', '.', '.', '*', '.'}, {'.', '.', '*', '.', '.', '.', '.', '.',}};
+    private static char[][] matrice = {{'.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '*', '.'},
+            {'.', '*', '.', '.', '.', '.', '.', '*', '.', '*', '.', '.'},
+            {'.', '.', '.', '.', '.', '.', '*', '.', '.', '.', '.', '.'},
+            {'.', '.', '.', '.', '.', '*', '.', '.', '.', '.', '.', '.'},
+            {'.', '.', '.', '.', '*', '.', '*', '.', '.', '.', '.', '.'},
+            {'.', '.', '.', '*', '.', '.', '.', '.', '.', '.', '.', '*'},
+            {'.', '.', '*', '.', '.', '.', '.', '.', '.', '.', '*', '.'},
+            {'.', '*', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.'},
+            {'.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '*', '.'},
+            {'.', '*', '.', '.', '.', '.', '.', '.', '.', '*', '.', '.'},
+            {'*', '.', '.', '.', '.', '.', '.', '.', '*', '.', '.', '.'},
+            {'.', '.', '.', '.', '.', '*', '.', '*', '.', '.', '.', '.'},
+            {'.', '.', '.', '.', '.', '.', '*', '.', '.', '.', '.', '.'},
+            {'.', '.', '.', '.', '.', '*', '.', '.', '.', '.', '.', '.'},
+            {'.', '.', '*', '.', '*', '.', '.', '.', '.', '.', '*', '.'},
+            {'.', '*', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.'}};
 
     private ArrayList<JTextField> text;
     private static ArrayList<String> dizionarioInput;
@@ -25,6 +47,7 @@ public class InterfacciaCruciverba {
         buttonRisolviCruciverba.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                startTime=System.currentTimeMillis();
                 //risoluzione tramite algoritmo1
                  /*if(cruciverba1.risolviCruciverba_alg1()){
                   JOptionPane.showMessageDialog(null, "Cruciverba completato", "Risultato cruciverba", JOptionPane.INFORMATION_MESSAGE);
@@ -32,19 +55,24 @@ public class InterfacciaCruciverba {
                   JOptionPane.showMessageDialog(null, "Cruciverba non completato", "Risultato cruciverba", JOptionPane.ERROR_MESSAGE);
                  }*/
 
-                /*//risoluzione tramite algoritmo2
-                if (cruciverba1.risolviCruciverba_alg2()) {
-                    JOptionPane.showMessageDialog(null, "Cruciverba completato", "Risultato cruciverba", JOptionPane.INFORMATION_MESSAGE);
+                 //DAFARE TODO cancellarlo
+                 //è possibile cancellarlo secondo me
+                //risoluzione tramite algoritmo2
+                if (cruciverba1.risolviCruciverba()) {
+                    stopTime=System.currentTimeMillis();
+                    totalTime=stopTime-startTime;
+                    JOptionPane.showMessageDialog(null, "Cruciverba completato in " + totalTime, "Risultato cruciverba", JOptionPane.INFORMATION_MESSAGE);
                 } else {
                     JOptionPane.showMessageDialog(null, "Cruciverba non completato", "Risultato cruciverba", JOptionPane.ERROR_MESSAGE);
-                }*/
+                }
 
-                //risoluzione tramite algoritmo3
+                /*//risoluzione tramite algoritmo3
                 if (cruciverba1.risolviCruciverba_alg3()) {
                     JOptionPane.showMessageDialog(null, "Cruciverba completato", "Risultato cruciverba", JOptionPane.INFORMATION_MESSAGE);
                 } else {
                     JOptionPane.showMessageDialog(null, "Cruciverba non completato", "Risultato cruciverba", JOptionPane.ERROR_MESSAGE);
                 }
+                 */
             }
         });
         buttonCercaParola.addActionListener(new ActionListener() {
@@ -62,10 +90,12 @@ public class InterfacciaCruciverba {
         frame.setContentPane(window.panelMain);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
-        frame.setSize(480, 200);
+
+        //imposto la dimensione della finestra a seconda del numero di righe e di colonne del cruciverba
+        frame.setSize(20*(matrice.length+matrice[0].length), 20*(matrice.length+matrice[0].length));
         frame.setVisible(true);
 
-        dizionarioInput = new ArrayList<String>();
+        /*dizionarioInput = new ArrayList<String>();
         dizionarioInput.add("CAT");
         dizionarioInput.add("NOIA");
         dizionarioInput.add("ANCA");
@@ -80,7 +110,61 @@ public class InterfacciaCruciverba {
         dizionarioInput.add("OI");
         dizionarioInput.add("PA");
         dizionarioInput.add("ESITO");
-
+*/
+        dizionarioInput = new ArrayList<String>();
+        dizionarioInput.add("STRAGRANDE");
+        dizionarioInput.add("TESEO");
+        dizionarioInput.add("CASABIANCA");
+        dizionarioInput.add("ALAIN");
+        dizionarioInput.add("FE");
+        dizionarioInput.add("FURIA");
+        dizionarioInput.add("ROSSO");
+        dizionarioInput.add("ALVARO");
+        dizionarioInput.add("ONLUS");
+        dizionarioInput.add("LEZIOSA");
+        dizionarioInput.add("BISTRO");
+        dizionarioInput.add("PIETA");
+        dizionarioInput.add("ESTERE");
+        dizionarioInput.add("DENTISTICO");
+        dizionarioInput.add("LASER");
+        dizionarioInput.add("PORO");
+        dizionarioInput.add("TIZIO");
+        dizionarioInput.add("OSTETRICA");
+        dizionarioInput.add("MOSA");
+        dizionarioInput.add("ANA");
+        dizionarioInput.add("MALESIA");
+        dizionarioInput.add("AN");
+        dizionarioInput.add("LEONINO");
+        dizionarioInput.add("BEN");
+        dizionarioInput.add("TE");
+        dizionarioInput.add("FARETTO");
+        dizionarioInput.add("RIO");
+        dizionarioInput.add("GARRANI");
+        dizionarioInput.add("WO");
+        dizionarioInput.add("LISI");
+        dizionarioInput.add("GARA");
+        dizionarioInput.add("MARGARINE");
+        dizionarioInput.add("INORGANICA");
+        dizionarioInput.add("ALATO");
+        dizionarioInput.add("FERRAMENTA");
+        dizionarioInput.add("CRANICO");
+        dizionarioInput.add("RA");
+        dizionarioInput.add("RAVERA");
+        dizionarioInput.add("TOCCARE");
+        dizionarioInput.add("OCARINA");
+        dizionarioInput.add("BOB");
+        dizionarioInput.add("LIONE");
+        dizionarioInput.add("ODORE");
+        dizionarioInput.add("ADAMI");
+        dizionarioInput.add("SCAPPATOIA");
+        dizionarioInput.add("ALIBI");
+        dizionarioInput.add("LORENA");
+        dizionarioInput.add("MASSA");
+        dizionarioInput.add("SAVONAROLA");
+        dizionarioInput.add("IRENE");
+        dizionarioInput.add("WESER");
+        dizionarioInput.add("BOSTON");
+        dizionarioInput.add("BE");
 
         //window.createUIComponents();
         window.open();
@@ -90,8 +174,16 @@ public class InterfacciaCruciverba {
 
     public void open() {
         //creaCruciverba(matrice);
-        cruciverba1 = new ImplementazioneCruciverba(panelMain, matrice, "CANE", 0, 0, dizionarioInput);
 
+        //creazione cruciverba per l'utilizzo di funzioni dell'algoritmo1
+        //cruciverba1 = new ImplAlg1Cruciverba(panelMain, matrice, "CANE", 0, 0, dizionarioInput);
+
+        //creazione cruciverba per l'utilizzo di funzioni dell'algoritmo2
+        //cruciverba1 = new ImplAlg2Cruciverba(panelMain, matrice, "CANE", 0, 0, dizionarioInput);
+
+        //creazione cruciverba per l'utilizzo di funzioni dell'algoritmo3
+        //cruciverba1 = new ImplAlg3Cruciverba(panelMain, matrice, "CANE", 0, 0, dizionarioInput);
+        cruciverba1 = new ImplAlg3Cruciverba(panelMain, matrice, "TERRORISTA", 7, 2, dizionarioInput);
 
         //aggiornaCruciverba(cruciverba1.VisualizzaSchema());
 
