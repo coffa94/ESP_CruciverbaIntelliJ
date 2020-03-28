@@ -3,17 +3,12 @@ package com.cruciverbapackage;
 import javax.swing.*;
 import java.util.ArrayList;
 
-public class ImplAlg1Cruciverba implements Cruciverba {
-    private Schema schema_originale;
-    //private SchemaScomposto schema_scomposto;
-    private ArrayList<String> dizionario;
+public class ImplAlg1Cruciverba extends ImplementazioneCruciverba{
 
     //costruttore cruciverba con una struttura passata in input
     public ImplAlg1Cruciverba(JPanel panel, char matrice[][], String parolaIniziale, int posizioneRigaIniziale, int posizioneColonnaIniziale, ArrayList<String> dizionarioInput) {
-        schema_originale = new Schema(panel, matrice, parolaIniziale, new Posizione(posizioneRigaIniziale, posizioneColonnaIniziale), 'O');
-        if (dizionarioInput != null && dizionarioInput.size() != 0) {
-            dizionario = dizionarioInput;
-        }
+        super(panel,matrice,parolaIniziale,posizioneRigaIniziale,posizioneColonnaIniziale,dizionarioInput);
+
 
     }
 
@@ -227,28 +222,4 @@ public class ImplAlg1Cruciverba implements Cruciverba {
         return maxParolaLettereInserite;
     }
 
-    //@requires: this!=null
-    //@effects: controllo se cruciverba è finito o no
-    //@throws: nullPointerException
-    //@return: true se completo, false altrimenti
-    public boolean isComplete() {
-        if (dizionario.size()==0){
-            return true;
-        }else{
-            return false;
-        }
-    }
-
-    //aggiornamento dizionario con le parole dello schema COMPLETATE, in questo modo quelle che parole che si sono completate automaticamente inserendo
-    //altre parole nello schema vengono eliminate dal dizionario
-    public void aggiornaDizionario(){
-        ArrayList<Parola> paroleSchema = schema_originale.getParoleSchema();
-        String parolaCorrente;
-        for (Parola p : paroleSchema){
-            parolaCorrente=p.getParola();
-            if (p.getLunghezza()==p.getLettereInserite() && dizionario.contains(parolaCorrente)){
-                dizionario.remove(parolaCorrente);
-            }
-        }
-    }
 }
