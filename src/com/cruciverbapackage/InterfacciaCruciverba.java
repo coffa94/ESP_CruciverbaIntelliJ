@@ -13,10 +13,14 @@ import java.lang.Object;
 
 public class InterfacciaCruciverba {
     private JPanel panelMain;
+    private JPanel panelListaParole;
     private JLabel labelCruciverba;
     private JButton buttonRisolviCruciverba;
     private JButton buttonCercaParola;
+    private JList listListaParole;
+    private JScrollPane scrollPaneListaParole;
     private static ImplementazioneCruciverba cruciverba1;
+    private static int dimensioneFinestraMinima=500;
     private long startTime=0;
     private long stopTime=0;
     private long totalTime=0;
@@ -50,26 +54,31 @@ public class InterfacciaCruciverba {
                 startTime=System.currentTimeMillis();
                 //risoluzione tramite algoritmo1
                  /*if(cruciverba1.risolviCruciverba_alg1()){
-                  JOptionPane.showMessageDialog(null, "Cruciverba completato", "Risultato cruciverba", JOptionPane.INFORMATION_MESSAGE);
+                    listListaParole.setListData(cruciverba1.dizionario.toArray());
+                    JOptionPane.showMessageDialog(null, "Cruciverba completato", "Risultato cruciverba", JOptionPane.INFORMATION_MESSAGE);
                  }else{
-                  JOptionPane.showMessageDialog(null, "Cruciverba non completato", "Risultato cruciverba", JOptionPane.ERROR_MESSAGE);
+                    listListaParole.setListData(cruciverba1.dizionario.toArray());
+                    JOptionPane.showMessageDialog(null, "Cruciverba non completato", "Risultato cruciverba", JOptionPane.ERROR_MESSAGE);
                  }*/
 
                  //DAFARE TODO cancellarlo
                  //è possibile cancellarlo secondo me
                 //risoluzione tramite algoritmo2
                 if (cruciverba1.risolviCruciverba()) {
+                    listListaParole.setListData(cruciverba1.dizionario.toArray());
                     stopTime=System.currentTimeMillis();
                     totalTime=stopTime-startTime;
                     JOptionPane.showMessageDialog(null, "Cruciverba completato in " + totalTime, "Risultato cruciverba", JOptionPane.INFORMATION_MESSAGE);
                 } else {
+                    listListaParole.setListData(cruciverba1.dizionario.toArray());
                     JOptionPane.showMessageDialog(null, "Cruciverba non completato", "Risultato cruciverba", JOptionPane.ERROR_MESSAGE);
                 }
-
                 /*//risoluzione tramite algoritmo3
                 if (cruciverba1.risolviCruciverba_alg3()) {
+                    listListaParole.setListData(cruciverba1.dizionario.toArray());
                     JOptionPane.showMessageDialog(null, "Cruciverba completato", "Risultato cruciverba", JOptionPane.INFORMATION_MESSAGE);
                 } else {
+                    listListaParole.setListData(cruciverba1.dizionario.toArray());
                     JOptionPane.showMessageDialog(null, "Cruciverba non completato", "Risultato cruciverba", JOptionPane.ERROR_MESSAGE);
                 }
                  */
@@ -91,11 +100,18 @@ public class InterfacciaCruciverba {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
 
-        //imposto la dimensione della finestra a seconda del numero di righe e di colonne del cruciverba
-        frame.setSize(20*(matrice.length+matrice[0].length), 20*(matrice.length+matrice[0].length));
+        //imposto la dimensione della finestra a seconda del numero di righe e di colonne del cruciverba, se sono troppo basse imposto una
+        //dimensione minima
+        int dimensioneFinestra=20*(matrice.length+matrice[0].length)+100;
+        if (dimensioneFinestra<dimensioneFinestraMinima){
+            frame.setSize(dimensioneFinestraMinima, dimensioneFinestraMinima);
+        }else{
+            frame.setSize(dimensioneFinestra, dimensioneFinestra);
+        }
         frame.setVisible(true);
 
-        /*dizionarioInput = new ArrayList<String>();
+        /*
+        dizionarioInput = new ArrayList<String>();
         dizionarioInput.add("CAT");
         dizionarioInput.add("NOIA");
         dizionarioInput.add("ANCA");
@@ -184,7 +200,7 @@ public class InterfacciaCruciverba {
         //creazione cruciverba per l'utilizzo di funzioni dell'algoritmo3
         //cruciverba1 = new ImplAlg3Cruciverba(panelMain, matrice, "CANE", 0, 0, dizionarioInput);
         cruciverba1 = new ImplAlg3Cruciverba(panelMain, matrice, "TERRORISTA", 7, 2, dizionarioInput);
-
+        listListaParole.setListData(dizionarioInput.toArray());
         //aggiornaCruciverba(cruciverba1.VisualizzaSchema());
 
     }
@@ -243,9 +259,23 @@ public class InterfacciaCruciverba {
         buttonCercaParola = new JButton("CercaParola");
         buttonCercaParola.setBounds(240, 40, 200, 20);
 
+        listListaParole=new JList();
+        listListaParole.setBounds(20, 80, 200,200);
+
+        scrollPaneListaParole = new JScrollPane(listListaParole);
+        scrollPaneListaParole.setPreferredSize(new Dimension(300,200));
+        scrollPaneListaParole.setBounds(20,80,800,800);
+
+        panelListaParole = new JPanel();
+        BorderLayout groupLayoutListaParole = new BorderLayout();
+        panelListaParole.setLayout(groupLayoutListaParole);
+        panelListaParole.add(scrollPaneListaParole);
+        panelListaParole.setBounds(20,80,200,200);
+
         panelMain.add(labelCruciverba);
         panelMain.add(buttonRisolviCruciverba);
         panelMain.add(buttonCercaParola);
+        panelMain.add(panelListaParole);
         panelMain.revalidate();
 
 

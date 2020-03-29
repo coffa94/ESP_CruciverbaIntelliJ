@@ -83,17 +83,7 @@ public class ImplAlg3Cruciverba extends ImplementazioneCruciverba {
         // suddiviso per lunghezza all'interno dello schema
         int cicliEseguiti = 0, cicliMax = 100, c, lunghezzaMax = 10;
         int numeroParoleLunghezzaC = 0, numeroParoleLunghezzaCInserite = 0;
-        /*Timer tempoDiEsecuzione= new Timer(600, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    throw new Exception("Tempo massimo di esecuzione raggiunto");
-                } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null, ex.toString(), "Errore", JOptionPane.ERROR_MESSAGE);
-                    System.exit(102);
-                }
-            }
-        });*/
+
         ArrayList<ArrayList<Parola>> listaParoleLunghezzaC = new ArrayList<ArrayList<Parola>>();
 
         if (isComplete()) {

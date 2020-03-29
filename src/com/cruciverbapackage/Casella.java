@@ -11,8 +11,8 @@ public class Casella {
     private boolean casellaNera;
 
     public Casella(JPanel panel, Posizione posizioneInput, char carattereInput, boolean casellaNeraInput) {
-        int xIniziale = 20;
-        int yIniziale = 70;
+        int xIniziale = 240;
+        int yIniziale = 80;
         int i, j = 0;
         try {
             if (posizioneInput != null) {

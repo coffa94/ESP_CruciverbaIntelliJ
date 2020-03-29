@@ -26,7 +26,6 @@ public interface Cruciverba {
     //@return: componenteDaVisualizzare T (di tipo grafico??)
     //public <T> T visualizzaSchema();
 
-    //algoritmo 1
     //@requires: this!=null
     //@effects: ricerca la prossima parola da inserire nel cruciverba
     //@throws: nullPointerException
@@ -34,7 +33,7 @@ public interface Cruciverba {
     public String cercaParolaDaInserire(Parola casellaDaCompletare, ArrayList<String> dizionario);
 
     //@requires: this!=null
-    //@effects: chiama n volte cercaParolaDaInserire finche lo schema non è completato, cioè isComplete=true
+    //@effects: chiama cercaParolaDaInserire finche lo schema non è completato, cioè isComplete=true
     //@throws: nullPointerException
     //@return: true se completato, false se non è possibile completarlo
     public boolean risolviCruciverba();

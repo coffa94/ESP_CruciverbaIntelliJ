@@ -12,6 +12,10 @@ public class ImplementazioneCruciverba implements Cruciverba {
     //protected SchemaScomposto schema_scomposto;
     protected ArrayList<String> dizionario;
 
+    public ArrayList<String> getDizionario() {
+        return dizionario;
+    }
+
     //costruttore cruciverba con una struttura passata in input
     public ImplementazioneCruciverba(JPanel panel, char matrice[][], String parolaIniziale, int posizioneRigaIniziale, int posizioneColonnaIniziale, ArrayList<String> dizionarioInput) {
         schema_originale = new Schema(panel, matrice, parolaIniziale, new Posizione(posizioneRigaIniziale, posizioneColonnaIniziale), 'O');
@@ -51,7 +55,7 @@ public class ImplementazioneCruciverba implements Cruciverba {
 
 
     //@requires: this!=null
-    //@effects: chiama n volte cercaParolaDaInserire finche lo schema non è completato, cioè isComplete=true
+    //@effects: chiama cercaParolaDaInserire finche lo schema non è completato, cioè isComplete=true
     //@throws: nullPointerException
     //@return: true se completato, false se non è possibile completarlo
     public boolean risolviCruciverba(){
