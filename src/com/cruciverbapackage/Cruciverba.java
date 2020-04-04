@@ -32,6 +32,12 @@ public interface Cruciverba {
     //@return: parola trovata E oppure null (in questo caso va gestito)
     public String cercaParolaDaInserire(Parola casellaDaCompletare, ArrayList<String> dizionario);
 
+    //@requires this!=null
+    //@effects: inserisce una parola nello schema del cruciverba
+    //@throws: nullPointerException
+    //*return: true se cruciverba è completo, false se non è stato completato o non è stata trovata una parola da inserire
+    public boolean inserisci1Parola();
+
     //@requires: this!=null
     //@effects: chiama cercaParolaDaInserire finche lo schema non è completato, cioè isComplete=true
     //@throws: nullPointerException

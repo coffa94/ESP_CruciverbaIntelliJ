@@ -74,6 +74,79 @@ public class ImplAlg3Cruciverba extends ImplementazioneCruciverba {
         }
     }
 
+    //corrisponde ad un ciclo di risolviCruciverba (in cui poi viene lanciata la funzione cercaParolaDaInserire)
+    //@requires this!=null
+    //@effects: inserisce una parola nello schema del cruciverba
+    //@throws: nullPointerException
+    //*return: true se cruciverba è completo, false se non è stato completato o non è stata trovata una parola da inserire
+    public boolean inserisci1Parola(){
+        boolean trovataParola=false;
+        //TODO questa lunghezza=10 potrebbe essere sostituiti analizzando la dimensione dell'insieme trovato cercando il numero di parole
+        // suddiviso per lunghezza all'interno dello schema
+        int cicliEseguiti = 0, cicliMax = 100, c, lunghezzaMax = 10;
+        int numeroParoleLunghezzaC = 0, numeroParoleLunghezzaCInserite = 0;
+
+        ArrayList<ArrayList<Parola>> listaParoleLunghezzaC = new ArrayList<ArrayList<Parola>>();
+
+        if (isComplete()) {
+            return true;
+        } else {
+            for (int i = 0; i < lunghezzaMax; i++) {
+                ArrayList<Parola> paroleLunghezzaC;
+                paroleLunghezzaC = schema_originale.ricercaLunghezzaParole(i + 1);
+                if (paroleLunghezzaC.size() > 0) {
+                    listaParoleLunghezzaC.add(i, paroleLunghezzaC);
+                } else {
+                    listaParoleLunghezzaC.add(new ArrayList<Parola>());
+                }
+            }
+
+            while (!isComplete() && cicliEseguiti < cicliMax && !(trovataParola)) {
+                cicliEseguiti++;
+                c = 0;
+                while (c < lunghezzaMax && !(trovataParola)) {
+                    ArrayList<Parola> paroleLunghezzaC = listaParoleLunghezzaC.get(c);
+                    int i=0;
+                    while ( i < paroleLunghezzaC.size() && !(trovataParola)) {
+                        Parola casellaDaCompletare = paroleLunghezzaC.get(i);
+                        //prima di cercare la parolaDaInserire faccio un controllo se la parola nella lista paroleLunghezzaC è già completa,
+                        // se si la elimino dalla lista
+                        if (casellaDaCompletare.getLunghezza() == casellaDaCompletare.getLettereInserite()) {
+                            paroleLunghezzaC.remove(casellaDaCompletare);
+                        } else {
+                            String parolaDainserire = cercaParolaDaInserire(casellaDaCompletare, dizionario);
+                            if (!(parolaDainserire.equals(""))) {
+                                //è stata trovata una parola da inserire nello schema, rimuovo quindi la casellaDaCompletare dalla lista di parole di
+                                // lunghezza c ancora da inserire
+                                trovataParola=true;
+                                paroleLunghezzaC.remove(casellaDaCompletare);
+
+                                casellaDaCompletare.setParola(parolaDainserire);
+                                aggiornaParola(casellaDaCompletare.getParola(), casellaDaCompletare.getPosizioneParola().getRiga()
+                                        , casellaDaCompletare.getPosizioneParola().getColonna(), casellaDaCompletare.getOrientamento());
+
+                                //aggiorno il dizionario togliendo la parola che è stata inserita nello schema
+                                // + eventuali parole che si sono autocompletate inserendo una parola nello schema
+                                aggiornaDizionario();
+                            }else{
+                                //incremento solo se la parola non era già completata o se non è stato inserito niente nello schema
+                                i++;
+                            }
+                        }
+                    }
+                    c++;
+                }
+            }
+
+            //controllo se il cruciverba è stato completato o meno
+            if (isComplete()) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
+
     //@requires: this!=null
     //@effects: risoluzione cruciverba attraverso l'utilizzo dell'algoritmo 3
     //@throws: nullPointerException

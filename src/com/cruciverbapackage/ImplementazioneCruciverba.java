@@ -50,8 +50,12 @@ public class ImplementazioneCruciverba implements Cruciverba {
         return "";
     }
 
-    //TODO funzione da lanciare al click su cercaParola
-    //corrisponde ad un ciclo di risolviCruciverba (in cui poi viene lanciata la funzione cercaParolaDaInserire
+    //corrisponde ad un ciclo di risolviCruciverba (in cui poi viene lanciata la funzione cercaParolaDaInserire)
+    //@requires this!=null
+    //@effects: inserisce una parola nello schema del cruciverba
+    //@throws: nullPointerException
+    //*return: true se cruciverba è completo, false se non è stato completato o non è stata trovata una parola da inserire
+    public boolean inserisci1Parola(){ return true; }
 
 
     //@requires: this!=null

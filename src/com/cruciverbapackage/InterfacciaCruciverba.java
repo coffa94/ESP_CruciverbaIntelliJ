@@ -88,6 +88,17 @@ public class InterfacciaCruciverba {
             @Override
             public void actionPerformed(ActionEvent e) {
 
+                //TODO lanciare inserisci1Parola al click
+                if (cruciverba1.inserisci1Parola()) {
+                    listListaParole.setListData(cruciverba1.dizionario.toArray());
+                    stopTime=System.currentTimeMillis();
+                    totalTime=stopTime-startTime;
+                    JOptionPane.showMessageDialog(null, "Cruciverba completato in " + totalTime, "Risultato cruciverba", JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    listListaParole.setListData(cruciverba1.dizionario.toArray());
+                    //JOptionPane.showMessageDialog(null, "Cruciverba non completato", "Risultato cruciverba", JOptionPane.ERROR_MESSAGE);
+                }
+
             }
         });
     }
@@ -251,7 +262,7 @@ public class InterfacciaCruciverba {
         layoutGUI.setAutoCreateGaps(true);
         layoutGUI.setAutoCreateContainerGaps(true);
 
-        labelCruciverba = new JLabel("Cruciverba 4X8");
+        labelCruciverba = new JLabel("Cruciverba " + matrice.length + "X" + matrice[0].length);
         labelCruciverba.setBounds(20, 20, 400, 20);
 
         buttonRisolviCruciverba = new JButton("RisolviCruciverba");
