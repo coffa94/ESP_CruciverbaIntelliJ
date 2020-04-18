@@ -11,23 +11,7 @@ public class ImplAlg3Cruciverba extends ImplementazioneCruciverba {
 
     }
 
-    //@requires: this!=null, parola!=null, posizione all'interno dello schema
-    //@modifies: this
-    //@effects: inserisce la parola trovata all'interno del cruciverba
-    //@throws: nullPointerException, positionException se posizione non interna al cruciverba
-    //         lengthException se lunghezza parola non entra nel cruciverba
-    public void aggiornaParola(String parola, int riga, int colonna, char orientamento) {
-        schema_originale.aggiornaSchema(parola,new Posizione(riga,colonna),orientamento);
-    }
-
-    //@requires: this!=null, lettera!=null, posizione all'interno del cruciverba
-    //@modifies: this
-    //@effects: inserisce la lettera dentro il cruciverba alla posizione indicata
-    //@throws: nullPointerException, positionException se posizione non interna al cruciverba
-    public void aggiornaLettera(char lettera, int riga, int colonna) {
-
-    }
-
+    //TODO implementare algoritmo 3 vedi oneNote
     //@requires: this!=null
     //@effects: ricerca la prossima parola da inserire nel cruciverba
     //@throws: nullPointerException

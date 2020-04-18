@@ -92,6 +92,24 @@ public class Parola {
 
     }
 
+    public Parola(Parola p){
+        //non faccio la copia, probabilmente quando modifico le caselle o altri campi li modifica anche in quelli originali dello schema
+        // this.setCaselleParola(new ArrayList<Casella>(p.getCaselleParola()));
+        this.setParola(p.getParola());
+        this.setCaselleParola(p.getCaselleParola());
+        this.setPosizioneParola(p.getPosizioneParola());
+        this.setLunghezza(p.getLunghezza());
+        this.setLettereInserite(p.getLettereInserite());
+        this.setOrientamento(p.getOrientamento());
+    }
+
+    public ArrayList<Casella> getCaselleParola() {
+        return caselleParola;
+    }
+
+    public void setCaselleParola(ArrayList<Casella> caselleParola) {
+        this.caselleParola = caselleParola;
+    }
 
     public String getParola() {
         return parola;
@@ -188,4 +206,13 @@ public class Parola {
             JOptionPane.showMessageDialog(null, ex.toString(), "Errore", JOptionPane.ERROR_MESSAGE);
         }
     }
+
+    public boolean isComplete(){
+        if (this.lunghezza==this.lettereInserite){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
 }

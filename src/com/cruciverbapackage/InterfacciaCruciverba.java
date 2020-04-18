@@ -210,7 +210,10 @@ public class InterfacciaCruciverba {
 
         //creazione cruciverba per l'utilizzo di funzioni dell'algoritmo3
         //cruciverba1 = new ImplAlg3Cruciverba(panelMain, matrice, "CANE", 0, 0, dizionarioInput);
-        cruciverba1 = new ImplAlg3Cruciverba(panelMain, matrice, "TERRORISTA", 7, 2, dizionarioInput);
+        //cruciverba1 = new ImplAlg3Cruciverba(panelMain, matrice, "TERRORISTA", 7, 2, dizionarioInput);
+
+        cruciverba1 = new ImplAlg4Cruciverba_AI(panelMain,matrice, "TERRORISTA", 7, 2, dizionarioInput);
+
         listListaParole.setListData(dizionarioInput.toArray());
         //aggiornaCruciverba(cruciverba1.VisualizzaSchema());
 
