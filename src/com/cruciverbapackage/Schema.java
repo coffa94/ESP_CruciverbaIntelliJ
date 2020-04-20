@@ -104,7 +104,8 @@ public class Schema {
                     posizioneIniziale.setColonna(j);
                     lunghezzaParola++;
 
-                    //cerco la casella già esistente relativa alla riga i, colonna j per poi inserirla nella parola ed averla collegata alle caselle dello schema, così come alle parole in orizzontale
+                    //cerco la casella già esistente relativa alla riga i, colonna j per poi inserirla nella parola ed averla
+                    // collegata alle caselle dello schema, così come alle parole in orizzontale
                     cercaCasella(caselleParola, i, j);
 
                 } else if (matrice[i][j] == carattere && (!primaLettera)) {
@@ -150,7 +151,7 @@ public class Schema {
     }
 
     public ArrayList<Parola> getParoleSchema() {
-        return paroleSchema;
+        return new ArrayList<Parola>(paroleSchema);
     }
 
     //@requires: this!=null, parola entra nello schema (lunghezza corretta), posizione esistente
@@ -184,6 +185,8 @@ public class Schema {
         return matrice;
     }
 
+    //cerca all'interno delle caselle dello schema e se già presente una casella con posizione riga, colonna allora la
+    // assegna alle caselleParola senza creare una nuova casella apposita
     public void cercaCasella(ArrayList<Casella> caselleParola, int riga, int colonna) {
         for (Casella c : caselleSchema) {
             if (c.confrontaPosizione(riga, colonna)) {
