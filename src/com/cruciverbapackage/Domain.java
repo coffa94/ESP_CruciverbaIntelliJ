@@ -20,9 +20,13 @@ class Domain{
 
     //ritorna la lista di valori inseriti in questo dominio
     public ArrayList<String> getListValues(){
-        return listValues;
+        return new ArrayList<String>(listValues);
     }
 
+    //modifica la lista di valori inseriti in questo dominio
+    public void setListValues(ArrayList<String> listValues) {
+        this.listValues = listValues;
+    }
 
     //ritorna la lunghezza delle parole inserite in questo dominio
     public int getLunghezzaParole(){
@@ -34,5 +38,9 @@ class Domain{
         listValues.add(s);
     }
 
+    //conta il numero di valori all'interno del dominio
+    public int getValuesNumber(){
+        return listValues.size();
+    }
 
 }
