@@ -2,6 +2,8 @@ package com.cruciverbapackage;
 
 import java.util.ArrayList;
 
+
+//classe CSP = costraintsSatisfactionProblem, utilizzo di algoritmo di AI per la ricerca della soluzione del cruciverba
 public class CSP {
     private ArrayList<Parola> listSolution;
     private boolean CSPExecuted;
@@ -10,7 +12,11 @@ public class CSP {
     private ArrayList<Domain> domains;
 
     public ArrayList<Parola> getListSolution() {
-        return listSolution;
+        return new ArrayList<Parola>(listSolution);
+    }
+
+    public ArrayList<Variable> getVariables() {
+        return new ArrayList<Variable>(variables);
     }
 
     public boolean isCSPExecuted() {
@@ -74,6 +80,11 @@ public class CSP {
                 if (foundD!=null){
                     Variable v = new Variable(p,foundD);
                     variables.add(v);
+                    //se lettereInserite per questa parola è diverso da zero lancio anche la procedura di inferenza per ridurre
+                    // i domini di questa variabile
+                    if (p.getLettereInserite()>0){
+                        v.inference();
+                    }
                 }else{
                     throw new NullPointerException("Non è stato trovato un dominio per questa variabile");
                 }
@@ -106,6 +117,10 @@ public class CSP {
         //backtracking intelligente = gestisco la lista dei conflitti cioè quali variabili vincolano la scelta successiva
         //                            di altre variabili con caselle collegate, nel caso di dominio vuoto utilizzo la lista
         //                            dei conflitti (politica LIFO) per assegnare un nuovo valore a quella variabile.
+    }
 
+    //ritorno il numero di variabili totali
+    public int getNumberVariables(){
+        return variables.size();
     }
 }
