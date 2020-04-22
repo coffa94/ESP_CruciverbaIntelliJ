@@ -38,12 +38,7 @@ public class ImplAlg4Cruciverba_AI extends ImplementazioneCruciverba{
     //@throws: nullPointerException
     //@return: true se completato, false se non è possibile completarlo
     public boolean risolviCruciverba(){
-        listSolution= backtrackSearch( constraintsSolver);
-        if (listSolution.size()==constraintsSolver.getNumberVariables()){
-            return true;
-        }else{
-            return false;
-        }
+        return backtrackSearch(constraintsSolver);
 /*vecchia implementazione
         constraintsSolver.solve();
         if (!(constraintsSolver.isCSPExecuted())){
@@ -72,23 +67,61 @@ public class ImplAlg4Cruciverba_AI extends ImplementazioneCruciverba{
 
 
     //lancio procedura per soluzione cruciverba con AI
-    private ArrayList<Parola> backtrackSearch( CSP csp){
-        return backtrack(new ArrayList<Parola>(), csp);
+    private boolean backtrackSearch( CSP csp){
+        backtrack(new ArrayList<Parola>(), csp);
+        if (listSolution.size()==constraintsSolver.getNumberVariables()){
+            return true;
+        }else{
+            return false;
+        }
     }
 
-    //ricerca soluzione cruciverba con AI
-    private ArrayList<Parola> backtrack(ArrayList<Parola> assignment, CSP csp){
+    //ricerca soluzione cruciverba con AI con variable=MRV (minimum remaining values)+euristica del grado, value=meno vincolante,
+    // inferenza con FC (forward checking), backtracking intelligente con conflict-directed backjumping
+    // ritorno il valore null quando sono arrivato in fondo alla procedura, altrimenti ritorno la variabile di cui analizzo la lista
+    // delle variabili da cui dipende per fare il backtracking intelligente
+    private Variable backtrack(ArrayList<Parola> assignment, CSP csp){
+        int countAssignment=0;
+        Variable varResult=null;
         if (assignment.size()==csp.getNumberVariables()){
-            return assignment;
+            listSolution=assignment;
+            return null;
         }
-        Variable var=selectUnassignedVariables(constraintsSolver);
+        Variable var=selectUnassignedVariable(constraintsSolver);
+        if (var==null){
+            //termino la procedura corrente
+            //nessuna variabile a cui assegnare un valore trovata
+            return null;
+        }else{
+            //mantengo una copia della vecchia variabile nel caso in cui l'assegnamento corrente non è corretto
+            Variable oldVar = new Variable(var);
 
+            //scorro i valori del dominio scegliendo per primi i valori meno vincolanti, scelta di un valore che diminuisce in modo
+            // minore il dominio delle variabili collegate alla variabile corrente
+            for(String s : orderDomainValues(var,assignment,csp)){
+                var.setNewParola(s);
+                var.aggiornaCaselleParola();
+                var.setValueAssigned(true);
+                assignment.add(var.getValue());
+                countAssignment++;
+                if (inference(csp,var,s)){
+                    //TODO aggiornare i domini con le stesse lettere di quella di var di cui ho appena inserito un valore
+                    varResult= backtrack(assignment,csp);
+                    if (varResult==null){
+                        return null;
+                    }
+                }
+                assignment.remove(countAssignment);
+                countAssignment--;
+                var=oldVar;
+            }
+        }
         return null;
     }
 
 
     //seleziono la variabile per la ricerca di un valore da inserire seguendo la strategia di CSP
-    private Variable selectUnassignedVariables(CSP constraintsSolver) {
+    private Variable selectUnassignedVariable(CSP constraintsSolver) {
         //imposto il valore iniziale uguale al numero di parole da inserire nel cruciverba
         int minValues = dizionario.size();
         ArrayList<Variable> listCandidateVariables = null;
@@ -119,22 +152,24 @@ public class ImplAlg4Cruciverba_AI extends ImplementazioneCruciverba{
         //procedura di selezione variabili per minor valore dei sottodomini
         for (Variable v : constraintsSolver.getVariables()) {
             int variableValues = v.getValuesNumber();
-            if (variableValues<minValues) {
-                //se il numero di valori del sottodominio per questa variabile è inferiore a quella precedente creo una nuova lista
-                // (la lista precedente contenente le variabili con numero valori sottodominio maggiore viene scartata)
-                // in cui inserisco la variabile corrente e aggiorno il numero valore sottodominio minimo
-                listCandidateVariables = new ArrayList<Variable>();
-                listCandidateVariables.add(v);
-                minValues = variableValues;
-            } else if (variableValues == minValues) {
-
-                //controllo se non era ancora stata inizializzata la lista delle variabili candidate
-                if (listCandidateVariables == null) {
+            if (!(v.isValueAssigned())) {
+                if (variableValues < minValues) {
+                    //se il numero di valori del sottodominio per questa variabile è inferiore a quella precedente creo una nuova lista
+                    // (la lista precedente contenente le variabili con numero valori sottodominio maggiore viene scartata)
+                    // in cui inserisco la variabile corrente e aggiorno il numero valore sottodominio minimo
                     listCandidateVariables = new ArrayList<Variable>();
-                }
+                    listCandidateVariables.add(v);
+                    minValues = variableValues;
+                } else if (variableValues == minValues) {
 
-                //inserisco la variabile corrente nella lista contenente le variabili con la stessa percentuale di completamento
-                listCandidateVariables.add(v);
+                    //controllo se non era ancora stata inizializzata la lista delle variabili candidate
+                    if (listCandidateVariables == null) {
+                        listCandidateVariables = new ArrayList<Variable>();
+                    }
+
+                    //inserisco la variabile corrente nella lista contenente le variabili con la stessa percentuale di completamento
+                    listCandidateVariables.add(v);
+                }
             }
         }
 
@@ -146,7 +181,7 @@ public class ImplAlg4Cruciverba_AI extends ImplementazioneCruciverba{
 
             }else if(listCandidateVariables.size()==1){
                 //se la lista delle variabili candidate contiene un solo elemento lo passo alla return della funzione
-                return listCandidateVariables.get(1);
+                return listCandidateVariables.get(0);
             }else{
                 //la lista contiene più elementi, cerco quella variabile che vincola maggiormente le altre variabili (quella con più lettere)
                 int maxLetters=0;
@@ -174,5 +209,47 @@ public class ImplAlg4Cruciverba_AI extends ImplementazioneCruciverba{
         }
     }
 
+    //creo la lista di assegnamenti di valori del dominio alla variabile, ordinata dai valori meno vincolanti a quelli più vincolanti
+    private ArrayList<String> orderDomainValues(Variable var, ArrayList<Parola> assignment, CSP csp){
+        //TODO implementare soluzione per poter creare una lista ordinata di valori da quello meno vincolante a quello più vincolante
+        //per adesso ritorno semplicemente la lista dei valori del dominio possibili
+        return var.getListValuesDomain();
+
+    }
+
+    //procedura che mi permette di:
+    // 1) togliere dal problema csp la variabile var perché gli è stato assegnato un valore
+    // 2) cercare le variabili collegate a var di cui dovrò modificare il dominio dovuto alla nuova stringa s assegnata a var
+    // 3) fare un controllo che i domini risultanti delle variabili collegate non siano vuoti:
+    //    se lo sono ritorno false altrimenti true
+    private boolean inference(CSP csp, Variable var, String s){
+
+        //constraintsSolver.removeVariable(var);    //utilizzo un booleano per conoscere se è già stata assegnata o no
+
+        ArrayList<Variable> listVariables=null;
+        int i=0;
+        boolean result=true;
+        //trovare variabili collegate a var
+        listVariables=csp.searchLinkedVariables(var);
+        while (listVariables!=null && i<listVariables.size() && result){
+            Variable currentVar=listVariables.get(i);
+            currentVar.setOldValue(currentVar.getValue());
+            currentVar.aggiornaParola();
+            if (!(currentVar.inference())){
+                currentVar.ripristinaParola();
+                result=false;
+            }
+            i++;
+        }
+
+        //se il risultato dell'inferenza è false ripristino tutti i valori dei domini che avevo modificato durante questa procedura
+        while(!(result) && i>=0){
+            Variable currentVar=listVariables.get(i);
+            currentVar.ripristinaParola();
+            currentVar.restoreDomain();
+            i--;
+        }
+        return result;
+    }
 
 }

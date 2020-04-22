@@ -56,6 +56,12 @@ public class Casella {
         return posizioneCasella.equals(posizioneDaConfrontare);
     }
 
+    //procedura di confronto caselle, ritorna true se la casella in input è la stessa della casella dell'oggetto corrente
+    public boolean confrontaCaselle(Casella c){
+        return posizioneCasella.equals(c.posizioneCasella);
+    }
+
+
     public void aggiornaCarattere(char carattereInput){
         carattereCasella=carattereInput;
         textFieldCasella.setText(String.valueOf(carattereInput));

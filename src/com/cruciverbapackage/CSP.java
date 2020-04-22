@@ -76,7 +76,7 @@ public class CSP {
                 foundD=searchDomain(p.getLunghezza());
 
 
-                //TODO se lettereInserite!=0 devo lanciare la procedura di inferenza sui domini delle variabili che creo?
+                //se lettereInserite!=0 devo lanciare la procedura di inferenza sui domini delle variabili che creo
                 if (foundD!=null){
                     Variable v = new Variable(p,foundD);
                     variables.add(v);
@@ -108,6 +108,37 @@ public class CSP {
         return foundD;
     }
 
+
+    //REMOVED
+    // dopo aver creato tutte le variabili, creo i collegamenti tra di esse, in modo che quando assegno un valore ad una
+    // variabile conosco le variabili ad essa collegate
+    /*private void createLinkBetweenVariables(){
+        for (Variable var : variables){
+
+        }
+    }
+     */
+
+    //ritorna le variabili collegata alla variabile passata in input var
+    public ArrayList<Variable> searchLinkedVariables(Variable var){
+        ArrayList<Variable> linkedVariables=null;
+
+        //scorro le variabili dello schema alla ricerca di quelle collegata a quella in input
+        for(Variable searchVar : variables){
+            //faccio un controllo se è già assegnato un valore, in questo modo evito di verificare il collegamento con una variabile
+            // alla quale ho già assegnato un valore (sia variabile corrente che altre variabili all'interno dello schema)
+            if (!(searchVar.isValueAssigned())) {
+                if (searchVar.isLinked(var)) {
+                    if (linkedVariables==null){
+                        linkedVariables=new ArrayList<Variable>();
+                    }
+                    linkedVariables.add(new Variable(searchVar));
+                }
+            }
+        }
+        return linkedVariables;
+    }
+
     public void solve(){
         //CSP:
         //variabili = paroleSchema
@@ -123,4 +154,12 @@ public class CSP {
     public int getNumberVariables(){
         return variables.size();
     }
+
+
+    //REMOVED - provo ad utilizzare un booleano dentro la classe Variable per indicare che è stata già assegnata
+    //rimuove una variabile dalla lista di variabili del problema csp
+    /*public void removeVariable(Variable var){
+        variables.remove(var);
+    }
+     */
 }

@@ -215,4 +215,16 @@ public class Parola {
         }
     }
 
+    //controllo se esistono caselle uguali tra due parole
+    public boolean isLinked(Parola p){
+        for (Casella casellaParolaCorrente : caselleParola){
+            for (Casella casellaParolaDaConfrontare : p.getCaselleParola()){
+                if (casellaParolaCorrente.confrontaCaselle(casellaParolaDaConfrontare)){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
 }

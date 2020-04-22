@@ -43,4 +43,10 @@ class Domain{
         return listValues.size();
     }
 
+    //restituisco la stringa alla posizione index della lista di valori (listValues)
+    public String getValueDomain(int index){
+        return listValues.get(index);
+    }
+
+
 }
