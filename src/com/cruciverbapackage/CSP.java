@@ -19,8 +19,16 @@ public class CSP {
         return new ArrayList<Variable>(variables);
     }
 
+    public void setCSPExecuted(boolean CSPExecuted) {
+        this.CSPExecuted = CSPExecuted;
+    }
+
     public boolean isCSPExecuted() {
         return CSPExecuted;
+    }
+
+    public void setCSPResult(boolean CSPResult) {
+        this.CSPResult = CSPResult;
     }
 
     public boolean isCSPResult() {

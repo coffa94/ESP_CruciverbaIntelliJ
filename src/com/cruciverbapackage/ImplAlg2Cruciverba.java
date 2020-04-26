@@ -68,7 +68,7 @@ public class ImplAlg2Cruciverba extends ImplementazioneCruciverba {
 
         //TODO questa lunghezza=10 potrebbe essere sostituiti analizzando la dimensione dell'insieme trovato cercando il numero di parole
         // suddiviso per lunghezza all'interno dello schema
-        int cicliEseguiti = 0, cicliMax = 100, c, lunghezzaMax = 10;
+        int cicliEseguiti = 0, cicliMax = 100, c, lunghezzaMax = schema_originale.cercaLunghezzaParolaMax();
         int numeroParoleLunghezzaC = 0, numeroParoleLunghezzaCInserite = 0;
         /*Timer tempoDiEsecuzione= new Timer(600, new ActionListener() {
             @Override
@@ -150,7 +150,7 @@ public class ImplAlg2Cruciverba extends ImplementazioneCruciverba {
     public boolean risolviCruciverba() {
         //TODO questa lunghezza=10 potrebbe essere sostituiti analizzando la dimensione dell'insieme trovato cercando il numero di parole
         // suddiviso per lunghezza all'interno dello schema
-        int cicliEseguiti = 0, cicliMax = 100, c, lunghezzaMax = 10;
+        int cicliEseguiti = 0, cicliMax = 100, c, lunghezzaMax = schema_originale.cercaLunghezzaParolaMax();
         int numeroParoleLunghezzaC = 0, numeroParoleLunghezzaCInserite = 0;
         /*Timer tempoDiEsecuzione= new Timer(600, new ActionListener() {
             @Override

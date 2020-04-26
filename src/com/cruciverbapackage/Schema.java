@@ -220,5 +220,16 @@ public class Schema {
         return paroleLunghezzaN;
     }
 
+    public int cercaLunghezzaParolaMax(){
+        int lunghezzaMax=0;
+        for (Parola p : paroleSchema){
+            int lunghezzaCorrente=p.getLunghezza();
+            if (lunghezzaCorrente > lunghezzaMax){
+                lunghezzaMax=lunghezzaCorrente;
+            }
+        }
+        return lunghezzaMax;
+    }
+
 
 }

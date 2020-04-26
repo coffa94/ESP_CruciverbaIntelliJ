@@ -30,7 +30,38 @@ public class ImplAlg4Cruciverba_AI extends ImplementazioneCruciverba{
     //@effects: inserisce una parola nello schema del cruciverba
     //@throws: nullPointerException
     //*return: true se cruciverba è completo, false se non è stato completato o non è stata trovata una parola da inserire
-    public boolean inserisci1Parola(){ return true; }
+    public boolean inserisci1Parola(){
+        int i=0;
+        if (!(constraintsSolver.isCSPExecuted())){
+
+            constraintsSolver.setCSPResult(backtrackSearch(constraintsSolver));
+
+            if (constraintsSolver.isCSPResult()){
+                if(listSolution.size()>=0){
+                    Parola p=listSolution.get(i);
+                    schema_originale.aggiornaSchema(p.getParola(),p.getPosizioneParola(),p.getOrientamento());
+                    listSolution.remove(i);
+                }
+                aggiornaDizionario();
+            }
+        }else{
+            if(constraintsSolver.isCSPResult()) {
+                if(listSolution.size()>=0){
+                    Parola p=listSolution.get(i);
+                    schema_originale.aggiornaSchema(p.getParola(),p.getPosizioneParola(),p.getOrientamento());
+                    listSolution.remove(i);
+                }
+                aggiornaDizionario();
+            }
+
+
+        }
+        if (listSolution.size()==0) {
+            return constraintsSolver.isCSPResult();
+        }else{
+            return false;
+        }
+    }
 
     //TODO implementare algoritmo 4 con AI utilizzo CSP
     //@requires: this!=null
@@ -38,43 +69,56 @@ public class ImplAlg4Cruciverba_AI extends ImplementazioneCruciverba{
     //@throws: nullPointerException
     //@return: true se completato, false se non è possibile completarlo
     public boolean risolviCruciverba(){
-        return backtrackSearch(constraintsSolver);
-/*vecchia implementazione
-        constraintsSolver.solve();
+        int i=0;
         if (!(constraintsSolver.isCSPExecuted())){
 
+            constraintsSolver.setCSPResult(backtrackSearch(constraintsSolver));
 
             if (constraintsSolver.isCSPResult()){
-                listSolution=constraintsSolver.getListSolution();
-                while(listSolution.size()>0){
+                while(i<listSolution.size()){
+                    Parola p=listSolution.get(i);
+                    schema_originale.aggiornaSchema(p.getParola(),p.getPosizioneParola(),p.getOrientamento());
 
+
+                    i++;
                 }
+                aggiornaDizionario();
             }
             return constraintsSolver.isCSPResult();
         }else{
             if(constraintsSolver.isCSPResult()) {
-                listSolution=constraintsSolver.getListSolution();
-                while (listSolution.size() > 0) {
+                while (listSolution.size() >= 0) {
+                    Parola p=listSolution.get(i);
+                    schema_originale.aggiornaSchema(p.getParola(),p.getPosizioneParola(),p.getOrientamento());
 
+
+                    i++;
                 }
+                aggiornaDizionario();
             }
             return constraintsSolver.isCSPResult();
 
         }
-*/
 
     }
 
 
     //lancio procedura per soluzione cruciverba con AI
     private boolean backtrackSearch( CSP csp){
+        csp.setCSPExecuted(true);
         Schema oldSchema=new Schema(schema_originale);
         backtrack(new ArrayList<Parola>(), csp);
         if (listSolution.size()==constraintsSolver.getNumberVariables()){
             schema_originale=oldSchema;
+            for (Parola p : schema_originale.getParoleSchema()){
+                p.aggiornaCaselleParola();
+            }
             return true;
         }else{
             schema_originale=oldSchema;
+            for (Parola p : schema_originale.getParoleSchema()){
+                p.aggiornaCaselleParola();
+            }
             return false;
         }
     }
@@ -116,8 +160,8 @@ public class ImplAlg4Cruciverba_AI extends ImplementazioneCruciverba{
                         return null;
                     }
                 }
-                assignment.remove(countAssignment);
                 countAssignment--;
+                assignment.remove(countAssignment);
                 var=oldVar;
             }
         }
@@ -267,8 +311,9 @@ public class ImplAlg4Cruciverba_AI extends ImplementazioneCruciverba{
 
 
         //se il risultato dell'inferenza è false ripristino tutti i valori dei domini che avevo modificato durante la procedura sulle variabili collegate
-        //partendo dal penultimo variabile perché l'ultima su cui si era verificato l'errore di inferenza li ha già ripristinati
-        while(!(result) && counterLinkedVariables-1>=0){
+        //partendo dalla penultima variabile perché l'ultima su cui si era verificato l'errore di inferenza li ha già ripristinati (torno indietro di 2)
+        counterLinkedVariables=counterLinkedVariables-2;
+        while(!(result) && counterLinkedVariables>=0){
             Variable currentVar=listLinkedVariables.get(counterLinkedVariables);
             currentVar.ripristinaParola();
             currentVar.restoreDomain();
@@ -276,8 +321,9 @@ public class ImplAlg4Cruciverba_AI extends ImplementazioneCruciverba{
         }
         //se il risultato dell'inferenza è false ripristino tutti i valori dei domini che avevo modificato durante la procedura sulle variabili con
         // la stessa lunghezza
-        //partendo dal penultimo variabile perché l'ultima su cui si era verificato l'errore di inferenza li ha già ripristinati
-        while(!(result) && counterSameLengthVariables-1>=0){
+        //partendo dalla penultima variabile perché l'ultima su cui si era verificato l'errore di inferenza li ha già ripristinati (torno indietro di 2)
+        counterSameLengthVariables=counterSameLengthVariables-2;
+        while(!(result) && counterSameLengthVariables>=0){
             Variable currentVar=listSameLengthVariables.get(counterSameLengthVariables);
             currentVar.ripristinaParola();
             currentVar.restoreDomain();

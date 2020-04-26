@@ -36,7 +36,7 @@ public class InterfacciaCruciverba {
                                        {'.', '.', '*', '.', '.', '.', '.', '.'}};
 */
 
-    /*//esempio2
+    //esempio2
     private static char[][] matrice = {{'.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '*', '.'},
                                        {'.', '*', '.', '.', '.', '.', '.', '*', '.', '*', '.', '.'},
                                        {'.', '.', '.', '.', '.', '.', '*', '.', '.', '.', '.', '.'},
@@ -53,8 +53,8 @@ public class InterfacciaCruciverba {
                                        {'.', '.', '.', '.', '.', '*', '.', '.', '.', '.', '.', '.'},
                                        {'.', '.', '*', '.', '*', '.', '.', '.', '.', '.', '*', '.'},
                                        {'.', '*', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.'}};
-*/
-    //esempio3
+
+    /*//esempio3
     private static char[][] matrice = {{'.','.','*','.','.','.','.','.','.','.','.','.','*','.','.','.','.','.','.'},
                                        {'.','.','.','.','.','.','.','.','.','.','.','.','.','*','.','.','.','.','*'},
                                        {'.','.','.','*','.','*','.','.','.','*','.','*','.','.','*','.','.','.','.'},
@@ -67,7 +67,7 @@ public class InterfacciaCruciverba {
                                        {'.','.','.','.','.','.','.','*','.','.','.','.','.','.','*','.','.','.','.'},
                                        {'.','*','.','.','.','.','*','.','.','.','.','.','.','*','.','.','.','.','.'},
                                        {'*','.','.','.','.','*','.','.','.','*','.','.','*','.','.','.','.','.','*'}};
-
+*/
 
         private ArrayList<JTextField> text;
     private static ArrayList<String> dizionarioInput;
@@ -165,10 +165,14 @@ public class InterfacciaCruciverba {
         dizionarioInput.add("ESITO");
 */
 
-        /*//esempio2
+        //esempio2
         dizionarioInput = new ArrayList<String>();
         dizionarioInput.add("STRAGRANDE");
         dizionarioInput.add("TESEO");
+
+        //per prova
+        dizionarioInput.add("CASABLANCA");
+
         dizionarioInput.add("CASABIANCA");
         dizionarioInput.add("ALAIN");
         dizionarioInput.add("FE");
@@ -220,9 +224,14 @@ public class InterfacciaCruciverba {
         dizionarioInput.add("WESER");
         dizionarioInput.add("BOSTON");
         dizionarioInput.add("BE");
-         */
+        //per prova
+        dizionarioInput.add("QUAT");
+        dizionarioInput.add("TRE");
+        dizionarioInput.add("BOSTRN");
+        dizionarioInput.add("DD");
 
-        //esempio3
+
+        /*//esempio3
         dizionarioInput = new ArrayList<String>();
         dizionarioInput.add("BANALITA");
         dizionarioInput.add("MIAO");
@@ -296,6 +305,7 @@ public class InterfacciaCruciverba {
         dizionarioInput.add("RA");
         dizionarioInput.add("PUBBLICAZIONI");
         dizionarioInput.add("SE");
+        */
 
 
 
@@ -309,26 +319,56 @@ public class InterfacciaCruciverba {
         //creaCruciverba(matrice);
 
         //creazione cruciverba per l'utilizzo di funzioni dell'algoritmo1
-        //cruciverba1 = new ImplAlg1Cruciverba(panelMain, matrice, "CANE", 0, 0, dizionarioInput);
+        /*//esempio1
+        cruciverba1 = new ImplAlg1Cruciverba(panelMain, matrice, "CANE", 0, 0, dizionarioInput,'O');
+        */
+
+        /*//esempio2
+        cruciverba1=new ImplAlg1Cruciverba(panelMain,matrice,"TERRORISTA",7,2,dizionarioInput,'O');
+        */
+
+         /*//esempio3
+        cruciverba1=new ImplAlg1Cruciverba(panelMain,matrice,"DONO",4,4,dizionarioInput,'V');
+        */
 
         //creazione cruciverba per l'utilizzo di funzioni dell'algoritmo2
-        //cruciverba1 = new ImplAlg2Cruciverba(panelMain, matrice, "CANE", 0, 0, dizionarioInput);
+         /*//esempio1
+        cruciverba1 = new ImplAlg2Cruciverba(panelMain, matrice, "CANE", 0, 0, dizionarioInput,'O');
+        */
+
+        /*//esempio2
+        cruciverba1=new ImplAlg2Cruciverba(panelMain,matrice,"TERRORISTA",7,2,dizionarioInput,'O');
+        */
+
+         /*//esempio3
+        cruciverba1=new ImplAlg2Cruciverba(panelMain,matrice,"DONO",4,4,dizionarioInput,'V');
+        */
+
 
         //creazione cruciverba per l'utilizzo di funzioni dell'algoritmo3
-        //cruciverba1 = new ImplAlg3Cruciverba(panelMain, matrice, "CANE", 0, 0, dizionarioInput);
-        //cruciverba1 = new ImplAlg3Cruciverba(panelMain, matrice, "TERRORISTA", 7, 2, dizionarioInput);
-
-        //creazione cruciverba per l'utilizzo di funzioni dell'algoritmo4
         /*//esempio1
-        cruciverba1=new ImplAlg4Cruciverba_AI(panelMain,matrice,"CANE",0,0, dizionarioInput);
+        cruciverba1 = new ImplAlg3Cruciverba(panelMain, matrice, "CANE", 0, 0, dizionarioInput,'O');
          */
 
         /*//esempio2
-        cruciverba1 = new ImplAlg4Cruciverba_AI(panelMain,matrice, "TERRORISTA", 7, 2, dizionarioInput);
+        cruciverba1 = new ImplAlg3Cruciverba(panelMain, matrice, "TERRORISTA", 7, 2, dizionarioInput,'O');
          */
-        //esempio3
-        cruciverba1= new ImplAlg4Cruciverba_AI(panelMain, matrice, "DONO",4,4,dizionarioInput, 'V');
 
+        /*//esempio3
+        cruciverba1 = new ImplAlg3Cruciverba(panelMain, matrice, "DONO", 4, 4, dizionarioInput,'V');
+        */
+
+        //creazione cruciverba per l'utilizzo di funzioni dell'algoritmo4
+        /*//esempio1
+        cruciverba1=new ImplAlg4Cruciverba_AI(panelMain,matrice,"CANE",0,0, dizionarioInput,'O');
+         */
+
+        //esempio2
+        cruciverba1 = new ImplAlg4Cruciverba_AI(panelMain,matrice, "TERRORISTA", 7, 2, dizionarioInput,'O');
+
+        /*//esempio3
+        cruciverba1= new ImplAlg4Cruciverba_AI(panelMain, matrice, "DONO",4,4,dizionarioInput, 'V');
+*/
         listListaParole.setListData(dizionarioInput.toArray());
         //aggiornaCruciverba(cruciverba1.VisualizzaSchema());
 
