@@ -6,8 +6,8 @@ import java.util.ArrayList;
 public class ImplAlg3Cruciverba extends ImplementazioneCruciverba {
 
     //costruttore cruciverba con una struttura passata in input
-    public ImplAlg3Cruciverba(JPanel panel, char matrice[][], String parolaIniziale, int posizioneRigaIniziale, int posizioneColonnaIniziale, ArrayList<String> dizionarioInput) {
-        super(panel,matrice,parolaIniziale,posizioneRigaIniziale,posizioneColonnaIniziale,dizionarioInput);
+    public ImplAlg3Cruciverba(JPanel panel, char matrice[][], String parolaIniziale, int posizioneRigaIniziale, int posizioneColonnaIniziale, ArrayList<String> dizionarioInput, char orientamento) {
+        super(panel,matrice,parolaIniziale,posizioneRigaIniziale,posizioneColonnaIniziale,dizionarioInput, orientamento);
 
     }
 

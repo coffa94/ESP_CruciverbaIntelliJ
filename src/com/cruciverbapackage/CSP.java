@@ -83,7 +83,7 @@ public class CSP {
                     //se lettereInserite per questa parola è diverso da zero lancio anche la procedura di inferenza per ridurre
                     // i domini di questa variabile
                     if (p.getLettereInserite()>0){
-                        v.inference();
+                        v.inferenceAfterUpdateParola();
                     }
                 }else{
                     throw new NullPointerException("Non è stato trovato un dominio per questa variabile");
@@ -132,11 +132,31 @@ public class CSP {
                     if (linkedVariables==null){
                         linkedVariables=new ArrayList<Variable>();
                     }
-                    linkedVariables.add(new Variable(searchVar));
+                    linkedVariables.add(searchVar);
                 }
             }
         }
         return linkedVariables;
+    }
+
+    //ritorna le variabili con la stessa lunghezza della variabile passata in input var
+    public ArrayList<Variable> searchSameLengthVariables(int lengthToCompare){
+        ArrayList<Variable> sameLengthVariables=null;
+
+        //scorro le variabili dello schema alla ricerca di quelle collegata a quella in input
+        for(Variable searchVar : variables){
+            //faccio un controllo se è già assegnato un valore, in questo modo evito di verificare il collegamento con una variabile
+            // alla quale ho già assegnato un valore (sia variabile corrente che altre variabili all'interno dello schema)
+            if (!(searchVar.isValueAssigned())) {
+                if (searchVar.getNumberLetters()==lengthToCompare) {
+                    if (sameLengthVariables==null){
+                        sameLengthVariables=new ArrayList<Variable>();
+                    }
+                    sameLengthVariables.add(searchVar);
+                }
+            }
+        }
+        return sameLengthVariables;
     }
 
     public void solve(){

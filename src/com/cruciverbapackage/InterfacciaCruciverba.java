@@ -24,26 +24,52 @@ public class InterfacciaCruciverba {
     private long startTime=0;
     private long stopTime=0;
     private long totalTime=0;
-    //private static char[][] matrice = {{'.', '.', '.', '.', '*', '.', '.', '.'}, {'*', '.', '.', '.', '.', '*', '.', '.'}, {'.', '.', '.', '.', '.', '.', '*', '.'}, {'.', '.', '*', '.', '.', '.', '.', '.',}};
-    //private static char[][] matrice = {{'.', '.', '.', '.', '*', '.', '.', '.'}, {'*', '.', '.', '.', '.', '*', '.', '.'}, {'.', '.', '.', '.', '.', '.', '*', '.'}, {'.', '.', '*', '.', '.', '.', '.', '.',}};
-    private static char[][] matrice = {{'.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '*', '.'},
-            {'.', '*', '.', '.', '.', '.', '.', '*', '.', '*', '.', '.'},
-            {'.', '.', '.', '.', '.', '.', '*', '.', '.', '.', '.', '.'},
-            {'.', '.', '.', '.', '.', '*', '.', '.', '.', '.', '.', '.'},
-            {'.', '.', '.', '.', '*', '.', '*', '.', '.', '.', '.', '.'},
-            {'.', '.', '.', '*', '.', '.', '.', '.', '.', '.', '.', '*'},
-            {'.', '.', '*', '.', '.', '.', '.', '.', '.', '.', '*', '.'},
-            {'.', '*', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.'},
-            {'.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '*', '.'},
-            {'.', '*', '.', '.', '.', '.', '.', '.', '.', '*', '.', '.'},
-            {'*', '.', '.', '.', '.', '.', '.', '.', '*', '.', '.', '.'},
-            {'.', '.', '.', '.', '.', '*', '.', '*', '.', '.', '.', '.'},
-            {'.', '.', '.', '.', '.', '.', '*', '.', '.', '.', '.', '.'},
-            {'.', '.', '.', '.', '.', '*', '.', '.', '.', '.', '.', '.'},
-            {'.', '.', '*', '.', '*', '.', '.', '.', '.', '.', '*', '.'},
-            {'.', '*', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.'}};
+    //private static char[][] matrice = {{'.', '.', '.', '.', '*', '.', '.', '.'},
+    //                                   {'*', '.', '.', '.', '.', '*', '.', '.'},
+    //                                   {'.', '.', '.', '.', '.', '.', '*', '.'},
+    //                                   {'.', '.', '*', '.', '.', '.', '.', '.',}};
 
-    private ArrayList<JTextField> text;
+    /*//esempio1
+    private static char[][] matrice = {{'.', '.', '.', '.', '*', '.', '.', '.'},
+                                       {'*', '.', '.', '.', '.', '*', '.', '.'},
+                                       {'.', '.', '.', '.', '.', '.', '*', '.'},
+                                       {'.', '.', '*', '.', '.', '.', '.', '.'}};
+*/
+
+    /*//esempio2
+    private static char[][] matrice = {{'.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '*', '.'},
+                                       {'.', '*', '.', '.', '.', '.', '.', '*', '.', '*', '.', '.'},
+                                       {'.', '.', '.', '.', '.', '.', '*', '.', '.', '.', '.', '.'},
+                                       {'.', '.', '.', '.', '.', '*', '.', '.', '.', '.', '.', '.'},
+                                       {'.', '.', '.', '.', '*', '.', '*', '.', '.', '.', '.', '.'},
+                                       {'.', '.', '.', '*', '.', '.', '.', '.', '.', '.', '.', '*'},
+                                       {'.', '.', '*', '.', '.', '.', '.', '.', '.', '.', '*', '.'},
+                                       {'.', '*', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.'},
+                                       {'.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '*', '.'},
+                                       {'.', '*', '.', '.', '.', '.', '.', '.', '.', '*', '.', '.'},
+                                       {'*', '.', '.', '.', '.', '.', '.', '.', '*', '.', '.', '.'},
+                                       {'.', '.', '.', '.', '.', '*', '.', '*', '.', '.', '.', '.'},
+                                       {'.', '.', '.', '.', '.', '.', '*', '.', '.', '.', '.', '.'},
+                                       {'.', '.', '.', '.', '.', '*', '.', '.', '.', '.', '.', '.'},
+                                       {'.', '.', '*', '.', '*', '.', '.', '.', '.', '.', '*', '.'},
+                                       {'.', '*', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.'}};
+*/
+    //esempio3
+    private static char[][] matrice = {{'.','.','*','.','.','.','.','.','.','.','.','.','*','.','.','.','.','.','.'},
+                                       {'.','.','.','.','.','.','.','.','.','.','.','.','.','*','.','.','.','.','*'},
+                                       {'.','.','.','*','.','*','.','.','.','*','.','*','.','.','*','.','.','.','.'},
+                                       {'.','*','.','.','*','.','*','.','*','.','*','.','.','.','*','.','.','.','.'},
+                                       {'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','*','.','.'},
+                                       {'.','.','.','.','.','.','.','.','.','.','.','*','.','.','.','.','.','.','.'},
+                                       {'.','.','.','.','.','.','.','.','.','.','.','.','*','.','.','.','.','.','*'},
+                                       {'.','.','.','.','.','.','.','.','.','*','.','.','.','.','.','*','.','.','.'},
+                                       {'.','.','*','.','*','.','.','.','.','.','.','.','.','*','.','.','.','.','.'},
+                                       {'.','.','.','.','.','.','.','*','.','.','.','.','.','.','*','.','.','.','.'},
+                                       {'.','*','.','.','.','.','*','.','.','.','.','.','.','*','.','.','.','.','.'},
+                                       {'*','.','.','.','.','*','.','.','.','*','.','.','*','.','.','.','.','.','*'}};
+
+
+        private ArrayList<JTextField> text;
     private static ArrayList<String> dizionarioInput;
 
     public InterfacciaCruciverba() {
@@ -121,7 +147,7 @@ public class InterfacciaCruciverba {
         }
         frame.setVisible(true);
 
-        /*
+        /*//esempio1
         dizionarioInput = new ArrayList<String>();
         dizionarioInput.add("CAT");
         dizionarioInput.add("NOIA");
@@ -138,6 +164,8 @@ public class InterfacciaCruciverba {
         dizionarioInput.add("PA");
         dizionarioInput.add("ESITO");
 */
+
+        /*//esempio2
         dizionarioInput = new ArrayList<String>();
         dizionarioInput.add("STRAGRANDE");
         dizionarioInput.add("TESEO");
@@ -192,6 +220,84 @@ public class InterfacciaCruciverba {
         dizionarioInput.add("WESER");
         dizionarioInput.add("BOSTON");
         dizionarioInput.add("BE");
+         */
+
+        //esempio3
+        dizionarioInput = new ArrayList<String>();
+        dizionarioInput.add("BANALITA");
+        dizionarioInput.add("MIAO");
+        dizionarioInput.add("TETTO");
+        dizionarioInput.add("ISOLA");
+        dizionarioInput.add("LUCI");
+        dizionarioInput.add("IDA");
+        dizionarioInput.add("TONANTE");
+        dizionarioInput.add("EO");
+        dizionarioInput.add("NOMINE");
+        dizionarioInput.add("NAT");
+        dizionarioInput.add("SPIEGAMENTO");
+        dizionarioInput.add("TA");
+        dizionarioInput.add("OTRI");
+        dizionarioInput.add("ADATTE");
+        dizionarioInput.add("EOLO");
+        dizionarioInput.add("AGARICO");
+        dizionarioInput.add("IDIOMA");
+        dizionarioInput.add("PECORE");
+        dizionarioInput.add("GIARDINIPUBBLICI");
+        dizionarioInput.add("ESIGUI");
+        dizionarioInput.add("AI");
+        dizionarioInput.add("ELI");
+        dizionarioInput.add("MANICOTTO");
+        dizionarioInput.add("ITER");
+        dizionarioInput.add("ARRINGARE");
+        dizionarioInput.add("TI");
+        dizionarioInput.add("MARINOMARINI");
+        dizionarioInput.add("FIDEL");
+        dizionarioInput.add("INEDITI");
+        dizionarioInput.add("TOM");
+        dizionarioInput.add("NI");
+        dizionarioInput.add("BARATRO");
+        dizionarioInput.add("LARIO");
+        dizionarioInput.add("ULANI");
+        dizionarioInput.add("ATEO");
+        dizionarioInput.add("ON");
+        dizionarioInput.add("CALLIMACO");
+        dizionarioInput.add("NEO");
+        dizionarioInput.add("ISACCO");
+        dizionarioInput.add("TINI");
+        dizionarioInput.add("RINASCIMENTO");
+        dizionarioInput.add("LB");
+        dizionarioInput.add("ADRIA");
+        dizionarioInput.add("SL");
+        dizionarioInput.add("NC");
+        dizionarioInput.add("PIRAMIDE");
+        dizionarioInput.add("ALI");
+        dizionarioInput.add("ADA");
+        dizionarioInput.add("ILIO");
+        dizionarioInput.add("AU");
+        dizionarioInput.add("ECONOMICA");
+        dizionarioInput.add("ICE");
+        dizionarioInput.add("SUD");
+        dizionarioInput.add("AREA");
+        dizionarioInput.add("RAME");
+        dizionarioInput.add("MB");
+        dizionarioInput.add("CALAF");
+        dizionarioInput.add("BUE");
+        dizionarioInput.add("EMI");
+        dizionarioInput.add("ASTRONOMICA");
+        dizionarioInput.add("CRUMIRA");
+        dizionarioInput.add("OZI");
+        dizionarioInput.add("RINOMATA");
+        dizionarioInput.add("ANOMALIA");
+        dizionarioInput.add("IDIOTI");
+        dizionarioInput.add("LOS");
+        dizionarioInput.add("SS");
+        dizionarioInput.add("URNE");
+        dizionarioInput.add("ORTI");
+        dizionarioInput.add("RA");
+        dizionarioInput.add("PUBBLICAZIONI");
+        dizionarioInput.add("SE");
+
+
 
         //window.createUIComponents();
         window.open();
@@ -212,7 +318,16 @@ public class InterfacciaCruciverba {
         //cruciverba1 = new ImplAlg3Cruciverba(panelMain, matrice, "CANE", 0, 0, dizionarioInput);
         //cruciverba1 = new ImplAlg3Cruciverba(panelMain, matrice, "TERRORISTA", 7, 2, dizionarioInput);
 
+        //creazione cruciverba per l'utilizzo di funzioni dell'algoritmo4
+        /*//esempio1
+        cruciverba1=new ImplAlg4Cruciverba_AI(panelMain,matrice,"CANE",0,0, dizionarioInput);
+         */
+
+        /*//esempio2
         cruciverba1 = new ImplAlg4Cruciverba_AI(panelMain,matrice, "TERRORISTA", 7, 2, dizionarioInput);
+         */
+        //esempio3
+        cruciverba1= new ImplAlg4Cruciverba_AI(panelMain, matrice, "DONO",4,4,dizionarioInput, 'V');
 
         listListaParole.setListData(dizionarioInput.toArray());
         //aggiornaCruciverba(cruciverba1.VisualizzaSchema());

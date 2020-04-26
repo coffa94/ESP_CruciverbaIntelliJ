@@ -49,12 +49,40 @@ public class Variable {
         this.oldValue = oldValue;
     }
 
-    //procedura di inferenza sul dominio di questa variabile per rimuovere i valori non permessi
-    //TODO ritorna false se il dominio risultante dall'inferenza risulta essere vuoto
-    public boolean inference(){
+    //TODO vedere se farlo
+    //procedura di inferenza della variabile, lancia le due procedura a seconda dell'input?
+    /*public boolean inference(){
+
+    }
+     */
+
+    //procedura di inferenza sul dominio di questa variabile per rimuovere i valori non permessi dopo assegnazione di un valore ad un'altra variabile
+    //ritorna false se il dominio risultante dall'inferenza risulta essere vuoto
+    public boolean inferenceAfterAssignedValue(String s){
+        ArrayList<String> listValuesDomain=variableDomain.getListValues();
+
+        //salvo una copia della lista valore del dominio per poterla ripristinare in caso di errore di inferenza (dominio vuoto)
+        oldListValues=new ArrayList<String>(listValuesDomain);
+        if (listValuesDomain.contains(s)){
+            listValuesDomain.remove(s);
+        }
+
+        //se il dominio dopo aver fatto inferenza non è vuoto lo aggiorno per la variabile corrente e ritorno true
+        //altrimenti ritorno false senza aggiornare il dominio della variabile corrente
+        if(listValuesDomain.size()>0){
+            variableDomain.setListValues(listValuesDomain);
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    //procedura di inferenza sul dominio di questa variabile per rimuovere i valori non permessi dopo aggiornamento parola
+    //ritorna false se il dominio risultante dall'inferenza risulta essere vuoto
+    public boolean inferenceAfterUpdateParola(){
         ArrayList<String> listValuesDomain = variableDomain.getListValues();
 
-        //salvo una copia della lista valore del dominio per poterla ripristinare in caso di errore di inferenza
+        //salvo una copia della lista valore del dominio per poterla ripristinare in caso di errore di inferenza (dominio vuoto)
         oldListValues=new ArrayList<String>(listValuesDomain);
         String parolaSchema = value.getParola();
         for (int i=0; i<parolaSchema.length(); i++){

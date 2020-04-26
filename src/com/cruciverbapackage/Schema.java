@@ -150,9 +150,22 @@ public class Schema {
         aggiornaSchema(parolaIniziale, posizioneParolaIniziale, orientamentoInput);
     }
 
+    //metodo costruttore schema a partire da uno schema già esistente
+    public Schema(Schema s){
+        this.paroleSchema=new ArrayList<Parola>();
+
+        for(Parola p : s.getParoleSchema()){
+
+        }
+        this.paroleSchema=s.getParoleSchema();
+        this.caselleSchema=s.getCaselleSchema();
+    }
+
     public ArrayList<Parola> getParoleSchema() {
         return new ArrayList<Parola>(paroleSchema);
     }
+
+    public ArrayList<Casella> getCaselleSchema(){ return new ArrayList<Casella>(caselleSchema); }
 
     //@requires: this!=null, parola entra nello schema (lunghezza corretta), posizione esistente
     //@modifies: this
