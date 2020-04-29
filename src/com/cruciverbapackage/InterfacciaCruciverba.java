@@ -1,5 +1,7 @@
 package com.cruciverbapackage;
 
+//Coffaro_Davide_mat556603_Progetto ESP cruciverba
+
 import org.junit.rules.Stopwatch;
 
 import javax.swing.*;
@@ -19,15 +21,13 @@ public class InterfacciaCruciverba {
     private JButton buttonCercaParola;
     private JList listListaParole;
     private JScrollPane scrollPaneListaParole;
+    private JLabel labelParolaInserita;
+    private JTextField textFieldParolaInserita;
     private static ImplementazioneCruciverba cruciverba1;
     private static int dimensioneFinestraMinima=500;
     private long startTime=0;
     private long stopTime=0;
     private long totalTime=0;
-    //private static char[][] matrice = {{'.', '.', '.', '.', '*', '.', '.', '.'},
-    //                                   {'*', '.', '.', '.', '.', '*', '.', '.'},
-    //                                   {'.', '.', '.', '.', '.', '.', '*', '.'},
-    //                                   {'.', '.', '*', '.', '.', '.', '.', '.',}};
 
     /*//esempio1
     private static char[][] matrice = {{'.', '.', '.', '.', '*', '.', '.', '.'},
@@ -78,18 +78,7 @@ public class InterfacciaCruciverba {
             @Override
             public void actionPerformed(ActionEvent e) {
                 startTime=System.currentTimeMillis();
-                //risoluzione tramite algoritmo1
-                 /*if(cruciverba1.risolviCruciverba_alg1()){
-                    listListaParole.setListData(cruciverba1.dizionario.toArray());
-                    JOptionPane.showMessageDialog(null, "Cruciverba completato", "Risultato cruciverba", JOptionPane.INFORMATION_MESSAGE);
-                 }else{
-                    listListaParole.setListData(cruciverba1.dizionario.toArray());
-                    JOptionPane.showMessageDialog(null, "Cruciverba non completato", "Risultato cruciverba", JOptionPane.ERROR_MESSAGE);
-                 }*/
 
-                 //DAFARE TODO cancellarlo
-                 //è possibile cancellarlo secondo me
-                //risoluzione tramite algoritmo2
                 if (cruciverba1.risolviCruciverba()) {
                     listListaParole.setListData(cruciverba1.dizionario.toArray());
                     stopTime=System.currentTimeMillis();
@@ -115,12 +104,19 @@ public class InterfacciaCruciverba {
             public void actionPerformed(ActionEvent e) {
 
                 //TODO lanciare inserisci1Parola al click
-                if (cruciverba1.inserisci1Parola()) {
+                String parolaInserita=cruciverba1.inserisci1Parola();
+                if (parolaInserita==null) {
                     listListaParole.setListData(cruciverba1.dizionario.toArray());
                     stopTime=System.currentTimeMillis();
                     totalTime=stopTime-startTime;
-                    JOptionPane.showMessageDialog(null, "Cruciverba completato in " + totalTime, "Risultato cruciverba", JOptionPane.INFORMATION_MESSAGE);
+                    if (cruciverba1.isAlgResult()) {
+                        JOptionPane.showMessageDialog(null, "Cruciverba completato in " + totalTime, "Risultato cruciverba", JOptionPane.INFORMATION_MESSAGE);
+                    }else{
+                        JOptionPane.showMessageDialog(null, "Cruciverba non completato", "Risultato cruciverba", JOptionPane.ERROR_MESSAGE);
+
+                    }
                 } else {
+                    textFieldParolaInserita.setText(parolaInserita);
                     listListaParole.setListData(cruciverba1.dizionario.toArray());
                     //JOptionPane.showMessageDialog(null, "Cruciverba non completato", "Risultato cruciverba", JOptionPane.ERROR_MESSAGE);
                 }
@@ -167,12 +163,22 @@ public class InterfacciaCruciverba {
 
         //esempio2
         dizionarioInput = new ArrayList<String>();
+        //per prova parole in più nella lista da inserire
+        dizionarioInput.add("CASABLANCA");
+        dizionarioInput.add("QUAT");
+        dizionarioInput.add("TRE");
+        dizionarioInput.add("BOSTRN");
+        dizionarioInput.add("DD");
+        dizionarioInput.add("CIAO");
+        dizionarioInput.add("TOPO");
+        dizionarioInput.add("INORGANICI");
+        dizionarioInput.add("TESIO");
+        dizionarioInput.add("TOCCIRE");
+        dizionarioInput.add("TORO");
+
+
         dizionarioInput.add("STRAGRANDE");
         dizionarioInput.add("TESEO");
-
-        //per prova
-        dizionarioInput.add("CASABLANCA");
-
         dizionarioInput.add("CASABIANCA");
         dizionarioInput.add("ALAIN");
         dizionarioInput.add("FE");
@@ -224,11 +230,6 @@ public class InterfacciaCruciverba {
         dizionarioInput.add("WESER");
         dizionarioInput.add("BOSTON");
         dizionarioInput.add("BE");
-        //per prova
-        dizionarioInput.add("QUAT");
-        dizionarioInput.add("TRE");
-        dizionarioInput.add("BOSTRN");
-        dizionarioInput.add("DD");
 
 
         /*//esempio3
@@ -316,7 +317,6 @@ public class InterfacciaCruciverba {
     }
 
     public void open() {
-        //creaCruciverba(matrice);
 
         //creazione cruciverba per l'utilizzo di funzioni dell'algoritmo1
         /*//esempio1
@@ -325,7 +325,7 @@ public class InterfacciaCruciverba {
 
         /*//esempio2
         cruciverba1=new ImplAlg1Cruciverba(panelMain,matrice,"TERRORISTA",7,2,dizionarioInput,'O');
-        */
+*/
 
          /*//esempio3
         cruciverba1=new ImplAlg1Cruciverba(panelMain,matrice,"DONO",4,4,dizionarioInput,'V');
@@ -338,24 +338,10 @@ public class InterfacciaCruciverba {
 
         /*//esempio2
         cruciverba1=new ImplAlg2Cruciverba(panelMain,matrice,"TERRORISTA",7,2,dizionarioInput,'O');
-        */
+*/
 
          /*//esempio3
         cruciverba1=new ImplAlg2Cruciverba(panelMain,matrice,"DONO",4,4,dizionarioInput,'V');
-        */
-
-
-        //creazione cruciverba per l'utilizzo di funzioni dell'algoritmo3
-        /*//esempio1
-        cruciverba1 = new ImplAlg3Cruciverba(panelMain, matrice, "CANE", 0, 0, dizionarioInput,'O');
-         */
-
-        /*//esempio2
-        cruciverba1 = new ImplAlg3Cruciverba(panelMain, matrice, "TERRORISTA", 7, 2, dizionarioInput,'O');
-         */
-
-        /*//esempio3
-        cruciverba1 = new ImplAlg3Cruciverba(panelMain, matrice, "DONO", 4, 4, dizionarioInput,'V');
         */
 
         //creazione cruciverba per l'utilizzo di funzioni dell'algoritmo4
@@ -366,48 +352,11 @@ public class InterfacciaCruciverba {
         //esempio2
         cruciverba1 = new ImplAlg4Cruciverba_AI(panelMain,matrice, "TERRORISTA", 7, 2, dizionarioInput,'O');
 
+
         /*//esempio3
         cruciverba1= new ImplAlg4Cruciverba_AI(panelMain, matrice, "DONO",4,4,dizionarioInput, 'V');
 */
         listListaParole.setListData(dizionarioInput.toArray());
-        //aggiornaCruciverba(cruciverba1.VisualizzaSchema());
-
-    }
-
-    protected void creaCruciverba(char[][] matrice) {
-        int xIniziale = 20;
-        int yIniziale = 50;
-        int index = 0;
-        text = new ArrayList<JTextField>();
-
-        /*for (int i=0; i<matrice.length; i++) {
-            for (int j=0; j<matrice[0].length; j++) {
-                if (matrice[i][j]=='.'){
-                    text.add( new JTextField());
-                    index++;
-                    text.get(index-1).setSize( 20, 20);
-                    text.get(index-1).setLocation(xIniziale+j*20, yIniziale+i*20);
-                    panelMain.add(text.get(index-1));
-                    panelMain.revalidate();
-                }else if(matrice[i][j]=='*') {
-                    JTextField t=new JTextField();
-                    t.setBackground(new Color( 0, 0, 0));
-                    t.setEnabled(false);
-                    text.add(t);
-                    index++;
-                    text.get(index-1).setSize(20, 20);
-                    text.get(index-1).setLocation(xIniziale+j*20, yIniziale+i*20);
-                    panelMain.add(text.get(index-1));
-                    panelMain.revalidate();
-                }
-            }
-        }*/
-
-        //text = new Text(composite, SWT.BORDER);
-        //text.setBounds(125, 66, 21, 21);
-    }
-
-    protected void aggiornaCruciverba(char[][] matriceCruciverba) {
 
     }
 
@@ -441,27 +390,21 @@ public class InterfacciaCruciverba {
         panelListaParole.add(scrollPaneListaParole);
         panelListaParole.setBounds(20,80,200,200);
 
+        labelParolaInserita = new JLabel("Ultima parola inserita");
+        labelParolaInserita.setBounds(20, 300, 400, 20);
+
+        textFieldParolaInserita=new JTextField();
+        textFieldParolaInserita.setSize(200, 20);
+        textFieldParolaInserita.setLocation(20,  320);
+
+
         panelMain.add(labelCruciverba);
         panelMain.add(buttonRisolviCruciverba);
         panelMain.add(buttonCercaParola);
         panelMain.add(panelListaParole);
+        panelMain.add(labelParolaInserita);
+        panelMain.add(textFieldParolaInserita);
         panelMain.revalidate();
-
-
-        //panelMain.setLayout(ccc);
-//panelMain.setLayout(null);
-        //panelCruciverba.setLayout(ccc);
-        //System.out.println(panelCruciverba.getLayout().toString());
-        //panelCruciverba.setSize(100,100);
-        //panelMain.add(panelCruciverba);
-        /*JTextField comp = new JTextField("ciao");
-        comp.setText("Ciao");
-        comp.setSize(100, 100);
-        //panelCruciverba.add(comp);
-        System.out.print(panelMain.getLayout().toString());
-        panelMain.add(comp);
-        panelMain.revalidate();*/
-        //System.out.print(panelMain.getLayout().toString());
 
     }
 }

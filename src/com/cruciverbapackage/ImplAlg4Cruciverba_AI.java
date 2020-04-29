@@ -1,5 +1,7 @@
 package com.cruciverbapackage;
 
+//Coffaro_Davide_mat556603_Progetto ESP cruciverba
+
 import javax.swing.*;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -30,15 +32,16 @@ public class ImplAlg4Cruciverba_AI extends ImplementazioneCruciverba{
     //@effects: inserisce una parola nello schema del cruciverba
     //@throws: nullPointerException
     //*return: true se cruciverba è completo, false se non è stato completato o non è stata trovata una parola da inserire
-    public boolean inserisci1Parola(){
+    public String inserisci1Parola(){
         int i=0;
+        Parola p=null;
         if (!(constraintsSolver.isCSPExecuted())){
 
             constraintsSolver.setCSPResult(backtrackSearch(constraintsSolver));
 
             if (constraintsSolver.isCSPResult()){
-                if(listSolution.size()>=0){
-                    Parola p=listSolution.get(i);
+                if(listSolution.size()>0){
+                    p=listSolution.get(i);
                     schema_originale.aggiornaSchema(p.getParola(),p.getPosizioneParola(),p.getOrientamento());
                     listSolution.remove(i);
                 }
@@ -46,8 +49,8 @@ public class ImplAlg4Cruciverba_AI extends ImplementazioneCruciverba{
             }
         }else{
             if(constraintsSolver.isCSPResult()) {
-                if(listSolution.size()>=0){
-                    Parola p=listSolution.get(i);
+                if(listSolution.size()>0){
+                    p=listSolution.get(i);
                     schema_originale.aggiornaSchema(p.getParola(),p.getPosizioneParola(),p.getOrientamento());
                     listSolution.remove(i);
                 }
@@ -56,14 +59,21 @@ public class ImplAlg4Cruciverba_AI extends ImplementazioneCruciverba{
 
 
         }
+
+        algResult=constraintsSolver.isCSPResult();
+
         if (listSolution.size()==0) {
-            return constraintsSolver.isCSPResult();
+            if (p==null){
+                return null;
+            }else{
+                return p.getParola();
+            }
         }else{
-            return false;
+            return p.getParola();
         }
     }
 
-    //TODO implementare algoritmo 4 con AI utilizzo CSP
+    //implementazione algoritmo 4 con AI utilizzo CSP
     //@requires: this!=null
     //@effects: chiama cercaParolaDaInserire finche lo schema non è completato, cioè isComplete=true
     //@throws: nullPointerException
@@ -75,27 +85,25 @@ public class ImplAlg4Cruciverba_AI extends ImplementazioneCruciverba{
             constraintsSolver.setCSPResult(backtrackSearch(constraintsSolver));
 
             if (constraintsSolver.isCSPResult()){
-                while(i<listSolution.size()){
+                while(listSolution.size()>0){
                     Parola p=listSolution.get(i);
                     schema_originale.aggiornaSchema(p.getParola(),p.getPosizioneParola(),p.getOrientamento());
-
-
-                    i++;
+                    listSolution.remove(i);
                 }
                 aggiornaDizionario();
             }
+            algResult=constraintsSolver.isCSPResult();
             return constraintsSolver.isCSPResult();
         }else{
             if(constraintsSolver.isCSPResult()) {
-                while (listSolution.size() >= 0) {
+                while (listSolution.size() > 0) {
                     Parola p=listSolution.get(i);
                     schema_originale.aggiornaSchema(p.getParola(),p.getPosizioneParola(),p.getOrientamento());
-
-
-                    i++;
+                    listSolution.remove(i);
                 }
                 aggiornaDizionario();
             }
+            algResult=constraintsSolver.isCSPResult();
             return constraintsSolver.isCSPResult();
 
         }
@@ -123,10 +131,10 @@ public class ImplAlg4Cruciverba_AI extends ImplementazioneCruciverba{
         }
     }
 
-    //ricerca soluzione cruciverba con AI con variable=MRV (minimum remaining values)+euristica del grado, value=meno vincolante,
-    // inferenza con FC (forward checking), backtracking intelligente con conflict-directed backjumping
-    // ritorno il valore null quando sono arrivato in fondo alla procedura, altrimenti ritorno la variabile di cui analizzo la lista
-    // delle variabili da cui dipende per fare il backtracking intelligente
+    //ricerca soluzione cruciverba con AI con variable=MRV (minimum remaining values)+euristica del grado, value=prossimo valore del dominio ancora non provato,
+    // inferenza con FC (forward checking), backtracking cronologico
+    // ritorno il valore null quando sono arrivato in fondo alla procedura, altrimenti ritorno la variabile che volevo utilizzare per fare il
+    // backtracking intelligente sulle variabili collegate ad essa, adesso non è utile perché utilizzo il backtracking cronologico
     private Variable backtrack(ArrayList<Parola> assignment, CSP csp){
         int countAssignment=assignment.size();
         Variable varResult=null;
@@ -143,8 +151,7 @@ public class ImplAlg4Cruciverba_AI extends ImplementazioneCruciverba{
             //mantengo una copia della vecchia variabile nel caso in cui l'assegnamento corrente non è corretto
             Variable oldVar = new Variable(var);
 
-            //scorro i valori del dominio scegliendo per primi i valori meno vincolanti, scelta di un valore che diminuisce in modo
-            // minore il dominio delle variabili collegate alla variabile corrente
+            //scorro i valori del dominio prendendoli uno ad uno dal dominio
             for(String s : orderDomainValues(var,assignment,csp)){
                 var.setNewParola(s);
                 var.aggiornaCaselleParola();
@@ -198,13 +205,13 @@ public class ImplAlg4Cruciverba_AI extends ImplementazioneCruciverba{
             }
         }*/
 
-        //procedura di selezione variabili per minor valore dei sottodomini
+        //procedura di selezione variabili per minor valore dei domini
         for (Variable v : constraintsSolver.getVariables()) {
             int variableValues = v.getValuesNumber();
             if (!(v.isValueAssigned())) {
                 if (variableValues < minValues) {
                     //se il numero di valori del sottodominio per questa variabile è inferiore a quella precedente creo una nuova lista
-                    // (la lista precedente contenente le variabili con numero valori sottodominio maggiore viene scartata)
+                    // (la lista precedente contenente le variabili con numero valori dominio maggiore viene scartata)
                     // in cui inserisco la variabile corrente e aggiorno il numero valore sottodominio minimo
                     listCandidateVariables = new ArrayList<Variable>();
                     listCandidateVariables.add(v);
@@ -258,7 +265,7 @@ public class ImplAlg4Cruciverba_AI extends ImplementazioneCruciverba{
         }
     }
 
-    //creo la lista di assegnamenti di valori del dominio alla variabile, ordinata dai valori meno vincolanti a quelli più vincolanti
+    //creo la lista di assegnamenti di valori del dominio alla variabile, ordinata in ordine di inserimento nel dominio
     private ArrayList<String> orderDomainValues(Variable var, ArrayList<Parola> assignment, CSP csp){
         //TODO implementare soluzione per poter creare una lista ordinata di valori da quello meno vincolante a quello più vincolante
         //per adesso ritorno semplicemente la lista dei valori del dominio possibili

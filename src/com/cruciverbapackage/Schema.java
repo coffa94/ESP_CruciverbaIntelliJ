@@ -1,5 +1,7 @@
 package com.cruciverbapackage;
 
+//Coffaro_Davide_mat556603_Progetto ESP cruciverba
+
 import javax.swing.*;
 import java.util.ArrayList;
 
@@ -191,11 +193,6 @@ public class Schema {
             parolaSchema.aggiornaParola();
         }
 
-    }
-
-    public char[][] schemaToMatrice() {
-        char[][] matrice = {{1, 2}, {3, 4}};
-        return matrice;
     }
 
     //cerca all'interno delle caselle dello schema e se già presente una casella con posizione riga, colonna allora la

@@ -1,5 +1,7 @@
 package com.cruciverbapackage;
 
+//Coffaro_Davide_mat556603_Progetto ESP cruciverba
+
 import javax.swing.*;
 import java.util.ArrayList;
 
@@ -63,8 +65,9 @@ public class ImplAlg2Cruciverba extends ImplementazioneCruciverba {
     //@effects: inserisce una parola nello schema del cruciverba
     //@throws: nullPointerException
     //*return: true se cruciverba è completo, false se non è stato completato o non è stata trovata una parola da inserire
-    public boolean inserisci1Parola(){
+    public String inserisci1Parola(){
         boolean trovataParola=false;
+        String parolaDaInserire=null;
 
         //TODO questa lunghezza=10 potrebbe essere sostituiti analizzando la dimensione dell'insieme trovato cercando il numero di parole
         // suddiviso per lunghezza all'interno dello schema
@@ -84,7 +87,7 @@ public class ImplAlg2Cruciverba extends ImplementazioneCruciverba {
         ArrayList<ArrayList<Parola>> listaParoleLunghezzaC = new ArrayList<ArrayList<Parola>>();
 
         if (isComplete()) {
-            return true;
+            return null;
         } else {
             for (int i = 0; i < lunghezzaMax; i++) {
                 ArrayList<Parola> paroleLunghezzaC;
@@ -109,14 +112,14 @@ public class ImplAlg2Cruciverba extends ImplementazioneCruciverba {
                         if (casellaDaCompletare.getLunghezza() == casellaDaCompletare.getLettereInserite()) {
                             paroleLunghezzaC.remove(casellaDaCompletare);
                         } else {
-                            String parolaDainserire = cercaParolaDaInserire(casellaDaCompletare, dizionario);
-                            if (!(parolaDainserire.equals(""))) {
+                            parolaDaInserire = cercaParolaDaInserire(casellaDaCompletare, dizionario);
+                            if (!(parolaDaInserire.equals(""))) {
                                 //è stata trovata una parola da inserire nello schema, rimuovo quindi la casellaDaCompletare dalla lista di parole di
                                 // lunghezza c ancora da inserire
                                 trovataParola=true;
                                 paroleLunghezzaC.remove(casellaDaCompletare);
 
-                                casellaDaCompletare.setParola(parolaDainserire);
+                                casellaDaCompletare.setParola(parolaDaInserire);
                                 aggiornaParola(casellaDaCompletare.getParola(), casellaDaCompletare.getPosizioneParola().getRiga()
                                         , casellaDaCompletare.getPosizioneParola().getColonna(), casellaDaCompletare.getOrientamento());
 
@@ -134,10 +137,10 @@ public class ImplAlg2Cruciverba extends ImplementazioneCruciverba {
             }
 
             //controllo se il cruciverba è stato completato o meno
-            if (isComplete()) {
-                return true;
+            if (trovataParola) {
+                return parolaDaInserire;
             } else {
-                return false;
+                return null;
             }
         }
     }

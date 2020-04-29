@@ -1,5 +1,7 @@
 package com.cruciverbapackage;
 
+//Coffaro_Davide_mat556603_Progetto ESP cruciverba
+
 import javax.imageio.plugins.tiff.ExifTIFFTagSet;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -7,14 +9,11 @@ import java.awt.event.ActionListener;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-public class ImplementazioneCruciverba implements Cruciverba {
+public class ImplementazioneCruciverba {
     protected Schema schema_originale;
-    //protected SchemaScomposto schema_scomposto;
     protected ArrayList<String> dizionario;
-
-    public ArrayList<String> getDizionario() {
-        return dizionario;
-    }
+    protected boolean algResult;
+    protected boolean algExecuted;
 
     //costruttore cruciverba con una struttura passata in input
     public ImplementazioneCruciverba(JPanel panel, char matrice[][], String parolaIniziale, int posizioneRigaIniziale, int posizioneColonnaIniziale, ArrayList<String> dizionarioInput, char orientamento) {
@@ -23,6 +22,18 @@ public class ImplementazioneCruciverba implements Cruciverba {
             dizionario = dizionarioInput;
         }
 
+    }
+
+    public ArrayList<String> getDizionario() {
+        return dizionario;
+    }
+
+    public boolean isAlgResult() {
+        return algResult;
+    }
+
+    public boolean isAlgExecuted() {
+        return algExecuted;
     }
 
     //@requires: this!=null, parola!=null, posizione all'interno dello schema
@@ -55,7 +66,7 @@ public class ImplementazioneCruciverba implements Cruciverba {
     //@effects: inserisce una parola nello schema del cruciverba
     //@throws: nullPointerException
     //*return: true se cruciverba è completo, false se non è stato completato o non è stata trovata una parola da inserire
-    public boolean inserisci1Parola(){ return true; }
+    public String inserisci1Parola(){ return null; }
 
 
     //@requires: this!=null

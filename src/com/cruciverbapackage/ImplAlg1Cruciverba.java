@@ -1,5 +1,7 @@
 package com.cruciverbapackage;
 
+//Coffaro_Davide_mat556603_Progetto ESP cruciverba
+
 import javax.swing.*;
 import java.util.ArrayList;
 
@@ -8,8 +10,6 @@ public class ImplAlg1Cruciverba extends ImplementazioneCruciverba{
     //costruttore cruciverba con una struttura passata in input
     public ImplAlg1Cruciverba(JPanel panel, char matrice[][], String parolaIniziale, int posizioneRigaIniziale, int posizioneColonnaIniziale, ArrayList<String> dizionarioInput, char orientamento) {
         super(panel,matrice,parolaIniziale,posizioneRigaIniziale,posizioneColonnaIniziale,dizionarioInput, orientamento);
-
-
     }
 
     //@requires: this!=null
@@ -64,11 +64,12 @@ public class ImplAlg1Cruciverba extends ImplementazioneCruciverba{
     //@effects: inserisce una parola nello schema del cruciverba
     //@throws: nullPointerException
     //*return: true se cruciverba è completo, false se non è stato completato o non è stata trovata una parola da inserire
-    public boolean inserisci1Parola(){
+    public String inserisci1Parola(){
         boolean trovataParola=false;
+        String parolaDaInserire=null;
 
         if (isComplete()){
-            return true;
+            return null;
         }
 
         //TODO questa lunghezza=10 potrebbe essere sostituiti analizzando la dimensione dell'insieme trovato cercando il numero di parole
@@ -95,7 +96,7 @@ public class ImplAlg1Cruciverba extends ImplementazioneCruciverba{
                     while(ricercaParole.size()>0 && !(trovataParola)){
                         Parola casellaDaCompletare=cercaParolaConPiuLettere(ricercaParole);
                         ricercaParole.remove(casellaDaCompletare);
-                        String parolaDaInserire=cercaParolaDaInserire(casellaDaCompletare,dizionario);
+                        parolaDaInserire=cercaParolaDaInserire(casellaDaCompletare,dizionario);
                         if (!( parolaDaInserire.equals(""))){
                             trovataParola=true;
                             casellaDaCompletare.setParola(parolaDaInserire);
@@ -122,10 +123,11 @@ public class ImplAlg1Cruciverba extends ImplementazioneCruciverba{
 
         }
 
-        if (isComplete()){
-            return true;
+        if (trovataParola){
+            return parolaDaInserire;
         }else{
-            return false;
+            risolviCruciverba();
+            return null;
         }
 
 
@@ -137,15 +139,15 @@ public class ImplAlg1Cruciverba extends ImplementazioneCruciverba{
     //@return: true se completato, false se non è possibile completarlo
     public boolean risolviCruciverba(){
 
-        if (isComplete()){
-            return true;
-        }
+        if(algExecuted){
+            return algResult;
+        }else {
 
-        //TODO questa lunghezza=10 potrebbe essere sostituiti analizzando la dimensione dell'insieme trovato cercando il numero di parole
-        // suddiviso per lunghezza all'interno dello schema
-        int cicliEseguiti=0,cicliMax=100,c,lunghezzaMax=schema_originale.cercaLunghezzaParolaMax();
-        int numeroParoleLunghezzaC=0,numeroParoleLunghezzaCInserite=0;
-        ArrayList<Boolean> trovato = new ArrayList<Boolean>();
+            //TODO questa lunghezza=10 potrebbe essere sostituiti analizzando la dimensione dell'insieme trovato cercando il numero di parole
+            // suddiviso per lunghezza all'interno dello schema
+            int cicliEseguiti = 0, cicliMax = 100, c, lunghezzaMax = schema_originale.cercaLunghezzaParolaMax();
+            int numeroParoleLunghezzaC = 0, numeroParoleLunghezzaCInserite = 0;
+            ArrayList<Boolean> trovato = new ArrayList<Boolean>();
         /*Timer tempoDiEsecuzione= new Timer(600, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -158,54 +160,59 @@ public class ImplAlg1Cruciverba extends ImplementazioneCruciverba{
             }
         });*/
 
-        ArrayList<Parola> ricercaParole;
+            ArrayList<Parola> ricercaParole;
 
-        for (int i=0; i<=lunghezzaMax;i++){
-            trovato.add(false);
-        }
-
-        while(daTrovare(trovato) && cicliEseguiti<cicliMax){
-            cicliEseguiti++;
-            c=0;
-            while(c<=lunghezzaMax){
-                //se ho già trovato tutte le parole con lunghezza c mi fermo e passo al numero c successivo
-                if (!(trovato.get(c))){
-                    ricercaParole=schema_originale.ricercaLunghezzaParole(c);
-                    numeroParoleLunghezzaC=ricercaParole.size();
-                    numeroParoleLunghezzaCInserite=0;
-                    while(ricercaParole.size()>0){
-                        Parola casellaDaCompletare=cercaParolaConPiuLettere(ricercaParole);
-                        ricercaParole.remove(casellaDaCompletare);
-                        String parolaDaInserire=cercaParolaDaInserire(casellaDaCompletare,dizionario);
-                        if (!( parolaDaInserire.equals(""))){
-                            casellaDaCompletare.setParola(parolaDaInserire);
-
-                            //TODO non si può fare in modo di passare la parola di tipo Parola invece che le singole informazioni?
-                            aggiornaParola(casellaDaCompletare.getParola(),casellaDaCompletare.getPosizioneParola().getRiga()
-                                    , casellaDaCompletare.getPosizioneParola().getColonna(),casellaDaCompletare.getOrientamento());
-                            numeroParoleLunghezzaCInserite++;
-
-                            //aggiorno il dizionario togliendo la parola che è stata inserita nello schema
-                            // + eventuali parole che si sono autocompletate inserendo una parola nello schema
-                            aggiornaDizionario();
-                        }
-
-                    }
-                    if (numeroParoleLunghezzaC==numeroParoleLunghezzaCInserite){
-                        trovato.set(c,true);
-                    }
-                }
-
-                //incremento il numero di caselle di cui voglio cercare le parole da inserire
-                c++;
+            for (int i = 0; i <= lunghezzaMax; i++) {
+                trovato.add(false);
             }
 
-        }
+            while (daTrovare(trovato) && cicliEseguiti < cicliMax) {
+                cicliEseguiti++;
+                c = 0;
+                while (c <= lunghezzaMax) {
+                    //se ho già trovato tutte le parole con lunghezza c mi fermo e passo al numero c successivo
+                    if (!(trovato.get(c))) {
+                        ricercaParole = schema_originale.ricercaLunghezzaParole(c);
+                        numeroParoleLunghezzaC = ricercaParole.size();
+                        numeroParoleLunghezzaCInserite = 0;
+                        while (ricercaParole.size() > 0) {
+                            Parola casellaDaCompletare = cercaParolaConPiuLettere(ricercaParole);
+                            ricercaParole.remove(casellaDaCompletare);
+                            String parolaDaInserire = cercaParolaDaInserire(casellaDaCompletare, dizionario);
+                            if (!(parolaDaInserire.equals(""))) {
+                                casellaDaCompletare.setParola(parolaDaInserire);
 
-        if (!(daTrovare(trovato))){
-            return true;
-        }else{
-            return false;
+                                //TODO non si può fare in modo di passare la parola di tipo Parola invece che le singole informazioni?
+                                aggiornaParola(casellaDaCompletare.getParola(), casellaDaCompletare.getPosizioneParola().getRiga()
+                                        , casellaDaCompletare.getPosizioneParola().getColonna(), casellaDaCompletare.getOrientamento());
+                                numeroParoleLunghezzaCInserite++;
+
+                                //aggiorno il dizionario togliendo la parola che è stata inserita nello schema
+                                // + eventuali parole che si sono autocompletate inserendo una parola nello schema
+                                aggiornaDizionario();
+                            }
+
+                        }
+                        if (numeroParoleLunghezzaC == numeroParoleLunghezzaCInserite) {
+                            trovato.set(c, true);
+                        }
+                    }
+
+                    //incremento il numero di caselle di cui voglio cercare le parole da inserire
+                    c++;
+                }
+
+            }
+
+
+            algExecuted=true;
+            if (!(daTrovare(trovato))){
+                algResult=true;
+                return true;
+            }else{
+                algResult=false;
+                return false;
+            }
         }
 
 
