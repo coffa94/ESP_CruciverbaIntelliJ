@@ -21,39 +21,44 @@ public class ImplAlg4Cruciverba_AI extends ImplementazioneCruciverba{
     private CSP constraintsSolver;
     private ArrayList<Parola> listSolution;
 
-    //costruttore cruciverba con una struttura passata in input
+    //costruttore cruciverba con una struttura passata in input che richiama il costruttore del padre e inizializza la variabile di tipo CPS
     public ImplAlg4Cruciverba_AI(JPanel panel, char matrice[][], String parolaIniziale, int posizioneRigaIniziale, int posizioneColonnaIniziale, ArrayList<String> dizionarioInput, char orientamento) {
         super(panel,matrice,parolaIniziale,posizioneRigaIniziale,posizioneColonnaIniziale,dizionarioInput, orientamento);
         constraintsSolver= new CSP(schema_originale,dizionario);
     }
 
     //corrisponde ad un ciclo di risolviCruciverba (in cui poi viene lanciata la funzione cercaParolaDaInserire)
-    //@requires this!=null
-    //@effects: inserisce una parola nello schema del cruciverba
-    //@throws: nullPointerException
-    //*return: true se cruciverba è completo, false se non è stato completato o non è stata trovata una parola da inserire
+    //inserisce una parola nello schema del cruciverba
     public String inserisci1Parola(){
         int i=0;
         Parola p=null;
+        //controllo se l'algoritmo di risoluzione era già stato eseguito
         if (!(constraintsSolver.isCSPExecuted())){
 
+            //se non era stato eseguito lo eseguo e salvo il risultato nella variabile risultato di CPS, nella listSolution sarà contenuto
+            // l'ordine di inserimento delle parole nello schema
             constraintsSolver.setCSPResult(backtrackSearch(constraintsSolver));
 
+            //se risultato dell'algoritmo è true prendo un elemento di listSolution e lo inserisco nello schema del cruciverba
             if (constraintsSolver.isCSPResult()){
                 if(listSolution.size()>0){
                     p=listSolution.get(i);
                     schema_originale.aggiornaSchema(p.getParola(),p.getPosizioneParola(),p.getOrientamento());
                     listSolution.remove(i);
                 }
+                //aggiorno le parole disponibili nel dizionario dopo l'inserimento della nuova parola nel cruciverba
                 aggiornaDizionario();
             }
         }else{
+            //in questo ramo non rieseguo l'algoritmo e se il risultato dell'algoritmo è true prendo un elemento di listSolution e lo inserisco
+            // nello schema del cruciverba
             if(constraintsSolver.isCSPResult()) {
                 if(listSolution.size()>0){
                     p=listSolution.get(i);
                     schema_originale.aggiornaSchema(p.getParola(),p.getPosizioneParola(),p.getOrientamento());
                     listSolution.remove(i);
                 }
+                //aggiorno la lista delle parole disponibili nel dizionario dopo l'inserimento dell'ultima parola
                 aggiornaDizionario();
             }
 
@@ -74,10 +79,13 @@ public class ImplAlg4Cruciverba_AI extends ImplementazioneCruciverba{
     }
 
     //implementazione algoritmo 4 con AI utilizzo CSP
-    //@requires: this!=null
-    //@effects: chiama cercaParolaDaInserire finche lo schema non è completato, cioè isComplete=true
-    //@throws: nullPointerException
-    //@return: true se completato, false se non è possibile completarlo
+    //CSP:
+    //variabili = paroleSchema
+    //domini = x domini ognuno relativo alle parole di x lettere
+    //vincoli = relativi alle variabili, ad esempio la variabile in posizione 2^ riga - 3^ colonna in orizzontale
+    //          ha la lettera 'i' nella quarta casella
+    //backtracking cronologico = se non riesco a completare lo schema del cruciverba con l'attuale assegnamento faccio passi indietro
+    //                            e provo ad inserire un altro valore nella variabile a cui avevo assegnato un valore errato
     public boolean risolviCruciverba(){
         int i=0;
         if (!(constraintsSolver.isCSPExecuted())){
@@ -85,26 +93,30 @@ public class ImplAlg4Cruciverba_AI extends ImplementazioneCruciverba{
             constraintsSolver.setCSPResult(backtrackSearch(constraintsSolver));
 
             if (constraintsSolver.isCSPResult()){
+                //inserisco tutte le parole nella listSolution all'interno dello schema del cruciverba, una alla volta
                 while(listSolution.size()>0){
                     Parola p=listSolution.get(i);
                     schema_originale.aggiornaSchema(p.getParola(),p.getPosizioneParola(),p.getOrientamento());
                     listSolution.remove(i);
                 }
+                //aggiorno la lista di parole disponibili del dizionario dopo l'inserimento delle parole di listSolution
                 aggiornaDizionario();
             }
             algResult=constraintsSolver.isCSPResult();
-            return constraintsSolver.isCSPResult();
+            return algResult;
         }else{
+            //se avevo già eseguito l'algoritmo inserisco solo le parole rimanenti nella listSolution all'interno dello schema del cruciverba
             if(constraintsSolver.isCSPResult()) {
                 while (listSolution.size() > 0) {
                     Parola p=listSolution.get(i);
                     schema_originale.aggiornaSchema(p.getParola(),p.getPosizioneParola(),p.getOrientamento());
                     listSolution.remove(i);
                 }
+                //aggiorno la lista di parole disponibili dopo l'inserimento delle parole nel cruciverba
                 aggiornaDizionario();
             }
             algResult=constraintsSolver.isCSPResult();
-            return constraintsSolver.isCSPResult();
+            return algResult;
 
         }
 
@@ -113,16 +125,21 @@ public class ImplAlg4Cruciverba_AI extends ImplementazioneCruciverba{
 
     //lancio procedura per soluzione cruciverba con AI
     private boolean backtrackSearch( CSP csp){
+        //setto variabile di esecuzione algoritmo a true
         csp.setCSPExecuted(true);
+        //salvo lo stato dello schema  attuale per poterlo ripristinare dopo l'esecuzione dell'algoritmo
+        //che conterrà altrimenti tutti i riferimenti modificati durante l'esecuzione dell'algoritmo
         Schema oldSchema=new Schema(schema_originale);
         backtrack(new ArrayList<Parola>(), csp);
         if (listSolution.size()==constraintsSolver.getNumberVariables()){
+            //ripristino lo schema originale e anche i valori a prima dell'esecuzione dell'algoritmo nelle caselle delle parole
             schema_originale=oldSchema;
             for (Parola p : schema_originale.getParoleSchema()){
                 p.aggiornaCaselleParola();
             }
             return true;
         }else{
+            //ripristino lo schema originale e anche i valori a prima dell'esecuzione dell'algoritmo nelle caselle delle parole
             schema_originale=oldSchema;
             for (Parola p : schema_originale.getParoleSchema()){
                 p.aggiornaCaselleParola();
@@ -131,7 +148,8 @@ public class ImplAlg4Cruciverba_AI extends ImplementazioneCruciverba{
         }
     }
 
-    //ricerca soluzione cruciverba con AI con variable=MRV (minimum remaining values)+euristica del grado, value=prossimo valore del dominio ancora non provato,
+    //ricerca soluzione cruciverba con AI con variable=MRV (minimum remaining values)+euristica del grado, value=prossimo valore del dominio ancora
+    // non provato,
     // inferenza con FC (forward checking), backtracking cronologico
     // ritorno il valore null quando sono arrivato in fondo alla procedura, altrimenti ritorno la variabile che volevo utilizzare per fare il
     // backtracking intelligente sulle variabili collegate ad essa, adesso non è utile perché utilizzo il backtracking cronologico
@@ -159,14 +177,13 @@ public class ImplAlg4Cruciverba_AI extends ImplementazioneCruciverba{
                 assignment.add(var.getValue());
                 countAssignment++;
                 if (inference(csp,var,s)){
-                    //TODO aggiornare i domini con le stesse lettere di quella di var di cui ho appena inserito un valore
-
                     //chiamo di nuovo backtrack per trovare il prossimo assegnamento da fare
                     varResult= backtrack(assignment,csp);
                     if (varResult==null){
                         return null;
                     }
                 }
+                //operazioni di ripristino nel caso in cui l'inferenza non è andata a buon fine
                 countAssignment--;
                 assignment.remove(countAssignment);
                 var=oldVar;
@@ -181,29 +198,6 @@ public class ImplAlg4Cruciverba_AI extends ImplementazioneCruciverba{
         //imposto il valore iniziale uguale al numero di parole da inserire nel cruciverba
         int minValues = dizionario.size();
         ArrayList<Variable> listCandidateVariables = null;
-
-        //da eliminare - vecchia procedura che prendeva percentuale di completamento parola per selezionare le variabili
-        /*float maxPercentage = 0f;
-        for (Variable v : constraintsSolver.getVariables()) {
-            float variablePercentage = v.getPercentageInsertedLetters();
-            if (variablePercentage > maxPercentage) {
-                //se la percentuale trovata per questa variabile è superiore a quella precedente creo una nuova lista
-                // (la lista precedente contenente le variabili con percentuale minore viene scartata) in cui inserisco la variabile corrente
-                // e aggiorno la percentuale massima
-                listCandidateVariables = new ArrayList<Variable>();
-                listCandidateVariables.add(v);
-                maxPercentage = variablePercentage;
-            } else if (variablePercentage == maxPercentage) {
-
-                //controllo se non era ancora stata inizializzata la lista delle variabili candidate
-                if (listCandidateVariables == null) {
-                    listCandidateVariables = new ArrayList<Variable>();
-                }
-
-                //inserisco la variabile corrente nella lista contenente le variabili con la stessa percentuale di completamento
-                listCandidateVariables.add(v);
-            }
-        }*/
 
         //procedura di selezione variabili per minor valore dei domini
         for (Variable v : constraintsSolver.getVariables()) {
@@ -280,22 +274,20 @@ public class ImplAlg4Cruciverba_AI extends ImplementazioneCruciverba{
     //    se lo sono ritorno false altrimenti true
     private boolean inference(CSP csp, Variable var, String s){
 
-        //constraintsSolver.removeVariable(var);    //utilizzo un booleano per conoscere se è già stata assegnata o no
-
-        //TODO accorpare le due funzioni di ricerca variabili (collegate e stessa lunghezza in un'unica procedura per non dover scorrere
-        // l'array variables di csp 2 volte
         ArrayList<Variable> listLinkedVariables=null;
         ArrayList<Variable> listSameLengthVariables=null;
         int counterLinkedVariables=0;
         int counterSameLengthVariables=0;
         boolean result=true;
 
-        //trovare variabili collegate a var e ridurre il loro dominio
+        //trovare variabili collegate a var (cioè che condividono le stesse caselle) e ridurre il loro dominio
         listLinkedVariables=csp.searchLinkedVariables(var);
         while (listLinkedVariables!=null && counterLinkedVariables<listLinkedVariables.size() && result){
             Variable currentVar=listLinkedVariables.get(counterLinkedVariables);
             currentVar.setOldValue(currentVar.getValue());
             currentVar.aggiornaParola();
+            //procedura di inference sulla variabile corrente, se va a buon fine proseguo altrimenti ripristino i valori e imposto la
+            // variabile result a false
             if (!(currentVar.inferenceAfterUpdateParola())){
                 currentVar.ripristinaParola();
                 result=false;
@@ -308,8 +300,6 @@ public class ImplAlg4Cruciverba_AI extends ImplementazioneCruciverba{
         listSameLengthVariables=csp.searchSameLengthVariables(var.getNumberLetters());
         while(listSameLengthVariables!=null && counterSameLengthVariables<listSameLengthVariables.size() && result){
             Variable currentVar=listSameLengthVariables.get(counterSameLengthVariables);
-            //currentVar.setOldValue(currentVar.getValue());
-            //currentVar.aggiornaParola();
             if (!(currentVar.inferenceAfterAssignedValue(s))){
                 result=false;
             }

@@ -11,6 +11,7 @@ public class Variable {
     private ArrayList<String> oldListValues;
     private Parola oldValue;
 
+    //costruttore in cui inizializzo la parola e il dominio della variabile + altre variabili per lo stato dell'oggetto
     public Variable(Parola var, Domain d){
         value=new Parola(var);
         variableDomain=new Domain(d);
@@ -19,6 +20,7 @@ public class Variable {
         oldValue=null;
     }
 
+    //costruisco una variabile da una già esistente
     public Variable(Variable var){
         this.value=var.getValue();
         this.variableDomain=var.getVariableDomain();
@@ -50,13 +52,6 @@ public class Variable {
     public void setOldValue(Parola oldValue) {
         this.oldValue = oldValue;
     }
-
-    //TODO vedere se farlo
-    //procedura di inferenza della variabile, lancia le due procedura a seconda dell'input?
-    /*public boolean inference(){
-
-    }
-     */
 
     //procedura di inferenza sul dominio di questa variabile per rimuovere i valori non permessi dopo assegnazione di un valore ad un'altra variabile
     //ritorna false se il dominio risultante dall'inferenza risulta essere vuoto
@@ -98,7 +93,7 @@ public class Variable {
                     String s = listValuesDomain.get(j);
 
                     //se il carattere della parola è diverso da quello del valore del dominio, tolgo quel valore dal dominio di questa variabile
-                    //altrimenti incremento il valore di j e continuo sul valore del dominio successivo
+                    //altrimenti incremento il valore di j e continuo sul valore successivo del dominio
                     if(checkChar!=s.charAt(i)){
                         listValuesDomain.remove(j);
                     }else {
@@ -110,7 +105,6 @@ public class Variable {
 
         }
 
-
         //se il dominio dopo aver fatto inferenza non è vuoto lo aggiorno per la variabile corrente e ritorno true
         //altrimenti ritorno false senza aggiornare il dominio della variabile corrente
         if(listValuesDomain.size()>0){
@@ -120,13 +114,6 @@ public class Variable {
             return false;
         }
     }
-
-    /*
-    //calcolo la percentuale di completamento della parola relativa alla variabile
-    public float getPercentageInsertedLetters(){
-        return (100*value.getLettereInserite()/value.getLunghezza());
-    }
-     */
 
     //ritorno il numero di lettere della variabile
     public int getNumberLetters(){

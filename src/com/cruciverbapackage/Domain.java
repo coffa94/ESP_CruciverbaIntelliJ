@@ -9,12 +9,14 @@ class Domain{
     private ArrayList<String> listValues;
     private int length;
 
+    //costruttore con inizializzazione delle variabili dell'oggetto Domain e con inserimento della stringa nella lista di valori del dominio
     public Domain(String s, int dim){
         listValues=new ArrayList<String>();
         listValues.add(s);
         length=dim;
     }
 
+    //costruttore a partire da un altro oggetto di tipo dominio già esistente
     public Domain(Domain d){
         listValues=d.getListValues();
         length=d.getLunghezzaParole();
@@ -49,6 +51,5 @@ class Domain{
     public String getValueDomain(int index){
         return listValues.get(index);
     }
-
 
 }

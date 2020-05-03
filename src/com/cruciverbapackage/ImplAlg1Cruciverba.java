@@ -7,15 +7,12 @@ import java.util.ArrayList;
 
 public class ImplAlg1Cruciverba extends ImplementazioneCruciverba{
 
-    //costruttore cruciverba con una struttura passata in input
+    //costruttore cruciverba con una struttura passata in input che richiama semplicemente il costruttore della classe padre
     public ImplAlg1Cruciverba(JPanel panel, char matrice[][], String parolaIniziale, int posizioneRigaIniziale, int posizioneColonnaIniziale, ArrayList<String> dizionarioInput, char orientamento) {
         super(panel,matrice,parolaIniziale,posizioneRigaIniziale,posizioneColonnaIniziale,dizionarioInput, orientamento);
     }
 
-    //@requires: this!=null
-    //@effects: ricerca la prossima parola da inserire nel cruciverba
-    //@throws: nullPointerException
-    //@return: parola trovata E oppure null (in questo caso va gestito)
+    // ricerca la prossima parola da inserire nel cruciverba con algoritmo1
     public String cercaParolaDaInserire(Parola casellaDaCompletare, ArrayList<String> dizionario){
         ArrayList<String> paroleDizionarioTrovate=new ArrayList<String>();
         int i=0;
@@ -35,9 +32,10 @@ public class ImplAlg1Cruciverba extends ImplementazioneCruciverba{
             // delle due parole per vedere se sono compatibili
             i=0;
             if (s.length()==lunghezzaParolaDaCompletare){
-                //TODO confrontare stringhe con una funzione delle stringhe??
+                //confronto carattere per carattere quelle dell'oggetto Parola corrente con quelle del dizionario
                 while (i<lunghezzaParolaDaCompletare && parolaUguale){
                     char carattere = parolaDaCompletare.charAt(i);
+                    //confronto i caratteri solo se è un carattere valido (diverso da '.' impostato inizialmente)
                     if (carattere!='.'){
                         if (carattere!=s.charAt(i)){
                             parolaUguale=false;
@@ -60,48 +58,49 @@ public class ImplAlg1Cruciverba extends ImplementazioneCruciverba{
     }
 
     //corrisponde ad un ciclo di risolviCruciverba (in cui poi viene lanciata la funzione cercaParolaDaInserire)
-    //@requires this!=null
-    //@effects: inserisce una parola nello schema del cruciverba
-    //@throws: nullPointerException
-    //*return: true se cruciverba è completo, false se non è stato completato o non è stata trovata una parola da inserire
+    //inserisce una parola nello schema del cruciverba
     public String inserisci1Parola(){
         boolean trovataParola=false;
         String parolaDaInserire=null;
-
-        if (isComplete()){
-            return null;
-        }
-
-        //TODO questa lunghezza=10 potrebbe essere sostituiti analizzando la dimensione dell'insieme trovato cercando il numero di parole
-        // suddiviso per lunghezza all'interno dello schema
-        int cicliEseguiti=0,cicliMax=100,c,lunghezzaMax=schema_originale.cercaLunghezzaParolaMax();
+        int cicliEseguiti=0,cicliMax=100,c;
+        //analizzo le parole dello schema e prendo la lunghezza massima
+        int lunghezzaMax=schema_originale.cercaLunghezzaParolaMax();
         int numeroParoleLunghezzaC=0,numeroParoleLunghezzaCInserite=0;
         ArrayList<Boolean> trovato = new ArrayList<Boolean>();
 
         ArrayList<Parola> ricercaParole;
 
+        //se già eseguito l'algoritmo ritorno null
+        if (isAlgExecuted()){
+            return null;
+        }
+        //imposto tutto l'arrayList trovato a false
         for (int i=0; i<=lunghezzaMax;i++){
             trovato.add(false);
         }
 
+        //ciclo finchè tutto l'arrayList trovato è uguale a true oppure fino ad arrivare a un'iterazione>cicliMax oppure se non ho trovato
+        //nessuna parola al ciclo precedente
         while(daTrovare(trovato) && cicliEseguiti<cicliMax && !(trovataParola)){
             cicliEseguiti++;
             c=0;
+            //ciclo da 0 fino alla lunghezza massima delle parole nello schema oppure esco se non ho trovato nessuna parola al ciclo precedente
             while(c<=lunghezzaMax && !(trovataParola)){
                 //se ho già trovato tutte le parole con lunghezza c mi fermo e passo al numero c successivo
                 if (!(trovato.get(c))){
                     ricercaParole=schema_originale.ricercaLunghezzaParole(c);
                     numeroParoleLunghezzaC=ricercaParole.size();
                     numeroParoleLunghezzaCInserite=0;
+                    //ciclo le parole di lunghezza c finchè la lista non è vuota oppure esco quando non ho trovato una parola al ciclo precedente
                     while(ricercaParole.size()>0 && !(trovataParola)){
                         Parola casellaDaCompletare=cercaParolaConPiuLettere(ricercaParole);
                         ricercaParole.remove(casellaDaCompletare);
+                        //chiamo la procedura di ricerca parola da inserire dell'algoritmo1
                         parolaDaInserire=cercaParolaDaInserire(casellaDaCompletare,dizionario);
                         if (!( parolaDaInserire.equals(""))){
                             trovataParola=true;
                             casellaDaCompletare.setParola(parolaDaInserire);
-
-                            //TODO non si può fare in modo di passare la parola di tipo Parola invece che le singole informazioni?
+                            //procedura per aggiornare lo schema con la parola trovata
                             aggiornaParola(casellaDaCompletare.getParola(),casellaDaCompletare.getPosizioneParola().getRiga()
                                     , casellaDaCompletare.getPosizioneParola().getColonna(),casellaDaCompletare.getOrientamento());
                             numeroParoleLunghezzaCInserite++;
@@ -123,6 +122,8 @@ public class ImplAlg1Cruciverba extends ImplementazioneCruciverba{
 
         }
 
+        //ritorno la parola se è stata trovata, altrimenti ritorno null ma lanciando prima la procedura di RisolviCruciverba
+        //per vedere se è stato completato correttamente o no
         if (trovataParola){
             return parolaDaInserire;
         }else{
@@ -133,56 +134,48 @@ public class ImplAlg1Cruciverba extends ImplementazioneCruciverba{
 
     }
 
-    //@requires: this!=null
-    //@effects: risoluzione cruciverba attraverso l'utilizzo dell'algoritmo 1
-    //@throws: nullPointerException
-    //@return: true se completato, false se non è possibile completarlo
+    //risoluzione cruciverba attraverso l'utilizzo dell'algoritmo 1 e ritorno se è stato completato o no
     public boolean risolviCruciverba(){
 
+        //se è gia stato eseguito una volta non ripeto l'esecuzione ma ritorno il risultato ottenuto in precedenza
         if(algExecuted){
             return algResult;
         }else {
 
-            //TODO questa lunghezza=10 potrebbe essere sostituiti analizzando la dimensione dell'insieme trovato cercando il numero di parole
-            // suddiviso per lunghezza all'interno dello schema
-            int cicliEseguiti = 0, cicliMax = 100, c, lunghezzaMax = schema_originale.cercaLunghezzaParolaMax();
+            int cicliEseguiti = 0, cicliMax = 100, c;
+            //analizzo le parole dello schema e prendo la lunghezza massima
+            int lunghezzaMax = schema_originale.cercaLunghezzaParolaMax();
             int numeroParoleLunghezzaC = 0, numeroParoleLunghezzaCInserite = 0;
             ArrayList<Boolean> trovato = new ArrayList<Boolean>();
-        /*Timer tempoDiEsecuzione= new Timer(600, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    throw new Exception("Tempo massimo di esecuzione raggiunto");
-                } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null, ex.toString(), "Errore", JOptionPane.ERROR_MESSAGE);
-                    System.exit(102);
-                }
-            }
-        });*/
 
             ArrayList<Parola> ricercaParole;
 
+            //imposto tutto l'arrayList trovato a false
             for (int i = 0; i <= lunghezzaMax; i++) {
                 trovato.add(false);
             }
 
+            //ciclo finchè tutto l'arrayList trovato è uguale a true oppure fino ad arrivare a un'iterazione>cicliMax
             while (daTrovare(trovato) && cicliEseguiti < cicliMax) {
                 cicliEseguiti++;
                 c = 0;
+                //ciclo da 0 fino alla lunghezza massima delle parole nello schema
                 while (c <= lunghezzaMax) {
                     //se ho già trovato tutte le parole con lunghezza c mi fermo e passo al numero c successivo
                     if (!(trovato.get(c))) {
                         ricercaParole = schema_originale.ricercaLunghezzaParole(c);
                         numeroParoleLunghezzaC = ricercaParole.size();
                         numeroParoleLunghezzaCInserite = 0;
+                        //ciclo le parole di lunghezza c finchè la lista non è vuota
                         while (ricercaParole.size() > 0) {
                             Parola casellaDaCompletare = cercaParolaConPiuLettere(ricercaParole);
                             ricercaParole.remove(casellaDaCompletare);
+                            //chiamo la procedura di ricerca parola da inserire dell'algoritmo1
                             String parolaDaInserire = cercaParolaDaInserire(casellaDaCompletare, dizionario);
                             if (!(parolaDaInserire.equals(""))) {
                                 casellaDaCompletare.setParola(parolaDaInserire);
 
-                                //TODO non si può fare in modo di passare la parola di tipo Parola invece che le singole informazioni?
+                                //procedura per aggiornare lo schema con la parola trovata
                                 aggiornaParola(casellaDaCompletare.getParola(), casellaDaCompletare.getPosizioneParola().getRiga()
                                         , casellaDaCompletare.getPosizioneParola().getColonna(), casellaDaCompletare.getOrientamento());
                                 numeroParoleLunghezzaCInserite++;
@@ -204,20 +197,23 @@ public class ImplAlg1Cruciverba extends ImplementazioneCruciverba{
 
             }
 
-
+            //aggiorno la variabile per sapere che ho eseguito una volta l'algoritmo di RisolviCruciverba
             algExecuted=true;
+            //faccio un controllo se ho completato tutte le parole dello schema, aggiorno la variabile che contiene il risultato del cruciverba
+            // e lo ritorno
             if (!(daTrovare(trovato))){
                 algResult=true;
-                return true;
+                return algResult;
             }else{
                 algResult=false;
-                return false;
+                return algResult;
             }
         }
 
-
     }
 
+    //controllo se sono presenti valori a false dentro l'arrayList trovato, in quel caso significa che ancora non ho trovato tutte
+    //le parole di lunghezza i
     public boolean daTrovare(ArrayList<Boolean> trovato){
         int i=0;
         try {
@@ -241,37 +237,6 @@ public class ImplAlg1Cruciverba extends ImplementazioneCruciverba{
 
     }
 
-    //non so se viene utilizzato
-    public String cercaParola() {
-        ArrayList<Parola> ricercaParole;
-        //TODO al momento dell'inserimento delle parole nello schema salvare con una variabile la lunghezza della parola più lunga.
-        // Al momento prendo una lunghezzaMax fittizia.
-        int lunghezzaMax = 10;
-
-        int i=1;
-        boolean trovato=false;
-
-        try{
-            //TODO sono alla ricerca della prossima parola da inserire nello schema, dopo aver cliccato il pulsante cercaParola,
-            // lavoro finche non ne trovo una oppure fino alla lunghezzaMax delle caselle, il che significa che non ne ho trovata nessuna
-            while (i<lunghezzaMax && !(trovato)){
-                ricercaParole=schema_originale.ricercaLunghezzaParole(i);
-                if (ricercaParole.size()>0){
-
-                }
-            }
-        }
-        catch (Exception ex){
-            JOptionPane.showMessageDialog(null, ex.toString(), "Errore", JOptionPane.ERROR_MESSAGE);
-            System.exit(103);
-        }
-        finally{
-            return "";
-        }
-
-    }
-
-    //TODO è possibile fare count dei caratteri di una parola non contando il carattere '.'???
     //cerco la parola all'interno della lista che ha più lettere già inserite, a parità di lettere già inserite prendo la prima che ho trovato
     public Parola cercaParolaConPiuLettere(ArrayList<Parola> listaParole){
         int maxLettereInserite=-1, contatoreLettereInserite=0;

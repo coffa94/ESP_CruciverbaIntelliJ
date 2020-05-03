@@ -7,17 +7,12 @@ import java.util.ArrayList;
 
 public class ImplAlg2Cruciverba extends ImplementazioneCruciverba {
 
-    //costruttore cruciverba con una struttura passata in input
+    //costruttore cruciverba con una struttura passata in input che richiama il costruttore del parole
     public ImplAlg2Cruciverba(JPanel panel, char matrice[][], String parolaIniziale, int posizioneRigaIniziale, int posizioneColonnaIniziale, ArrayList<String> dizionarioInput, char orientamento) {
         super(panel,matrice,parolaIniziale,posizioneRigaIniziale,posizioneColonnaIniziale,dizionarioInput, orientamento);
-
-
     }
 
-    //@requires: this!=null
-    //@effects: ricerca la prossima parola da inserire nel cruciverba
-    //@throws: nullPointerException
-    //@return: parola trovata E oppure null (in questo caso va gestito)
+    //ricerca la prossima parola da inserire nel cruciverba
     public String cercaParolaDaInserire(Parola casellaDaCompletare, ArrayList<String> dizionario){
         ArrayList<String> paroleDizionarioTrovate=new ArrayList<String>();
         int i=0;
@@ -37,6 +32,8 @@ public class ImplAlg2Cruciverba extends ImplementazioneCruciverba {
             // delle due parole per vedere se sono compatibili
             i=0;
             if (s.length()==lunghezzaParolaDaCompletare){
+                //confronto i caratteri della parola da completare con quelle delle parole nel dizionario, se non è presente
+                //nessun vincolo violato allora inserisco la parola del dizionario nella lista di parola da inserire
                 while (i<lunghezzaParolaDaCompletare && parolaUguale){
                     char carattere = parolaDaCompletare.charAt(i);
                     if (carattere!='.'){
@@ -53,6 +50,7 @@ public class ImplAlg2Cruciverba extends ImplementazioneCruciverba {
                 }
             }
         }
+        //se ho trovato solo una parola da inserire la ritorno alla funzione chiamante
         if (paroleDizionarioTrovate.size()==1){
             return paroleDizionarioTrovate.get(0);
         }else{
@@ -61,34 +59,21 @@ public class ImplAlg2Cruciverba extends ImplementazioneCruciverba {
     }
 
     //corrisponde ad un ciclo di risolviCruciverba (in cui poi viene lanciata la funzione cercaParolaDaInserire)
-    //@requires this!=null
-    //@effects: inserisce una parola nello schema del cruciverba
-    //@throws: nullPointerException
-    //*return: true se cruciverba è completo, false se non è stato completato o non è stata trovata una parola da inserire
+    //inserisce una parola nello schema del cruciverba
     public String inserisci1Parola(){
         boolean trovataParola=false;
         String parolaDaInserire=null;
 
-        //TODO questa lunghezza=10 potrebbe essere sostituiti analizzando la dimensione dell'insieme trovato cercando il numero di parole
-        // suddiviso per lunghezza all'interno dello schema
         int cicliEseguiti = 0, cicliMax = 100, c, lunghezzaMax = schema_originale.cercaLunghezzaParolaMax();
         int numeroParoleLunghezzaC = 0, numeroParoleLunghezzaCInserite = 0;
-        /*Timer tempoDiEsecuzione= new Timer(600, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    throw new Exception("Tempo massimo di esecuzione raggiunto");
-                } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null, ex.toString(), "Errore", JOptionPane.ERROR_MESSAGE);
-                    System.exit(102);
-                }
-            }
-        });*/
+
         ArrayList<ArrayList<Parola>> listaParoleLunghezzaC = new ArrayList<ArrayList<Parola>>();
 
-        if (isComplete()) {
+        //se già eseguito l'algoritmo ritorno null
+        if (isAlgExecuted()){
             return null;
-        } else {
+        }
+            //inserisco all'interno della lista delle parole di lunghezza i le parole di lunghezza i
             for (int i = 0; i < lunghezzaMax; i++) {
                 ArrayList<Parola> paroleLunghezzaC;
                 paroleLunghezzaC = schema_originale.ricercaLunghezzaParole(i + 1);
@@ -98,11 +83,12 @@ public class ImplAlg2Cruciverba extends ImplementazioneCruciverba {
                     listaParoleLunghezzaC.add(new ArrayList<Parola>());
                 }
             }
-
+            //ciclo finchè il cruciverba non è completo, fino ad aver fatto n>cicliMax iterazioni e se non trovo una parola da inserire
             while (!isComplete() && cicliEseguiti < cicliMax && !(trovataParola)) {
                 cicliEseguiti++;
                 c = 0;
                 while (c < lunghezzaMax && !(trovataParola)) {
+                    //prendo le parole di lunghezza=c su cui lavorerò
                     ArrayList<Parola> paroleLunghezzaC = listaParoleLunghezzaC.get(c);
                     int i=0;
                     while ( i < paroleLunghezzaC.size() && !(trovataParola)) {
@@ -120,6 +106,7 @@ public class ImplAlg2Cruciverba extends ImplementazioneCruciverba {
                                 paroleLunghezzaC.remove(casellaDaCompletare);
 
                                 casellaDaCompletare.setParola(parolaDaInserire);
+                                //aggiorno lo schema con la nuova parola trovata
                                 aggiornaParola(casellaDaCompletare.getParola(), casellaDaCompletare.getPosizioneParola().getRiga()
                                         , casellaDaCompletare.getPosizioneParola().getColonna(), casellaDaCompletare.getOrientamento());
 
@@ -140,88 +127,86 @@ public class ImplAlg2Cruciverba extends ImplementazioneCruciverba {
             if (trovataParola) {
                 return parolaDaInserire;
             } else {
+                risolviCruciverba();
                 return null;
             }
-        }
+
     }
 
-    //TODO da implementare algoritmo 3 vedi oneNote
-    //@requires: this!=null
-    //@effects: risoluzione cruciverba attraverso l'utilizzo dell'algoritmo 2
-    //@throws: nullPointerException
-    //@return: true se completato, false se non è possibile completarlo
+    // risoluzione cruciverba attraverso l'utilizzo dell'algoritmo 2 ritorno true se il cruciverba è stato completato, altrimenti false
     public boolean risolviCruciverba() {
-        //TODO questa lunghezza=10 potrebbe essere sostituiti analizzando la dimensione dell'insieme trovato cercando il numero di parole
-        // suddiviso per lunghezza all'interno dello schema
         int cicliEseguiti = 0, cicliMax = 100, c, lunghezzaMax = schema_originale.cercaLunghezzaParolaMax();
         int numeroParoleLunghezzaC = 0, numeroParoleLunghezzaCInserite = 0;
-        /*Timer tempoDiEsecuzione= new Timer(600, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    throw new Exception("Tempo massimo di esecuzione raggiunto");
-                } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null, ex.toString(), "Errore", JOptionPane.ERROR_MESSAGE);
-                    System.exit(102);
-                }
-            }
-        });*/
         ArrayList<ArrayList<Parola>> listaParoleLunghezzaC = new ArrayList<ArrayList<Parola>>();
 
-        if (isComplete()) {
-            return true;
-        } else {
-            for (int i = 0; i < lunghezzaMax; i++) {
-                ArrayList<Parola> paroleLunghezzaC;
-                paroleLunghezzaC = schema_originale.ricercaLunghezzaParole(i + 1);
-                if (paroleLunghezzaC.size() > 0) {
-                    listaParoleLunghezzaC.add(i, paroleLunghezzaC);
-                } else {
-                    listaParoleLunghezzaC.add(new ArrayList<Parola>());
-                }
-            }
-
-            while (!isComplete() && cicliEseguiti < cicliMax) {
-                cicliEseguiti++;
-                c = 0;
-                while (c < lunghezzaMax) {
-                    ArrayList<Parola> paroleLunghezzaC = listaParoleLunghezzaC.get(c);
-                    int i=0;
-                    while ( i < paroleLunghezzaC.size()) {
-                        Parola casellaDaCompletare = paroleLunghezzaC.get(i);
-                        //prima di cercare la parolaDaInserire faccio un controllo se la parola nella lista paroleLunghezzaC è già completa,
-                        // se si la elimino dalla lista
-                        if (casellaDaCompletare.getLunghezza() == casellaDaCompletare.getLettereInserite()) {
-                            paroleLunghezzaC.remove(casellaDaCompletare);
-                        } else {
-                            String parolaDainserire = cercaParolaDaInserire(casellaDaCompletare, dizionario);
-                            if (!(parolaDainserire.equals(""))) {
-                                //è stata trovata una parola da inserire nello schema, rimuovo quindi la casellaDaCompletare dalla lista di parole di
-                                // lunghezza c ancora da inserire
-                                paroleLunghezzaC.remove(casellaDaCompletare);
-
-                                casellaDaCompletare.setParola(parolaDainserire);
-                                aggiornaParola(casellaDaCompletare.getParola(), casellaDaCompletare.getPosizioneParola().getRiga()
-                                        , casellaDaCompletare.getPosizioneParola().getColonna(), casellaDaCompletare.getOrientamento());
-
-                                //aggiorno il dizionario togliendo la parola che è stata inserita nello schema
-                                // + eventuali parole che si sono autocompletate inserendo una parola nello schema
-                                aggiornaDizionario();
-                            }else{
-                                //incremento solo se la parola non era già completata o se non è stato inserito niente nello schema
-                                i++;
-                            }
-                        }
-                    }
-                    c++;
-                }
-            }
-
-            //controllo se il cruciverba è stato completato o meno
+        //se ho già eseguito l'algoritmo di risoluzione ritorno il risultato salvato
+        if(algExecuted){
+            return algResult;
+        }else {
             if (isComplete()) {
+                algExecuted=true;
+                algResult = true;
                 return true;
             } else {
-                return false;
+                //inserisco all'interno della lista delle parole di lunghezza i le parole di lunghezza i
+                for (int i = 0; i < lunghezzaMax; i++) {
+                    ArrayList<Parola> paroleLunghezzaC;
+                    paroleLunghezzaC = schema_originale.ricercaLunghezzaParole(i + 1);
+                    if (paroleLunghezzaC.size() > 0) {
+                        listaParoleLunghezzaC.add(i, paroleLunghezzaC);
+                    } else {
+                        listaParoleLunghezzaC.add(new ArrayList<Parola>());
+                    }
+                }
+                //ciclo finchè il cruciverba non è completo, fino ad aver fatto n>cicliMax iterazioni
+                while (!isComplete() && cicliEseguiti < cicliMax) {
+                    cicliEseguiti++;
+                    c = 0;
+                    while (c < lunghezzaMax) {
+                        //prendo le parole di lunghezza=c su cui lavorerò
+                        ArrayList<Parola> paroleLunghezzaC = listaParoleLunghezzaC.get(c);
+                        int i = 0;
+                        while (i < paroleLunghezzaC.size()) {
+                            Parola casellaDaCompletare = paroleLunghezzaC.get(i);
+                            //prima di cercare la parolaDaInserire faccio un controllo se la parola nella lista paroleLunghezzaC è già completa,
+                            // se si la elimino dalla lista
+                            if (casellaDaCompletare.getLunghezza() == casellaDaCompletare.getLettereInserite()) {
+                                paroleLunghezzaC.remove(casellaDaCompletare);
+                            } else {
+                                String parolaDainserire = cercaParolaDaInserire(casellaDaCompletare, dizionario);
+                                if (!(parolaDainserire.equals(""))) {
+                                    //è stata trovata una parola da inserire nello schema, rimuovo quindi la casellaDaCompletare dalla lista di parole di
+                                    // lunghezza c ancora da inserire
+                                    paroleLunghezzaC.remove(casellaDaCompletare);
+
+                                    casellaDaCompletare.setParola(parolaDainserire);
+                                    //aggiorno lo schema con la nuova parola trovata
+                                    aggiornaParola(casellaDaCompletare.getParola(), casellaDaCompletare.getPosizioneParola().getRiga()
+                                            , casellaDaCompletare.getPosizioneParola().getColonna(), casellaDaCompletare.getOrientamento());
+
+                                    //aggiorno il dizionario togliendo la parola che è stata inserita nello schema
+                                    // + eventuali parole che si sono autocompletate inserendo una parola nello schema
+                                    aggiornaDizionario();
+                                } else {
+                                    //incremento solo se la parola non era già completata o se non è stato inserito niente nello schema
+                                    i++;
+                                }
+                            }
+                        }
+                        c++;
+                    }
+                }
+
+                //setto la variabile di esecuzione algoritmo
+                algExecuted = true;
+                //controllo se il cruciverba è stato completato o meno e setto la variabile risultato
+                if (isComplete()) {
+                    algResult = true;
+                    return true;
+                } else {
+                    algResult = false;
+                    return false;
+                }
             }
         }
     }

@@ -36,43 +36,21 @@ public class ImplementazioneCruciverba {
         return algExecuted;
     }
 
-    //@requires: this!=null, parola!=null, posizione all'interno dello schema
-    //@modifies: this
-    //@effects: inserisce la parola trovata all'interno del cruciverba
-    //@throws: nullPointerException, positionException se posizione non interna al cruciverba
-    //         lengthException se lunghezza parola non entra nel cruciverba
+    // inserisce la parola all'interno del cruciverba nella riga e nella colonna specificata e con quell'orientamento
     public void aggiornaParola(String parola, int riga, int colonna, char orientamento) {
         schema_originale.aggiornaSchema(parola,new Posizione(riga,colonna),orientamento);
     }
 
-    //@requires: this!=null, lettera!=null, posizione all'interno del cruciverba
-    //@modifies: this
-    //@effects: inserisce la lettera dentro il cruciverba alla posizione indicata
-    //@throws: nullPointerException, positionException se posizione non interna al cruciverba
-    public void aggiornaLettera(char lettera, int riga, int colonna) {
-
-    }
-
-    //@requires: this!=null
-    //@effects: ricerca la prossima parola da inserire nel cruciverba
-    //@throws: nullPointerException
-    //@return: parola trovata E oppure null (in questo caso va gestito)
+    // ricerca la prossima parola da inserire nel cruciverba
     public String cercaParolaDaInserire(Parola casellaDaCompletare, ArrayList<String> dizionario){
         return "";
     }
 
     //corrisponde ad un ciclo di risolviCruciverba (in cui poi viene lanciata la funzione cercaParolaDaInserire)
-    //@requires this!=null
-    //@effects: inserisce una parola nello schema del cruciverba
-    //@throws: nullPointerException
-    //*return: true se cruciverba è completo, false se non è stato completato o non è stata trovata una parola da inserire
+    //inserisce una parola nello schema del cruciverba
     public String inserisci1Parola(){ return null; }
 
-
-    //@requires: this!=null
-    //@effects: chiama cercaParolaDaInserire finche lo schema non è completato, cioè isComplete=true
-    //@throws: nullPointerException
-    //@return: true se completato, false se non è possibile completarlo
+    //chiama cercaParolaDaInserire finche lo schema non è completato, cioè isComplete=true
     public boolean risolviCruciverba(){
         return true;
     }
@@ -91,10 +69,7 @@ public class ImplementazioneCruciverba {
         return maxParolaLettereInserite;
     }
 
-    //@requires: this!=null
-    //@effects: controllo se cruciverba è finito o no
-    //@throws: nullPointerException
-    //@return: true se completo, false altrimenti
+    // controllo se cruciverba è finito o no, quindi non risultano altre parole del dizionario da inserire
     public boolean isComplete() {
         if (dizionario.size()==0){
             return true;
@@ -115,6 +90,5 @@ public class ImplementazioneCruciverba {
             }
         }
     }
-
 
 }
