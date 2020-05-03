@@ -10,9 +10,7 @@ public class Schema {
     private ArrayList<Casella> caselleSchema;
 
 
-    //Metodo costruttore
-    //@modifies: this
-    //@effects: prende la matrice in ingresso e crea lo schema originale
+    //costruttore che prende la matrice in ingresso e crea lo schema aggiungendo la prima parola
     public Schema(JPanel panel, char matrice[][], String parolaIniziale, Posizione posizioneParolaIniziale, char orientamentoInput) {
         //inizializzazione variabili classe
         paroleSchema = new ArrayList<Parola>();
@@ -48,7 +46,7 @@ public class Schema {
 
                     caselleSchema.add(casellaAttuale);
                     caselleParola.add(casellaAttuale);
-                } else if (matrice[i][j] == carattere && (!primaLettera)) {
+                } else if (matrice[i][j] == carattere && (!primaLettera)) { //ricerca lettere successive della parola che verrà inserita nello schema
                     creazioneParola.append(' ');
                     lunghezzaParola++;
 
@@ -57,8 +55,8 @@ public class Schema {
 
                     caselleSchema.add(casellaAttuale);
                     caselleParola.add(casellaAttuale);
-                } else if (matrice[i][j] == casellaNera) {
-                    if (lunghezzaParola >= 2) {
+                } else if (matrice[i][j] == casellaNera) {  //ricerca delle caselle nere dello schema
+                    if (lunghezzaParola >= 2) {  //lunghezza minima di una parola raggiunta, la inserisco nello schema così come la casella nera e ripristino i valori iniziali
                         caselleSchema.add(new Casella(panel, posizioneAttuale, matrice[i][j], true));
                         parolaCreata = new Parola(creazioneParola.toString(), posizioneIniziale, 'O', lunghezzaParola, caselleParola);
                         paroleSchema.add(parolaCreata);
@@ -67,7 +65,7 @@ public class Schema {
                         lunghezzaParola = 0;
                         primaLettera = true;
                         caselleParola = new ArrayList<Casella>();
-                    } else {
+                    } else { // lunghezza minima di una parola non raggiunta, inserisco solo la casella nera e ripristino i valori iniziali
                         caselleSchema.add(new Casella(panel, posizioneAttuale, matrice[i][j], true));
                         creazioneParola = new StringBuilder();
                         posizioneIniziale.ripristinaPosizione();
@@ -78,7 +76,7 @@ public class Schema {
 
                 }
             }
-            if (lunghezzaParola >= 2) {
+            if (lunghezzaParola >= 2) {  //raggiunta la fine della riga, inserisco la parola nello schema se ha la lunghezza minima altrimenti no
                 parolaCreata = new Parola(creazioneParola.toString(), posizioneIniziale, 'O', lunghezzaParola, caselleParola);
                 paroleSchema.add(parolaCreata);
                 creazioneParola = new StringBuilder();
@@ -95,7 +93,7 @@ public class Schema {
             }
         }
 
-        //ricerca parole verticali
+        //ricerca parole verticali, stessa procedura di quelle orizzontali con l'aggiunta del controllo per le caselle già presenti
         for (int j = 0; j < matrice[0].length; j++) {
             for (int i = 0; i < matrice.length; i++) {
                 //ricerca della prima lettera della parola che verrà inserita nello schema
@@ -154,11 +152,6 @@ public class Schema {
 
     //metodo costruttore schema a partire da uno schema già esistente
     public Schema(Schema s){
-        this.paroleSchema=new ArrayList<Parola>();
-
-        for(Parola p : s.getParoleSchema()){
-
-        }
         this.paroleSchema=s.getParoleSchema();
         this.caselleSchema=s.getCaselleSchema();
     }
@@ -169,12 +162,7 @@ public class Schema {
 
     public ArrayList<Casella> getCaselleSchema(){ return new ArrayList<Casella>(caselleSchema); }
 
-    //@requires: this!=null, parola entra nello schema (lunghezza corretta), posizione esistente
-    //@modifies: this
-    //@effects: inserisce la parola nella posizione iniziale indicata e poi dopo questa funzione
-    //deve essere richiamato anche aggiornaSchemaScomposto
-    //@throws: nullPointerException, wordException se la parola da inserire è troppo lunga,
-    //positionException se la posizione non entra nello schema
+    // inserisce la parola in input nella parola dello schema con la stessa posizione e orientamento
     public void aggiornaSchema(String parola, Posizione posizioneParola, char orientamentoInput) {
         Parola p = new Parola(parola, posizioneParola, orientamentoInput, parola.length());
         for (Parola parolaSchema : paroleSchema) {
@@ -205,6 +193,7 @@ public class Schema {
         }
     }
 
+    //cerca le parole dello schema di lunghezza n
     public ArrayList<Parola> ricercaLunghezzaParole(int n){
         ArrayList<Parola> paroleLunghezzaN = new ArrayList<Parola>();
         for (Parola p : paroleSchema){
@@ -217,6 +206,7 @@ public class Schema {
         return paroleLunghezzaN;
     }
 
+    //cerca la lunghezza massima tra le parole dello schema
     public int cercaLunghezzaParolaMax(){
         int lunghezzaMax=0;
         for (Parola p : paroleSchema){
@@ -227,6 +217,5 @@ public class Schema {
         }
         return lunghezzaMax;
     }
-
 
 }

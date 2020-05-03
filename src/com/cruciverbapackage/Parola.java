@@ -13,8 +13,7 @@ public class Parola {
     private int lettereInserite;
     private char orientamento;
 
-    //metodo costruttore
-    //@effects: crea una parola con le relative informazioni
+    //metodo costruttore crea una parola con le relative informazioni, senza caselleParola collegate
     public Parola(String parola, Posizione posizioneIniziale, char orientamento, int lunghezza) {
         try {
             //controllo parola
@@ -51,8 +50,7 @@ public class Parola {
 
     }
 
-    //metodo costruttore
-    //@effects: crea una parola con le relative informazioni
+    //metodo costruttore crea una parola con le relative informazioni con le caselleParola collegate
     public Parola(String parola, Posizione posizioneIniziale, char orientamento, int lunghezza, ArrayList<Casella> caselleParolaInput) {
         try {
 
@@ -94,9 +92,8 @@ public class Parola {
 
     }
 
+    //metodo costruttore crea una parola a partire da una passata in input
     public Parola(Parola p){
-        //non faccio la copia, probabilmente quando modifico le caselle o altri campi li modifica anche in quelli originali dello schema
-        // this.setCaselleParola(new ArrayList<Casella>(p.getCaselleParola()));
         this.setParola(p.getParola());
         this.setCaselleParola(p.getCaselleParola());
         this.setPosizioneParola(p.getPosizioneParola());
@@ -117,36 +114,29 @@ public class Parola {
         return parola;
     }
 
-
     public void setParola(String parola) {
         this.parola = parola;
     }
-
 
     public Posizione getPosizioneParola() {
         return posizioneParola;
     }
 
-
     public void setPosizioneParola(Posizione posizioneParola) {
         this.posizioneParola = posizioneParola;
     }
-
 
     public int getLunghezza() {
         return lunghezza;
     }
 
-
     public void setLunghezza(int lunghezza) {
         this.lunghezza = lunghezza;
     }
 
-
     public char getOrientamento() {
         return orientamento;
     }
-
 
     public void setOrientamento(char orientamento) {
         this.orientamento = orientamento;
@@ -160,8 +150,8 @@ public class Parola {
         this.lettereInserite = lettereInserite;
     }
 
+    //controlla se le due parole corrispondono alla stessa casella nello schema, sia come orientamento che come inizio e lunghezza parola
     public boolean confrontaCaselle(Parola p) {
-        //controlla se le due parole corrispondono alla stessa casella nello schema, sia come orientamento che come inizio e lunghezza parola
         if (this.orientamento == p.orientamento && posizioneParola.equals(p.getPosizioneParola()) && this.lunghezza == p.lunghezza) {
             return true;
         } else {
@@ -186,7 +176,7 @@ public class Parola {
         }
     }
 
-    //aggiorna la stringa dentro parola con il testo delle caselle
+    //aggiorna la stringa dentro parola con il testo delle caselle, contando anche le lettere inserite
     public void aggiornaParola(){
             StringBuilder strParolaNuova=new StringBuilder();
         lettereInserite=0;
@@ -209,6 +199,7 @@ public class Parola {
         }
     }
 
+    //controlla se una parola è stata completata
     public boolean isComplete(){
         if (this.lunghezza==this.lettereInserite){
             return true;
