@@ -29,6 +29,7 @@ public class InterfacciaCruciverba {
     private long stopTime=0;
     private long totalTime=0;
 
+    //inizializzazione della matrici che faranno da base dello schema del cruciverba per i 3 esempi creati
     /*//esempio1
     private static char[][] matrice = {{'.', '.', '.', '.', '*', '.', '.', '.'},
                                        {'*', '.', '.', '.', '.', '*', '.', '.'},
@@ -36,7 +37,7 @@ public class InterfacciaCruciverba {
                                        {'.', '.', '*', '.', '.', '.', '.', '.'}};
 */
 
-    //esempio2
+    /*//esempio2
     private static char[][] matrice = {{'.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '*', '.'},
                                        {'.', '*', '.', '.', '.', '.', '.', '*', '.', '*', '.', '.'},
                                        {'.', '.', '.', '.', '.', '.', '*', '.', '.', '.', '.', '.'},
@@ -53,8 +54,9 @@ public class InterfacciaCruciverba {
                                        {'.', '.', '.', '.', '.', '*', '.', '.', '.', '.', '.', '.'},
                                        {'.', '.', '*', '.', '*', '.', '.', '.', '.', '.', '*', '.'},
                                        {'.', '*', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.'}};
+*/
 
-    /*//esempio3
+    //esempio3
     private static char[][] matrice = {{'.','.','*','.','.','.','.','.','.','.','.','.','*','.','.','.','.','.','.'},
                                        {'.','.','.','.','.','.','.','.','.','.','.','.','.','*','.','.','.','.','*'},
                                        {'.','.','.','*','.','*','.','.','.','*','.','*','.','.','*','.','.','.','.'},
@@ -67,7 +69,7 @@ public class InterfacciaCruciverba {
                                        {'.','.','.','.','.','.','.','*','.','.','.','.','.','.','*','.','.','.','.'},
                                        {'.','*','.','.','.','.','*','.','.','.','.','.','.','*','.','.','.','.','.'},
                                        {'*','.','.','.','.','*','.','.','.','*','.','.','*','.','.','.','.','.','*'}};
-*/
+
 
         private ArrayList<JTextField> text;
     private static ArrayList<String> dizionarioInput;
@@ -79,6 +81,7 @@ public class InterfacciaCruciverba {
             public void actionPerformed(ActionEvent e) {
                 startTime=System.currentTimeMillis();
 
+                //lancia procedura di risoluzione cruciverba e ritornando se è stata trovata la soluzione o meno, stampando un messaggio a video
                 if (cruciverba1.risolviCruciverba()) {
                     listListaParole.setListData(cruciverba1.dizionario.toArray());
                     stopTime=System.currentTimeMillis();
@@ -88,22 +91,15 @@ public class InterfacciaCruciverba {
                     listListaParole.setListData(cruciverba1.dizionario.toArray());
                     JOptionPane.showMessageDialog(null, "Cruciverba non completato", "Risultato cruciverba", JOptionPane.ERROR_MESSAGE);
                 }
-                /*//risoluzione tramite algoritmo3
-                if (cruciverba1.risolviCruciverba_alg3()) {
-                    listListaParole.setListData(cruciverba1.dizionario.toArray());
-                    JOptionPane.showMessageDialog(null, "Cruciverba completato", "Risultato cruciverba", JOptionPane.INFORMATION_MESSAGE);
-                } else {
-                    listListaParole.setListData(cruciverba1.dizionario.toArray());
-                    JOptionPane.showMessageDialog(null, "Cruciverba non completato", "Risultato cruciverba", JOptionPane.ERROR_MESSAGE);
-                }
-                 */
+
             }
         });
         buttonCercaParola.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                //TODO lanciare inserisci1Parola al click
+                //lancia procedura inserisci1Parola per cui esegue un passo dell'algoritmo e inserisce la parola trovata, se non trova nessuna
+                // parola controlla il risultato del cruciverba
                 String parolaInserita=cruciverba1.inserisci1Parola();
                 if (parolaInserita==null) {
                     listListaParole.setListData(cruciverba1.dizionario.toArray());
@@ -143,6 +139,7 @@ public class InterfacciaCruciverba {
         }
         frame.setVisible(true);
 
+        //creo lista di parole che potranno essere inserite nello schema del cruciverba per i 3 esempi creati
         /*//esempio1
         dizionarioInput = new ArrayList<String>();
         dizionarioInput.add("CAT");
@@ -161,7 +158,7 @@ public class InterfacciaCruciverba {
         dizionarioInput.add("ESITO");
 */
 
-        //esempio2
+        /*//esempio2
         dizionarioInput = new ArrayList<String>();
         //per prova parole in più nella lista da inserire
         dizionarioInput.add("CASABLANCA");
@@ -230,9 +227,10 @@ public class InterfacciaCruciverba {
         dizionarioInput.add("WESER");
         dizionarioInput.add("BOSTON");
         dizionarioInput.add("BE");
+*/
 
 
-        /*//esempio3
+        //esempio3
         dizionarioInput = new ArrayList<String>();
         dizionarioInput.add("BANALITA");
         dizionarioInput.add("MIAO");
@@ -306,7 +304,7 @@ public class InterfacciaCruciverba {
         dizionarioInput.add("RA");
         dizionarioInput.add("PUBBLICAZIONI");
         dizionarioInput.add("SE");
-        */
+
 
 
 
@@ -318,10 +316,10 @@ public class InterfacciaCruciverba {
 
     public void open() {
 
-        //creazione cruciverba per l'utilizzo di funzioni dell'algoritmo1
+        //creazione cruciverba per l'utilizzo di funzioni dell'algoritmo1 per i 3 esempi creati
         /*//esempio1
         cruciverba1 = new ImplAlg1Cruciverba(panelMain, matrice, "CANE", 0, 0, dizionarioInput,'O');
-        */
+*/
 
         /*//esempio2
         cruciverba1=new ImplAlg1Cruciverba(panelMain,matrice,"TERRORISTA",7,2,dizionarioInput,'O');
@@ -331,8 +329,8 @@ public class InterfacciaCruciverba {
         cruciverba1=new ImplAlg1Cruciverba(panelMain,matrice,"DONO",4,4,dizionarioInput,'V');
         */
 
-        //creazione cruciverba per l'utilizzo di funzioni dell'algoritmo2
-         /*//esempio1
+        //creazione cruciverba per l'utilizzo di funzioni dell'algoritmo2 per i 3 esempi creati
+        /*//esempio1
         cruciverba1 = new ImplAlg2Cruciverba(panelMain, matrice, "CANE", 0, 0, dizionarioInput,'O');
         */
 
@@ -344,25 +342,25 @@ public class InterfacciaCruciverba {
         cruciverba1=new ImplAlg2Cruciverba(panelMain,matrice,"DONO",4,4,dizionarioInput,'V');
         */
 
-        //creazione cruciverba per l'utilizzo di funzioni dell'algoritmo4
+        //creazione cruciverba per l'utilizzo di funzioni dell'algoritmo4 per i 3 esempi creati
         /*//esempio1
         cruciverba1=new ImplAlg4Cruciverba_AI(panelMain,matrice,"CANE",0,0, dizionarioInput,'O');
-         */
+        */
 
-        //esempio2
+        /*//esempio2
         cruciverba1 = new ImplAlg4Cruciverba_AI(panelMain,matrice, "TERRORISTA", 7, 2, dizionarioInput,'O');
-
-
-        /*//esempio3
-        cruciverba1= new ImplAlg4Cruciverba_AI(panelMain, matrice, "DONO",4,4,dizionarioInput, 'V');
 */
+
+        //esempio3
+        cruciverba1= new ImplAlg4Cruciverba_AI(panelMain, matrice, "DONO",4,4,dizionarioInput, 'V');
+
         listListaParole.setListData(dizionarioInput.toArray());
 
     }
 
 
     private void createUIComponents() {
-        // TODO: place custom component creation code here
+        // creo tutti gli elementi grafici dell'interfaccia utente per il cruciverba escluse tutte le caselle bianche e nere che creo in futuro
         panelMain = new JPanel();
         GroupLayout layoutGUI = new GroupLayout(panelMain);
         panelMain.setLayout(layoutGUI);
