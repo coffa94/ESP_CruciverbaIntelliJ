@@ -193,7 +193,7 @@ public class Schema {
         }
     }
 
-    //cerca le parole dello schema di lunghezza n
+    //cerca le parole dello schema di lunghezza n non ancora completate
     public ArrayList<Parola> ricercaLunghezzaParole(int n){
         ArrayList<Parola> paroleLunghezzaN = new ArrayList<Parola>();
         for (Parola p : paroleSchema){
