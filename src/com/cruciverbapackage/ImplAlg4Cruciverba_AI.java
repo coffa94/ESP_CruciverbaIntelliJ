@@ -131,20 +131,25 @@ public class ImplAlg4Cruciverba_AI extends ImplementazioneCruciverba{
         //che conterrà altrimenti tutti i riferimenti modificati durante l'esecuzione dell'algoritmo
         Schema oldSchema=new Schema(schema_originale);
         backtrack(new ArrayList<Parola>(), csp);
-        if (listSolution.size()==constraintsSolver.getNumberVariables()){
-            //ripristino lo schema originale e anche i valori a prima dell'esecuzione dell'algoritmo nelle caselle delle parole
-            schema_originale=oldSchema;
-            for (Parola p : schema_originale.getParoleSchema()){
-                p.aggiornaCaselleParola();
-            }
-            return true;
-        }else{
-            //ripristino lo schema originale e anche i valori a prima dell'esecuzione dell'algoritmo nelle caselle delle parole
-            schema_originale=oldSchema;
-            for (Parola p : schema_originale.getParoleSchema()){
-                p.aggiornaCaselleParola();
-            }
+        if (listSolution==null){
+            System.out.println("Soluzione non trovata");
             return false;
+        }else {
+            if (listSolution.size() == constraintsSolver.getNumberVariables()) {
+                //ripristino lo schema originale e anche i valori a prima dell'esecuzione dell'algoritmo nelle caselle delle parole
+                schema_originale = oldSchema;
+                for (Parola p : schema_originale.getParoleSchema()) {
+                    p.aggiornaCaselleParola();
+                }
+                return true;
+            } else {
+                //ripristino lo schema originale e anche i valori a prima dell'esecuzione dell'algoritmo nelle caselle delle parole
+                schema_originale = oldSchema;
+                for (Parola p : schema_originale.getParoleSchema()) {
+                    p.aggiornaCaselleParola();
+                }
+                return false;
+            }
         }
     }
 
