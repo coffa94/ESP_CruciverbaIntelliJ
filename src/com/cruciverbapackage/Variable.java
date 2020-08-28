@@ -142,8 +142,8 @@ public class Variable {
         value.aggiornaCaselleParola();
     }
 
-    public void aggiornaParola(){
-        value.aggiornaParola();
+    public boolean aggiornaParola(){
+        return value.aggiornaParola();
     }
 
     //confronto le caselle della Parola relativa a questo oggetto con quella della variabile passata in input, se una sola
@@ -157,9 +157,28 @@ public class Variable {
         variableDomain.setListValues(oldListValues);
     }
 
+    //ripristino i valori predefiniti del dominio (quelli iniziali)
+    public void restoreDomain(Domain initialDomain){
+        variableDomain.setListValues(initialDomain.getListValues());
+    }
+
     //ripristino la parola precedente della variabile (prima dell'inferenza)
     public void ripristinaParola(){
         value=oldValue;
+    }
+
+    //ripristino i valori della variabile corrente con quelli della variabile passata in input
+    public void restore(Variable oldVar, Domain initialDomain){
+        this.value.setParola(oldVar.getValue().getParola());
+        this.value.aggiornaCaselleParola();
+        this.variableDomain.setListValues(initialDomain.getListValues());
+        this.valueAssigned=oldVar.isValueAssigned();
+        this.oldListValues=oldVar.getOldListValues();
+        Parola restoreOldValue = oldVar.getOldValue();
+        if (!(restoreOldValue==null)){
+            this.oldValue.setParola(restoreOldValue.getParola());
+        }
+
     }
 
 }

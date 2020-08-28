@@ -158,18 +158,18 @@ public class ImplAlg4Cruciverba_AI extends ImplementazioneCruciverba{
     // inferenza con FC (forward checking), backtracking cronologico
     // ritorno il valore null quando sono arrivato in fondo alla procedura, altrimenti ritorno la variabile che volevo utilizzare per fare il
     // backtracking intelligente sulle variabili collegate ad essa, adesso non è utile perché utilizzo il backtracking cronologico
-    private Variable backtrack(ArrayList<Parola> assignment, CSP csp){
+    private boolean backtrack(ArrayList<Parola> assignment, CSP csp){
         int countAssignment=assignment.size();
-        Variable varResult=null;
+        boolean varResult=false;
         if (assignment.size()==csp.getNumberVariables()){
             listSolution=assignment;
-            return null;
+            return true;
         }
         Variable var=selectUnassignedVariable(constraintsSolver);
         if (var==null){
             //termino la procedura corrente
             //nessuna variabile a cui assegnare un valore trovata
-            return null;
+            return false;
         }else{
             //mantengo una copia della vecchia variabile nel caso in cui l'assegnamento corrente non è corretto
             Variable oldVar = new Variable(var);
@@ -183,18 +183,26 @@ public class ImplAlg4Cruciverba_AI extends ImplementazioneCruciverba{
                 countAssignment++;
                 if (inference(csp,var,s)){
                     //chiamo di nuovo backtrack per trovare il prossimo assegnamento da fare
-                    varResult= backtrack(assignment,csp);
-                    if (varResult==null){
-                        return null;
+                    varResult = backtrack(assignment,csp);
+                    if (varResult){
+                        return true;
                     }
                 }
-                //operazioni di ripristino nel caso in cui l'inferenza non è andata a buon fine
-                countAssignment--;
-                assignment.remove(countAssignment);
-                var=oldVar;
+
+                //controllo se sono stati assegnati valori per il numero di variabili dentro lo schema del cruciverba, se si il cruciverba è stato completato
+                //altrimenti ripristino i valori precedenti
+                if(assignment.size()==csp.getNumberVariables()){
+                    listSolution=assignment;
+                    return true;
+                }else {
+                    //operazioni di ripristino nel caso in cui l'inferenza non è andata a buon fine
+                    countAssignment--;
+                    assignment.remove(countAssignment);
+                    var.restore(oldVar, constraintsSolver.searchDomain(var.getValue().getLunghezza()));
+                }
             }
         }
-        return null;
+        return false;
     }
 
 
@@ -290,7 +298,9 @@ public class ImplAlg4Cruciverba_AI extends ImplementazioneCruciverba{
         while (listLinkedVariables!=null && counterLinkedVariables<listLinkedVariables.size() && result){
             Variable currentVar=listLinkedVariables.get(counterLinkedVariables);
             currentVar.setOldValue(currentVar.getValue());
-            currentVar.aggiornaParola();
+            if(currentVar.aggiornaParola()){
+                currentVar.restoreDomain(constraintsSolver.searchDomain(currentVar.getValue().getLunghezza()));
+            }
             //procedura di inference sulla variabile corrente, se va a buon fine proseguo altrimenti ripristino i valori e imposto la
             // variabile result a false
             if (!(currentVar.inferenceAfterUpdateParola())){

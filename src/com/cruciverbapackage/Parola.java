@@ -177,8 +177,9 @@ public class Parola {
     }
 
     //aggiorna la stringa dentro parola con il testo delle caselle, contando anche le lettere inserite
-    public void aggiornaParola(){
-            StringBuilder strParolaNuova=new StringBuilder();
+    public boolean aggiornaParola(){
+        StringBuilder strParolaNuova=new StringBuilder();
+        boolean result=false;
         lettereInserite=0;
         try{
             if (lunghezza==caselleParola.size()){
@@ -186,6 +187,7 @@ public class Parola {
                     char carattereCasella=caselleParola.get(i).getCarattereCasella();
                     if (carattereCasella!='.'){
                         lettereInserite++;
+                        result=true;
                     }
                     strParolaNuova.append(carattereCasella);
                 }
@@ -193,9 +195,11 @@ public class Parola {
             }else{
                 throw new Exception ("Lunghezza parola diversa dalla lunghezza della parola nel cruciverba");
             }
+            return result;
         }
         catch (Exception ex){
             JOptionPane.showMessageDialog(null, ex.toString(), "Errore", JOptionPane.ERROR_MESSAGE);
+            return false;
         }
     }
 

@@ -2,19 +2,13 @@ package com.cruciverbapackage;
 
 //Coffaro_Davide_mat556603_Progetto ESP cruciverba
 
-import org.junit.jupiter.api.parallel.Resources;
-import org.junit.rules.Stopwatch;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.ImageObserver;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.text.AttributedCharacterIterator;
 import java.util.ArrayList;
-import java.lang.Object;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -37,46 +31,7 @@ public class InterfacciaCruciverba {
     //inizializzazione della matrici che faranno da base dello schema del cruciverba per i 3 esempi creati
     //proposto un miglioramento a questa implementazione all'interno della relazione (nella sezione Scelte implementative)
     //esempio1
-    private static char[][] matrice = {{'.', '.', '.', '.', '*', '.', '.', '.'},
-                                       {'*', '.', '.', '.', '.', '*', '.', '.'},
-                                       {'.', '.', '.', '.', '.', '.', '*', '.'},
-                                       {'.', '.', '*', '.', '.', '.', '.', '.'}};
-
-
-    /*//esempio2
-    private static char[][] matrice = {{'.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '*', '.'},
-                                       {'.', '*', '.', '.', '.', '.', '.', '*', '.', '*', '.', '.'},
-                                       {'.', '.', '.', '.', '.', '.', '*', '.', '.', '.', '.', '.'},
-                                       {'.', '.', '.', '.', '.', '*', '.', '.', '.', '.', '.', '.'},
-                                       {'.', '.', '.', '.', '*', '.', '*', '.', '.', '.', '.', '.'},
-                                       {'.', '.', '.', '*', '.', '.', '.', '.', '.', '.', '.', '*'},
-                                       {'.', '.', '*', '.', '.', '.', '.', '.', '.', '.', '*', '.'},
-                                       {'.', '*', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.'},
-                                       {'.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '*', '.'},
-                                       {'.', '*', '.', '.', '.', '.', '.', '.', '.', '*', '.', '.'},
-                                       {'*', '.', '.', '.', '.', '.', '.', '.', '*', '.', '.', '.'},
-                                       {'.', '.', '.', '.', '.', '*', '.', '*', '.', '.', '.', '.'},
-                                       {'.', '.', '.', '.', '.', '.', '*', '.', '.', '.', '.', '.'},
-                                       {'.', '.', '.', '.', '.', '*', '.', '.', '.', '.', '.', '.'},
-                                       {'.', '.', '*', '.', '*', '.', '.', '.', '.', '.', '*', '.'},
-                                       {'.', '*', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.'}};
-*/
-
-    //esempio3
-/*    private static char[][] matrice = {{'.','.','*','.','.','.','.','.','.','.','.','.','*','.','.','.','.','.','.'},
-                                       {'.','.','.','.','.','.','.','.','.','.','.','.','.','*','.','.','.','.','*'},
-                                       {'.','.','.','*','.','*','.','.','.','*','.','*','.','.','*','.','.','.','.'},
-                                       {'.','*','.','.','*','.','*','.','*','.','*','.','.','.','*','.','.','.','.'},
-                                       {'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','*','.','.'},
-                                       {'.','.','.','.','.','.','.','.','.','.','.','*','.','.','.','.','.','.','.'},
-                                       {'.','.','.','.','.','.','.','.','.','.','.','.','*','.','.','.','.','.','*'},
-                                       {'.','.','.','.','.','.','.','.','.','*','.','.','.','.','.','*','.','.','.'},
-                                       {'.','.','*','.','*','.','.','.','.','.','.','.','.','*','.','.','.','.','.'},
-                                       {'.','.','.','.','.','.','.','*','.','.','.','.','.','.','*','.','.','.','.'},
-                                       {'.','*','.','.','.','.','*','.','.','.','.','.','.','*','.','.','.','.','.'},
-                                       {'*','.','.','.','.','*','.','.','.','*','.','.','*','.','.','.','.','.','*'}};
-*/
-
+    private static char[][] matriceSchemaCruciverba;
     private ArrayList<JTextField> text;
     private static ArrayList<String> dizionarioInput;
     private static String parolaIniziale;
@@ -133,7 +88,34 @@ public class InterfacciaCruciverba {
 
     public static void main(String[] args) {
         JFrame frame = new JFrame("Cruciverba");
-        InterfacciaCruciverba window = new InterfacciaCruciverba();
+        InterfacciaCruciverba window;
+
+        //importazione dello schema del cruciverba da un file .txt per i 3 esempi creati
+        //la prima riga del file .txt contiene le righe dello schema, la seconda riga contiene le colonne dello schema
+        //nelle successive righe si indica con . per le caselle bianche dello schema, * per le caselle nere
+
+        //come descritto nella sezione Scelte implementative della relazione, questa implementazione sarebbe
+        //migliorabile con una procedura di analisi dell'immagine
+        try{
+            //esempio1
+            File schema = new File("./schema1.txt");
+
+            //esempio2
+            //File schema = new File("./schema2.txt");
+
+            //esempio3
+            //File schema = new File("./schema3.txt");
+
+            if(schema.isFile()){
+                importaSchemaCruciverba(schema);
+            }
+
+        }catch(NullPointerException e){
+            System.out.println("Percoso file errato");
+            System.exit(-1);
+        }
+
+        window= new InterfacciaCruciverba();
 
         frame.setContentPane(window.panelMain);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -141,7 +123,7 @@ public class InterfacciaCruciverba {
 
         //imposto la dimensione della finestra a seconda del numero di righe e di colonne del cruciverba, se sono troppo basse imposto una
         //dimensione minima
-        int dimensioneFinestra=20*(matrice.length+matrice[0].length)+100;
+        int dimensioneFinestra=20*(matriceSchemaCruciverba.length+ matriceSchemaCruciverba[0].length)+100;
         if (dimensioneFinestra<dimensioneFinestraMinima){
             frame.setSize(dimensioneFinestraMinima, dimensioneFinestraMinima);
         }else{
@@ -159,67 +141,24 @@ public class InterfacciaCruciverba {
             //migliorabile creando una procedura di selezione di un file .txt
 
             //esempio1
-            //File f = new File("./esempio1.txt");
+            //File listaParole = new File("./esempio1.txt");
 
             //esempio2
-            //File f = new File("./esempio2.txt");
+            //File listaParole = new File("./esempio2.txt");
 
             //esempio3
-            //File f = new File("./esempio3.txt");
+            //File listaParole = new File("./esempio3.txt");
 
             //esempio4 - dizionario italiano completo
-            File f = new File("./paroleitaliane.txt");
+            File listaParole = new File("./paroleitaliane.txt");
 
-            if (f.isFile()) {
-                Scanner s = new Scanner(f);
-                if (s == null) {
-                    System.out.println("Scanner non creato");
-                }else {
-                    //imposto il delimitatore per poter analizzare la prima riga contenente la parola da inserire per prima nello schema
-                    // con la sua posizione e il suo orientamento
-                    //s.useDelimiter(",");
-                    if(s.hasNext()){
-                        parolaIniziale = s.next();
-                        if(s.hasNextInt()){
-                            posizioneRigaIniziale = Integer.valueOf(s.next());
-                            if(s.hasNextInt()){
-                                posizioneColonnaIniziale = Integer.valueOf(s.next());
-                                if(s.hasNext()){
-                                    orientamento = s.next().charAt(0);
-
-                                    s.reset();
-                                    //inserimento delle parole nella lista di parole disponibili
-                                    while (s.hasNextLine()) {
-                                        String riga = s.nextLine();
-                                        dizionarioInput.add(riga);
-                                    }
-                                }else{
-                                    System.out.println("Nessuna orientamento inserito");
-                                    throw new InputMismatchException();
-                                }
-                            }else{
-                                System.out.println("Nessuna posizione colonna iniziale inserita");
-                                throw new InputMismatchException();
-                            }
-                        }else{
-                            System.out.println("Nessuna posizione riga iniziale inserita");
-                            throw new InputMismatchException();
-                        }
-                    }else{
-                        System.out.println("Nessuna parola iniziale inserita");
-                        throw new InputMismatchException();
-                    }
-
-                    s.close();
-                }
+            if (listaParole.isFile()) {
+                importaDizionario(listaParole);
             }
-        }catch(FileNotFoundException e){
-            System.out.println("File not found exception");
-            System.exit(-1);
-        }catch(Exception e){
+        }catch(NullPointerException e){
+            System.out.println("Percorso file errato");
             System.exit(-1);
         }
-
 
         //window.createUIComponents();
         window.open();
@@ -230,13 +169,13 @@ public class InterfacciaCruciverba {
     public void open() {
 
         //creazione cruciverba per l'utilizzo di funzioni dell'algoritmo1
-        cruciverba1 = new ImplAlg1Cruciverba(panelMain, matrice, parolaIniziale, posizioneRigaIniziale, posizioneColonnaIniziale, dizionarioInput,orientamento);
+        //cruciverba1 = new ImplAlg1Cruciverba(panelMain, matriceSchemaCruciverba, parolaIniziale, posizioneRigaIniziale, posizioneColonnaIniziale, dizionarioInput,orientamento);
 
         //creazione cruciverba per l'utilizzo di funzioni dell'algoritmo2
-        //cruciverba1=new ImplAlg2Cruciverba(panelMain, matrice, parolaIniziale, posizioneRigaIniziale, posizioneColonnaIniziale, dizionarioInput, orientamento);
+        //cruciverba1=new ImplAlg2Cruciverba(panelMain, matriceSchemaCruciverba, parolaIniziale, posizioneRigaIniziale, posizioneColonnaIniziale, dizionarioInput, orientamento);
 
         //creazione cruciverba per l'utilizzo di funzioni dell'algoritmo4
-        //cruciverba1 = new ImplAlg4Cruciverba_AI(panelMain,matrice, parolaIniziale, posizioneRigaIniziale, posizioneColonnaIniziale, dizionarioInput,orientamento);
+        cruciverba1 = new ImplAlg4Cruciverba_AI(panelMain,matriceSchemaCruciverba, parolaIniziale, posizioneRigaIniziale, posizioneColonnaIniziale, dizionarioInput,orientamento);
 
         listListaParole.setListData(dizionarioInput.toArray());
 
@@ -251,7 +190,7 @@ public class InterfacciaCruciverba {
         layoutGUI.setAutoCreateGaps(true);
         layoutGUI.setAutoCreateContainerGaps(true);
 
-        labelCruciverba = new JLabel("Cruciverba " + matrice.length + "X" + matrice[0].length);
+        labelCruciverba = new JLabel("Cruciverba " + matriceSchemaCruciverba.length + "X" + matriceSchemaCruciverba[0].length);
         labelCruciverba.setBounds(20, 20, 400, 20);
 
         buttonRisolviCruciverba = new JButton("RisolviCruciverba");
@@ -288,5 +227,104 @@ public class InterfacciaCruciverba {
         panelMain.add(textFieldParolaInserita);
         panelMain.revalidate();
 
+    }
+
+    //funzione per importazione schema del cruciverba e inizializzazione variabile matriceSchemaCruciverba
+    private static void importaSchemaCruciverba(File f){
+        try {
+            Scanner s = new Scanner(f);
+            if (s == null) {
+                System.out.println("Scanner non creato");
+            } else {
+
+                if (s.hasNextInt()) {
+                    int nRighe = Integer.valueOf(s.next());
+
+                    if (s.hasNextInt()) {
+                        int nColonne = Integer.valueOf(s.next());
+
+                        //creo matrice di caratteri che utilizzero per creare lo schema del cruciverba
+                        char[][] matriceCruciverba = new char[nRighe][nColonne];
+                        for(int i=0; i<nRighe; i++){
+                            if(s.hasNextLine()){
+                                s.nextLine();
+                                for(int j=0; j<nColonne; j++){
+                                    if(s.hasNext()){
+                                        matriceCruciverba[i][j]=s.next().charAt(0);
+                                    }
+                                }
+
+                            }
+                        }
+                        matriceSchemaCruciverba = matriceCruciverba;
+
+                    } else {
+                        System.out.println("Numero di colonne dello schema non inserito");
+                        throw new InputMismatchException();
+                    }
+                } else {
+                    System.out.println("Numero di righe dello schema non inserito");
+                    throw new InputMismatchException();
+                }
+
+                s.close();
+            }
+        }catch(FileNotFoundException e){
+            System.out.println("File not found exception");
+            System.exit(-1);
+        }catch(InputMismatchException e){
+            System.exit(-1);
+        }
+    }
+
+    //funzione per importazione delle parole da inserire all'interno dello schema all'interno del dizionario
+    private static void importaDizionario(File f){
+        try {
+            Scanner s = new Scanner(f);
+            if (s == null) {
+                System.out.println("Scanner non creato");
+            } else {
+                //imposto il delimitatore per poter analizzare la prima riga contenente la parola da inserire per prima nello schema
+                // con la sua posizione e il suo orientamento
+                //s.useDelimiter(",");
+                if (s.hasNext()) {
+                    parolaIniziale = s.next();
+                    if (s.hasNextInt()) {
+                        posizioneRigaIniziale = Integer.valueOf(s.next());
+                        if (s.hasNextInt()) {
+                            posizioneColonnaIniziale = Integer.valueOf(s.next());
+                            if (s.hasNext()) {
+                                orientamento = s.next().charAt(0);
+                                s.nextLine();
+                                //inserimento delle parole nella lista di parole disponibili
+                                while (s.hasNextLine()) {
+                                    String riga = s.nextLine();
+                                    dizionarioInput.add(riga);
+                                }
+                            } else {
+                                System.out.println("Nessuna orientamento inserito");
+                                throw new InputMismatchException();
+                            }
+                        } else {
+                            System.out.println("Nessuna posizione colonna iniziale inserita");
+                            throw new InputMismatchException();
+                        }
+                    } else {
+                        System.out.println("Nessuna posizione riga iniziale inserita");
+                        throw new InputMismatchException();
+                    }
+                } else {
+                    System.out.println("Nessuna parola iniziale inserita");
+                    throw new InputMismatchException();
+                }
+
+                s.close();
+            }
+        }catch(FileNotFoundException e){
+            System.out.println("File not found exception");
+            System.exit(-1);
+        }catch(InputMismatchException e){
+            System.exit(-1);
+        }
     }
 }

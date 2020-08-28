@@ -1,4 +1,4 @@
-CANE, 0, 0, O
+CANE 0 0 O
 CAT
 NOIA
 ANCA

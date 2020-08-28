@@ -131,7 +131,6 @@ public class ImplAlg1Cruciverba extends ImplementazioneCruciverba{
             return null;
         }
 
-
     }
 
     //risoluzione cruciverba attraverso l'utilizzo dell'algoritmo 1 e ritorno se è stato completato o no
