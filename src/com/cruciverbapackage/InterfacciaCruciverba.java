@@ -141,7 +141,7 @@ public class InterfacciaCruciverba {
             //migliorabile creando una procedura di selezione di un file .txt
 
             //esempio1
-            //File listaParole = new File("./esempio1.txt");
+            File listaParole = new File("./esempio1.txt");
 
             //esempio2
             //File listaParole = new File("./esempio2.txt");
@@ -150,7 +150,7 @@ public class InterfacciaCruciverba {
             //File listaParole = new File("./esempio3.txt");
 
             //esempio4 - dizionario italiano completo
-            File listaParole = new File("./paroleitaliane.txt");
+            //File listaParole = new File("./paroleitaliane.txt");
 
             if (listaParole.isFile()) {
                 importaDizionario(listaParole);
