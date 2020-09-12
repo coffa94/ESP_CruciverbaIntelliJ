@@ -1,4 +1,4 @@
-cane 0 0 O
+terrorista 7 2 O
 a
 abaca
 abache
@@ -121885,6 +121885,7 @@ ircismo
 ircocervi
 ircocervo
 ire
+irene
 ireneo
 irenica
 ireniche

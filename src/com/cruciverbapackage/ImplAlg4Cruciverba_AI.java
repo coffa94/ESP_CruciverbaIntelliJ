@@ -66,15 +66,19 @@ public class ImplAlg4Cruciverba_AI extends ImplementazioneCruciverba{
         }
 
         algResult=constraintsSolver.isCSPResult();
-
-        if (listSolution.size()==0) {
-            if (p==null){
-                return null;
-            }else{
+        try {
+            if (listSolution.size() == 0) {
+                if (p == null) {
+                    return null;
+                } else {
+                    return p.getParola();
+                }
+            } else {
                 return p.getParola();
             }
-        }else{
-            return p.getParola();
+        }catch(NullPointerException e){
+            System.out.println("List solution è null");
+            return null;
         }
     }
 
@@ -174,32 +178,63 @@ public class ImplAlg4Cruciverba_AI extends ImplementazioneCruciverba{
             //mantengo una copia della vecchia variabile nel caso in cui l'assegnamento corrente non è corretto
             Variable oldVar = new Variable(var);
 
+            //elimino dal dominio della variabile i possibili valori già assegnati a variabili precedenti (visto che
+            //quando ritorno da backtrace ripristino per la variabile il dominio iniziale
+            //var.updateDomain(assignment);
+
+            ArrayList<String> varDomain=orderDomainValues(var,assignment,csp);
+
             //scorro i valori del dominio prendendoli uno ad uno dal dominio
-            for(String s : orderDomainValues(var,assignment,csp)){
+            for(String s : varDomain){
                 var.setNewParola(s);
                 var.aggiornaCaselleParola();
                 var.setValueAssigned(true);
                 assignment.add(var.getValue());
                 countAssignment++;
-                if (inference(csp,var,s)){
+
+                //datogliere
+                if (var.getValue().getPosizioneParola().equals(new Posizione(0,4))){
+                    System.out.println("Fermati e debugga");
+                }
+
+                if (inference(csp,var,s,assignment)){
                     //chiamo di nuovo backtrack per trovare il prossimo assegnamento da fare
+                    System.out.print(var.getValue().getPosizioneParola().getRiga());
+                    System.out.print(var.getValue().getOrientamento());
+                    System.out.print(var.getValue().getPosizioneParola().getColonna());
+                    System.out.println(var.getValue().getParola());
                     varResult = backtrack(assignment,csp);
                     if (varResult){
                         return true;
+                    }else{
+                        //controllo se sono stati assegnati valori per il numero di variabili dentro lo schema del cruciverba, se si il cruciverba è stato completato
+                        //altrimenti ripristino i valori precedenti
+                        if(assignment.size()==csp.getNumberVariables()){
+                            listSolution=assignment;
+                            return true;
+                        }else {
+                            //operazioni di ripristino nel caso in cui l'inferenza non è andata a buon fine
+                            countAssignment--;
+                            assignment.remove(countAssignment);
+                            var.restore(oldVar, constraintsSolver.searchDomain(var.getValue().getLunghezza()));
+                        }
+                        restoreLinkedSameLengthVariables(csp, var, assignment);
+                    }
+                }else{
+                    //controllo se sono stati assegnati valori per il numero di variabili dentro lo schema del cruciverba, se si il cruciverba è stato completato
+                    //altrimenti ripristino i valori precedenti
+                    if(assignment.size()==csp.getNumberVariables()){
+                        listSolution=assignment;
+                        return true;
+                    }else {
+                        //operazioni di ripristino nel caso in cui l'inferenza non è andata a buon fine
+                        countAssignment--;
+                        assignment.remove(countAssignment);
+                        var.restore(oldVar, constraintsSolver.searchDomain(var.getValue().getLunghezza()));
                     }
                 }
 
-                //controllo se sono stati assegnati valori per il numero di variabili dentro lo schema del cruciverba, se si il cruciverba è stato completato
-                //altrimenti ripristino i valori precedenti
-                if(assignment.size()==csp.getNumberVariables()){
-                    listSolution=assignment;
-                    return true;
-                }else {
-                    //operazioni di ripristino nel caso in cui l'inferenza non è andata a buon fine
-                    countAssignment--;
-                    assignment.remove(countAssignment);
-                    var.restore(oldVar, constraintsSolver.searchDomain(var.getValue().getLunghezza()));
-                }
+
             }
         }
         return false;
@@ -285,7 +320,7 @@ public class ImplAlg4Cruciverba_AI extends ImplementazioneCruciverba{
     // 2) cercare le variabili collegate a var di cui dovrò modificare il dominio dovuto alla nuova stringa s assegnata a var
     // 3) fare un controllo che i domini risultanti delle variabili collegate non siano vuoti:
     //    se lo sono ritorno false altrimenti true
-    private boolean inference(CSP csp, Variable var, String s){
+    private boolean inference(CSP csp, Variable var, String s, ArrayList<Parola> assignment){
 
         ArrayList<Variable> listLinkedVariables=null;
         ArrayList<Variable> listSameLengthVariables=null;
@@ -300,6 +335,7 @@ public class ImplAlg4Cruciverba_AI extends ImplementazioneCruciverba{
             currentVar.setOldValue(currentVar.getValue());
             if(currentVar.aggiornaParola()){
                 currentVar.restoreDomain(constraintsSolver.searchDomain(currentVar.getValue().getLunghezza()));
+                currentVar.updateDomain(assignment);
             }
             //procedura di inference sulla variabile corrente, se va a buon fine proseguo altrimenti ripristino i valori e imposto la
             // variabile result a false
@@ -315,6 +351,7 @@ public class ImplAlg4Cruciverba_AI extends ImplementazioneCruciverba{
         listSameLengthVariables=csp.searchSameLengthVariables(var.getNumberLetters());
         while(listSameLengthVariables!=null && counterSameLengthVariables<listSameLengthVariables.size() && result){
             Variable currentVar=listSameLengthVariables.get(counterSameLengthVariables);
+            //currentVar.setOldValue(currentVar.getValue());
             if (!(currentVar.inferenceAfterAssignedValue(s))){
                 result=false;
             }
@@ -328,7 +365,8 @@ public class ImplAlg4Cruciverba_AI extends ImplementazioneCruciverba{
         while(!(result) && counterLinkedVariables>=0){
             Variable currentVar=listLinkedVariables.get(counterLinkedVariables);
             currentVar.ripristinaParola();
-            currentVar.restoreDomain();
+            currentVar.restoreDomain(constraintsSolver.searchDomain(currentVar.getValue().getLunghezza()));
+            currentVar.updateDomain(assignment);
             counterLinkedVariables--;
         }
         //se il risultato dell'inferenza è false ripristino tutti i valori dei domini che avevo modificato durante la procedura sulle variabili con
@@ -337,11 +375,47 @@ public class ImplAlg4Cruciverba_AI extends ImplementazioneCruciverba{
         counterSameLengthVariables=counterSameLengthVariables-2;
         while(!(result) && counterSameLengthVariables>=0){
             Variable currentVar=listSameLengthVariables.get(counterSameLengthVariables);
-            currentVar.ripristinaParola();
-            currentVar.restoreDomain();
+            //currentVar.ripristinaParola();
+            currentVar.restoreDomain(constraintsSolver.searchDomain(var.getValue().getLunghezza()));
+            currentVar.updateDomain(assignment);
             counterSameLengthVariables--;
         }
         return result;
+    }
+
+    //ripristino i valori precedenti delle variabili collegate a var e delle variabili della stessa lunghezza di var
+    public void restoreLinkedSameLengthVariables(CSP csp, Variable var, ArrayList<Parola> assignment){
+        ArrayList<Variable> listLinkedVariables=null;
+        ArrayList<Variable> listSameLengthVariables=null;
+        int counterLinkedVariables=0;
+        int counterSameLengthVariables=0;
+
+        //trovare variabili collegate a var (cioè che condividono le stesse caselle)
+        listLinkedVariables=csp.searchLinkedVariables(var);
+
+        //guardo adesso tutte le variabili con la stessa lunghezza della variabile corrente a cui ho assegnato il valore
+        listSameLengthVariables=csp.searchSameLengthVariables(var.getNumberLetters());
+
+
+        //ripristino tutti i valori dei domini che avevo modificato durante la procedura sulle variabili collegate
+        while(counterLinkedVariables<listLinkedVariables.size()){
+            Variable currentVar=listLinkedVariables.get(counterLinkedVariables);
+            currentVar.aggiornaParola();
+            currentVar.restoreDomain(constraintsSolver.searchDomain(currentVar.getValue().getLunghezza()));
+            currentVar.updateDomain(assignment);
+            counterLinkedVariables++;
+        }
+
+        //ripristino tutti i valori dei domini che avevo modificato durante la procedura sulle variabili con
+        // la stessa lunghezza
+        while(counterSameLengthVariables<listSameLengthVariables.size()){
+            Variable currentVar=listSameLengthVariables.get(counterSameLengthVariables);
+            //currentVar.ripristinaParola();
+            currentVar.restoreDomain(constraintsSolver.searchDomain(var.getValue().getLunghezza()));
+            currentVar.updateDomain(assignment);
+            counterSameLengthVariables++;
+        }
+
     }
 
 }

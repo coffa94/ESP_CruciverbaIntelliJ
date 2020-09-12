@@ -11,6 +11,10 @@ public class Variable {
     private ArrayList<String> oldListValues;
     private Parola oldValue;
 
+    //TODO creare una variabile di tipo Domain per salvare il valore iniziale del dominio di lunghezza n, quando una
+    // parola porta a un errore nella risoluzione toglierla da quel dominio in modo che quando viene ripristinato non
+    // venga più tenuta in considerazione nelle prossime prove di risoluzione (non so se è corretto??)
+
     //costruttore in cui inizializzo la parola e il dominio della variabile + altre variabili per lo stato dell'oggetto
     public Variable(Parola var, Domain d){
         value=new Parola(var);
@@ -42,11 +46,19 @@ public class Variable {
     }
 
     public ArrayList<String> getOldListValues() {
-        return oldListValues;
+        if (oldListValues==null){
+            return null;
+        }else{
+            return new ArrayList<String>(oldListValues);
+        }
     }
 
     public Parola getOldValue() {
-        return oldValue;
+        if (oldValue==null){
+            return null;
+        }else {
+            return new Parola(oldValue);
+        }
     }
 
     public void setOldValue(Parola oldValue) {
@@ -80,7 +92,9 @@ public class Variable {
         ArrayList<String> listValuesDomain = variableDomain.getListValues();
 
         //salvo una copia della lista valore del dominio per poterla ripristinare in caso di errore di inferenza (dominio vuoto)
-        oldListValues=new ArrayList<String>(listValuesDomain);
+        if (listValuesDomain!=null) {
+            oldListValues = new ArrayList<String>(listValuesDomain);
+        }
         String parolaSchema = value.getParola();
         for (int i=0; i<parolaSchema.length(); i++){
             int j=0;
@@ -159,7 +173,9 @@ public class Variable {
 
     //ripristino i valori predefiniti del dominio (quelli iniziali)
     public void restoreDomain(Domain initialDomain){
-        variableDomain.setListValues(initialDomain.getListValues());
+        if (!(initialDomain==null)){
+            variableDomain.setListValues(initialDomain.getListValues());
+        }
     }
 
     //ripristino la parola precedente della variabile (prima dell'inferenza)
@@ -169,16 +185,32 @@ public class Variable {
 
     //ripristino i valori della variabile corrente con quelli della variabile passata in input
     public void restore(Variable oldVar, Domain initialDomain){
-        this.value.setParola(oldVar.getValue().getParola());
-        this.value.aggiornaCaselleParola();
-        this.variableDomain.setListValues(initialDomain.getListValues());
-        this.valueAssigned=oldVar.isValueAssigned();
-        this.oldListValues=oldVar.getOldListValues();
-        Parola restoreOldValue = oldVar.getOldValue();
-        if (!(restoreOldValue==null)){
-            this.oldValue.setParola(restoreOldValue.getParola());
+        if (oldVar!=null) {
+            this.value.setParola(oldVar.getValue().getParola());
+            this.value.aggiornaCaselleParola();
+            this.variableDomain.setListValues(initialDomain.getListValues());
+            this.valueAssigned = oldVar.isValueAssigned();
+            this.oldListValues = oldVar.getOldListValues();
+            Parola restoreOldValue = oldVar.getOldValue();
+            if (!(restoreOldValue == null)) {
+                this.oldValue.setParola(restoreOldValue.getParola());
+            }
         }
 
+    }
+
+    public void updateDomain(ArrayList<Parola> assignment){
+        for(int i=0; i<assignment.size(); i++){
+            String parolaAssignment = assignment.get(i).getParola();
+            if(this.getNumberLetters()==parolaAssignment.length()) {
+                if (this.variableDomain.getListValues().contains(parolaAssignment)) {
+                    ArrayList<String> newListValuesDomain=this.getListValuesDomain();
+                    newListValuesDomain.remove(parolaAssignment);
+                    this.variableDomain.setListValues(newListValuesDomain);
+
+                }
+            }
+        }
     }
 
 }

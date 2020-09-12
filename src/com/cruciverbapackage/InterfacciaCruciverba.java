@@ -98,10 +98,10 @@ public class InterfacciaCruciverba {
         //migliorabile con una procedura di analisi dell'immagine
         try{
             //esempio1
-            File schema = new File("./schema1.txt");
+            //File schema = new File("./schema1.txt");
 
             //esempio2
-            //File schema = new File("./schema2.txt");
+            File schema = new File("./schema2.txt");
 
             //esempio3
             //File schema = new File("./schema3.txt");
@@ -141,7 +141,7 @@ public class InterfacciaCruciverba {
             //migliorabile creando una procedura di selezione di un file .txt
 
             //esempio1
-            File listaParole = new File("./esempio1.txt");
+            //File listaParole = new File("./esempio1.txt");
 
             //esempio2
             //File listaParole = new File("./esempio2.txt");
@@ -150,7 +150,7 @@ public class InterfacciaCruciverba {
             //File listaParole = new File("./esempio3.txt");
 
             //esempio4 - dizionario italiano completo
-            //File listaParole = new File("./paroleitaliane.txt");
+            File listaParole = new File("./21000_parole_italiane.txt");
 
             if (listaParole.isFile()) {
                 importaDizionario(listaParole);

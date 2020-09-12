@@ -103,7 +103,7 @@ public class Parola {
     }
 
     public ArrayList<Casella> getCaselleParola() {
-        return caselleParola;
+        return new ArrayList<Casella>(caselleParola);
     }
 
     public void setCaselleParola(ArrayList<Casella> caselleParola) {
@@ -162,10 +162,15 @@ public class Parola {
 
     //aggiorna il testo delle caselle con la stringa dentro parola
     public void aggiornaCaselleParola(){
+        lettereInserite=0;
         try{
             if (lunghezza==caselleParola.size()){
                 for (int i=0; i<lunghezza; i++){
-                    caselleParola.get(i).aggiornaCarattere(parola.charAt(i));
+                    char currentChar = parola.charAt(i);
+                    if (currentChar!='.'){
+                        lettereInserite++;
+                    }
+                    caselleParola.get(i).aggiornaCarattere(currentChar);
                 }
             }else{
                 throw new Exception ("Lunghezza parola diversa dalla lunghezza della parola nel cruciverba");
@@ -222,6 +227,27 @@ public class Parola {
             }
         }
         return false;
+    }
+
+    //Ripristino i valori iniziali della parola, quindi tutti i caratteri a "." e le lettere inserite=0
+    public void resetParola(){
+        StringBuilder strParolaNuova=new StringBuilder();
+        boolean result=false;
+        lettereInserite=0;
+        try{
+            if (lunghezza==caselleParola.size()){
+                for (int i=0; i<lunghezza; i++){
+                    strParolaNuova.append('.');
+                }
+                lettereInserite=0;
+                parola=strParolaNuova.toString();
+            }else{
+                throw new Exception ("Lunghezza parola diversa dalla lunghezza della parola nel cruciverba");
+            }
+        }
+        catch (Exception ex){
+            JOptionPane.showMessageDialog(null, ex.toString(), "Errore", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
 }
