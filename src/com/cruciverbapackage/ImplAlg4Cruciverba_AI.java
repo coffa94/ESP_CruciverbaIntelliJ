@@ -192,11 +192,6 @@ public class ImplAlg4Cruciverba_AI extends ImplementazioneCruciverba{
                 assignment.add(var.getValue());
                 countAssignment++;
 
-                //datogliere
-                if (var.getValue().getPosizioneParola().equals(new Posizione(0,4))){
-                    System.out.println("Fermati e debugga");
-                }
-
                 if (inference(csp,var,s,assignment)){
                     //chiamo di nuovo backtrack per trovare il prossimo assegnamento da fare
                     System.out.print(var.getValue().getPosizioneParola().getRiga());

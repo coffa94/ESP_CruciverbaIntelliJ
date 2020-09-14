@@ -1,4 +1,4 @@
-terrorista 7 2 O
+cane 0 0 O
 a
 abate
 abati
@@ -929,7 +929,7 @@ altipiano
 alto
 altra
 altre
-altresi'
+altresi
 altrettante
 altri
 altrimenti
@@ -1128,7 +1128,7 @@ anditi
 andito
 ando
 andra
-andra'
+andra
 andrai
 andranno
 andrebbe
@@ -3530,7 +3530,7 @@ ciocca
 ciocche
 cioche
 cioe
-cioe'
+cioe
 ciondoli
 ciondolo
 ciotola
@@ -4845,7 +4845,7 @@ danzo
 dapprima
 dar
 dara
-dara'
+dara
 darai
 daranno
 darci
@@ -5732,7 +5732,7 @@ differiscono
 difficile
 difficili
 difficolta
-difficolta'
+difficolta
 diffida
 diffidai
 diffidammo
@@ -6760,7 +6760,7 @@ dovevo
 dovizia
 dovizie
 dovra
-dovra'
+dovra
 dovrai
 dovranno
 dovrebbe
@@ -6841,7 +6841,7 @@ duriate
 durino
 duro
 e
-e'
+e
 ebano
 ebete
 ebeti
@@ -7763,7 +7763,7 @@ fachiro
 facile
 facili
 facilita
-facilita'
+facilita
 facilitano
 facilitare
 facilmente
@@ -7802,7 +7802,7 @@ fallimenti
 fallimento
 fallito
 fallo
-falo'
+falo
 falsa
 false
 falsi
@@ -7827,7 +7827,7 @@ fantini
 fantino
 far
 fara
-fara'
+fara
 farai
 faranno
 farcela
@@ -19565,7 +19565,7 @@ tostino
 tosto
 totale
 totali
-totalita'
+totalita
 totalitari
 totalizz
 totalizza

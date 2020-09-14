@@ -1,4 +1,4 @@
-dono 4 4 V
+cane 0 0 O
 a
 abbandonare
 abbastanza
@@ -152,6 +152,7 @@ bob
 bocca
 bosco
 boston
+bostrn
 braccio
 bravo
 breve
@@ -186,6 +187,7 @@ caro
 carta
 casa
 casabianca
+casablanca
 caso
 cat
 cattivo
@@ -209,6 +211,7 @@ chilometro
 chissa
 chiudere
 ci
+ciao
 ciascuno
 cielo
 cioe
@@ -301,6 +304,7 @@ da
 dare
 davanti
 davvero
+dd
 decidere
 decisione
 dedicare
@@ -559,6 +563,7 @@ inizio
 innamorare
 inoltre
 inorganica
+inorganici
 insegnare
 insieme
 insistere
@@ -948,6 +953,7 @@ qualunque
 quanto
 quarto
 quasi
+quat
 quello
 questione
 questo
@@ -1192,6 +1198,7 @@ terreno
 territorio
 terzo
 teseo
+tesio
 testa
 tetto
 ti
@@ -1201,12 +1208,14 @@ tirare
 titolo
 tizio
 toccare
+toccire
 togliere
 tom
 tonante
 tono
 topo
 tornare
+toro
 tra
 tranquillo
 trarre
@@ -1214,6 +1223,7 @@ trascinare
 trasformare
 trattare
 tratto
+tre
 treno
 triste
 troppo

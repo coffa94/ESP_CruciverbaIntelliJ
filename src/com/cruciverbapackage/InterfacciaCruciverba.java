@@ -98,10 +98,10 @@ public class InterfacciaCruciverba {
         //migliorabile con una procedura di analisi dell'immagine
         try{
             //esempio1
-            //File schema = new File("./schema1.txt");
+            File schema = new File("./schema1.txt");
 
             //esempio2
-            File schema = new File("./schema2.txt");
+            //File schema = new File("./schema2.txt");
 
             //esempio3
             //File schema = new File("./schema3.txt");

@@ -1,4 +1,4 @@
-terrorista 7 2 O
+cane 0 0 O
 a
 abate
 abati
@@ -610,6 +610,7 @@ abroghiamo
 abroghiate
 abroghino
 abrogo
+abs
 abusa
 abusai
 abusammo
@@ -2345,7 +2346,7 @@ affilino
 affilio
 affilo
 affinche
-affinche'
+affinche
 affine
 affini
 affinita
@@ -2630,7 +2631,7 @@ aggiudico
 aggiunge
 aggiungendo
 aggiungere
-aggiungero'
+aggiungero
 aggiunse
 aggiunta
 aggiunte
@@ -3472,7 +3473,7 @@ altipiano
 alto
 altra
 altre
-altresi'
+altresi
 altrettante
 altri
 altrimenti
@@ -4011,7 +4012,7 @@ anatomie
 anatra
 anatre
 anca
-anch'
+anch
 anche
 ancora
 ancore
@@ -4056,7 +4057,7 @@ anditi
 andito
 ando
 andra
-andra'
+andra
 andrai
 andranno
 andrebbe
@@ -4516,7 +4517,8 @@ antri
 antro
 anzi
 anzianita
-anziche'
+anziche
+ap
 apatia
 apatie
 ape
@@ -4613,7 +4615,7 @@ apparenze
 appari
 apparir
 apparira
-apparira'
+apparira
 appariranno
 apparire
 appariva
@@ -4989,6 +4991,7 @@ aquila
 aquile
 aquilone
 aquiloni
+ar
 ara
 arabica
 aragosta
@@ -6517,7 +6520,7 @@ avidi
 avidita
 avido
 avra
-avra'
+avra
 avrai
 avrebbe
 avrebbero
@@ -6590,7 +6593,7 @@ avveriate
 avverino
 avvero
 avverra
-avverra'
+avverra
 avversa
 avversari
 avversaria
@@ -8937,7 +8940,7 @@ cancellavo
 cancellazione
 cancellazioni
 cancellera
-cancellera'
+cancellera
 cancellero
 cancelli
 cancellino
@@ -9175,7 +9178,7 @@ caricavate
 caricavi
 caricavo
 carichera
-carichera'
+carichera
 caricherai
 caricherei
 carichero
@@ -9269,6 +9272,7 @@ casto
 casuale
 casuali
 casualmente
+cat
 catalogato
 cataloghi
 catalogo
@@ -10020,7 +10024,7 @@ ciocca
 ciocche
 cioche
 cioe
-cioe'
+cioe
 ciondoli
 ciondolo
 ciotola
@@ -10725,7 +10729,7 @@ compariate
 comparii
 comparimmo
 comparira
-comparira'
+comparira
 comparirai
 compariranno
 comparire
@@ -11058,7 +11062,7 @@ comunista
 comuniste
 comunisti
 comunita
-comunita'
+comunita
 comunque
 con
 concatenare
@@ -12620,7 +12624,7 @@ coscienti
 coscienza
 cose
 cosi
-cosi'
+cosi
 cosiddetto
 cosituite
 cosmetica
@@ -13634,7 +13638,7 @@ danzo
 dapprima
 dar
 dara
-dara'
+dara
 darai
 daranno
 darci
@@ -15091,7 +15095,7 @@ deturpiamo
 deturpiate
 deturpino
 deturpo
-dev'
+dev
 devasta
 devastai
 devastammo
@@ -15142,7 +15146,7 @@ devozione
 dfgdfgdfgdfgdfgd
 dfgdgdfgdfgdfg
 di
-di'
+di
 dia
 diabete
 diabolica
@@ -15331,7 +15335,7 @@ differiscono
 difficile
 difficili
 difficolta
-difficolta'
+difficolta
 diffida
 diffidai
 diffidammo
@@ -17385,7 +17389,7 @@ dovevo
 dovizia
 dovizie
 dovra
-dovra'
+dovra
 dovrai
 dovranno
 dovrebbe
@@ -17547,7 +17551,7 @@ duriate
 durino
 duro
 e
-e'
+e
 ebano
 ebete
 ebeti
@@ -17824,6 +17828,7 @@ eguaglino
 eguaglio
 eguale
 eguali
+eire
 elabora
 elaborai
 elaborammo
@@ -19460,7 +19465,7 @@ fachiro
 facile
 facili
 facilita
-facilita'
+facilita
 facilitano
 facilitare
 facilmente
@@ -19526,7 +19531,7 @@ fallimenti
 fallimento
 fallito
 fallo
-falo'
+falo
 falsa
 false
 falsi
@@ -19578,7 +19583,7 @@ fantini
 fantino
 far
 fara
-fara'
+fara
 farai
 faranno
 farcela
@@ -20066,7 +20071,7 @@ finanziero
 finanzino
 finanzio
 finche
-finche'
+finche
 fine
 finendo
 finestra
@@ -21651,7 +21656,7 @@ ghirlanda
 ghirlande
 ghisa
 gia
-gia'
+gia
 giacca
 giacche
 giacciono
@@ -21668,6 +21673,7 @@ gialli
 giallo
 giara
 giardini
+giardinipubblici
 giardino
 giare
 gigante
@@ -28600,7 +28606,7 @@ mentiva
 mentivo
 mento
 mentre
-menu'
+menu
 menzionato
 menzognera
 menzognere
@@ -29189,7 +29195,7 @@ mobilia
 mobilie
 moda
 modalita
-modalita'
+modalita
 mode
 modella
 modellai
@@ -30185,6 +30191,7 @@ nocivi
 nocivo
 nodi
 nodo
+noe
 noi
 noia
 noie
@@ -30924,6 +30931,7 @@ oggi
 ogni
 ognuna
 ognuno
+oi
 oleandri
 oleandro
 oleosit
@@ -32041,6 +32049,7 @@ oziosi
 oziosit
 ozioso
 p
+pa
 pacata
 pacate
 pacati
@@ -32739,7 +32748,7 @@ pedaggi
 pedaggio
 pedale
 pedali
-pedalo'
+pedalo
 pedana
 pedane
 pedante
@@ -33119,7 +33128,7 @@ percezione
 percezioni
 perche
 percio
-percio'
+percio
 percome
 percorre
 percorrere
@@ -34490,7 +34499,7 @@ possiamo
 possibile
 possibili
 possibilita
-possibilita'
+possibilita
 possibilmente
 possiede
 posso
@@ -36617,7 +36626,7 @@ punzecchio
 punzone
 punzoni
 puo
-puo'
+puo
 puoi
 pupilla
 pupille
@@ -41385,7 +41394,7 @@ ritrosi
 ritroso
 ritrova
 ritrovano
-ritrovera'
+ritrovera
 ritrovi
 ritrovo
 ritta
@@ -41590,6 +41599,7 @@ rivoltiate
 rivoltino
 rivolto
 rivoluzione
+ro
 robusta
 robuste
 robusti
@@ -42644,7 +42654,7 @@ sapremo
 sapreste
 sapresti
 saputo
-sara'
+sara
 sarai
 saranno
 sarcastica
@@ -44952,7 +44962,7 @@ scrivendole
 scrivente
 scriventi
 scriver
-scrivera'
+scrivera
 scriverci
 scrivere
 scrivergli
@@ -45709,7 +45719,7 @@ semplici
 semplicissima
 semplicit
 semplicita
-semplicita'
+semplicita
 semplific
 semplifica
 semplificare
@@ -55851,7 +55861,7 @@ tostino
 tosto
 totale
 totali
-totalita'
+totalita
 totalitari
 totalizz
 totalizza
@@ -59250,7 +59260,7 @@ verniciavo
 vernicino
 vero
 verra
-verra'
+verra
 verranno
 verrano
 verrebbe

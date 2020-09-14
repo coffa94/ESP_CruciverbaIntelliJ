@@ -1,4 +1,4 @@
-terrorista 7 2 O
+cane 0 0 O
 a
 abaca
 abache

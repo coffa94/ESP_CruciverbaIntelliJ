@@ -11,10 +11,6 @@ public class Variable {
     private ArrayList<String> oldListValues;
     private Parola oldValue;
 
-    //TODO creare una variabile di tipo Domain per salvare il valore iniziale del dominio di lunghezza n, quando una
-    // parola porta a un errore nella risoluzione toglierla da quel dominio in modo che quando viene ripristinato non
-    // venga più tenuta in considerazione nelle prossime prove di risoluzione (non so se è corretto??)
-
     //costruttore in cui inizializzo la parola e il dominio della variabile + altre variabili per lo stato dell'oggetto
     public Variable(Parola var, Domain d){
         value=new Parola(var);
